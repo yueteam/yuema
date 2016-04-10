@@ -1,0 +1,9 @@
+{
+  "name": "yue",
+  "version": "0.0.1",
+  "dependencies": {
+    "zepto": "https://github.com/madrobby/zepto.git",
+    "promise": "git@gitlab.alibaba-inc.com:mtb/lib-promise.git"
+  },
+  "appPath": "."
+}

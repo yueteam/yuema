@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no,address=no,email=no">
+    <meta name="mobileOptimized" content="width">
+    <meta name="handheldFriendly" content="true">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>登录</title>
+
+    <script>g_start = new Date();</script>
+
+    <!-- build:css -->
+    <link rel="stylesheet" href="../build/css/login.css">
+    <!-- endbuild -->
+
+</head>
+<body>
+
+<div class="page-content">
+
+    <div class="content">
+        <div class="login">
+            <form action="/users/session" method="post" class="login-form">
+                <div id="owl">
+                    <div class="hand"></div>
+                    <div class="hand hand-r"></div>
+                    <div class="arms">
+                        <div class="arm"></div>
+                        <div class="arm arm-r"></div>
+                    </div>
+                </div>
+                <div class="form-panel">
+                    <input type="hidden" name="csrftoken" value="">
+                    <div class="control-group">
+                        <div class="controls">
+                            <label for="email" class="control-label iconfont icon-account"></label>
+                            <input id="email" type="email" name="email" placeholder="邮箱/用户名" tabindex="1" autofocus="autofocus" class="form-control input-medium">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <label for="password" class="control-label iconfont icon-password"></label>
+                            <input id="password" type="password" name="password" placeholder="密码" tabindex="2" class="form-control input-medium">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <button type="submit" tabindex="3" class="btn btn-primary">登录</button>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <p>
+                        <a href="/signup" tabindex="5" class="btn btn-gray">注册</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script src="../build/js/base.js"></script>
+<!-- build:js -->
+<script src="../build/js/login.js"></script>
+<!-- endbuild -->
+
+<!-- 加载脚本 -->
+<script>
+    g_mstart = new Date();
+</script>
+</div>
+</body>
+</html>

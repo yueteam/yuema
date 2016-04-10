@@ -1,0 +1,228 @@
+/* === dialogs === */
+@dialogBgColor: #e8e8e8;
+@dialogButonColor : #00c7af;
+@dialogButonBg: #fff;
+@dialogButonActiveBg: #fff;
+@dialogDuration: 400ms;
+@actionsdialogDuration: 300ms;
+@actionsdialogButtonBg: rgba(243,243,243,0.95);
+@actionsdialogActiveButtonBg: #dcdcdc;
+
+.dialog-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 10600;
+    visibility: hidden;
+    opacity: 0;
+    .transition(@dialogDuration);
+    &.dialog-overlay-visible {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.dialog {
+    width: 270px;
+    position: fixed;
+    z-index: 11000;
+    left: 50%;
+    margin-left: -135px;
+    margin-top: 0;
+    top: 50%;
+    text-align: center;
+    border-radius: 7px;
+    opacity: 0;
+    .transform(translate3d(0,0,0) scale(1.185));
+    -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property: -moz-transform, opacity;
+    -ms-transition-property: -ms-transform, opacity;
+    -o-transition-property: -o-transform, opacity;
+    transition-property: transform, opacity;
+    color: #333b3b;
+    &.dialog-in {
+        opacity: 1;
+        .transition(@dialogDuration);
+        .transform(translate3d(0,0,0) scale(1));
+    }
+    &.dialog-out {
+        opacity: 0;
+        z-index: 11000-1;
+        .transition(@dialogDuration);
+        .transform(translate3d(0,0,0) scale(0.815));
+    }
+}
+.dialog-inner {
+    padding: 15px;
+    border-radius: 7px 7px 0 0;
+    position: relative;
+    background: #fff;
+    .hairline(bottom, #ddd);
+
+    .iconfont {
+        font-size: 50px;
+    }
+    .icon-success {
+        color: @green-sea;
+    }
+    .icon-error {
+        color: @red-color;
+    }
+    .icon-warn {
+        color: @yellow;
+    }
+}
+.dialog-title {
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 5px;
+    +.dialog-text {
+        margin-top: 10px;
+        color: #3b3b3b;
+    }
+}
+.dialog-buttons {
+    height: 44px;
+    overflow: hidden;
+    .flexbox();
+    .justify-content(center);
+    &.dialog-buttons-vertical {
+        display: block;
+        height: auto;
+    }
+}
+.dialog-button {
+    width: 100%;
+    padding: 0 5px;
+    height: 44px;
+    font-size: 17px;
+    line-height: 44px;
+    text-align: center;
+    color: @dialogButonColor;
+    background: @dialogButonBg;
+    display: block;
+    position: relative;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+    .border-box();
+    .hairline(right, #ddd);
+    -webkit-box-flex:1;
+    -ms-flex:1;
+    &:first-child {
+        border-radius: 0 0 0 7px;
+    }
+    &:last-child {
+        .hairline-remove(right);
+        border-radius: 0 0 7px 0;
+    }
+    &:first-child:last-child {
+        border-radius: 0 0 7px 7px;
+    }
+    &.dialog-button-bold {
+        font-weight: 500;
+    }
+    html:not(.watch-active-state) &:active, &.active-state {
+        background: @dialogButonActiveBg;
+    }
+    .dialog-buttons-vertical & {
+        .hairline-remove(right);
+        .hairline-remove(top);
+        .hairline(bottom, #ddd);
+        border-radius: 0;
+        &:last-child {
+            border-radius: 0 0 7px 7px;
+            .hairline-remove(bottom);
+        }
+    }
+}
+.dialog-no-buttons {
+    .dialog-inner {
+        border-radius: 7px;
+        .hairline-remove(bottom);
+    }
+    .dialog-buttons {
+        display: none;
+    }
+}
+
+
+// Action sheet
+.actions-dialog {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 11000;
+    width: 100%;
+    .transform(translate3d(0,100%,0));
+    &.dialog-in {
+        .transition(@actionsdialogDuration);
+        .transform(translate3d(0,0,0));
+    }
+    &.dialog-out {
+        z-index: 10999;
+        .transition(@actionsdialogDuration);
+        .transform(translate3d(0,100%,0));
+    }
+}
+.actions-dialog-group {
+    margin: 8px;
+}
+.actions-dialog-button, .actions-dialog-label {
+    width: 100%;
+    text-align: center;
+    font-weight: normal;
+    margin: 0;
+    background: @actionsdialogButtonBg;
+    .border-box();
+    display: block;
+    position: relative;
+    .hairline(bottom, #ddd);
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    b {
+        font-weight: 500;
+    }
+    &.actions-dialog-button-bold {
+        font-weight: 500;
+    }
+    &.actions-dialog-button-red {
+        color: #ff3b30;
+    }
+    &:first-child {
+        border-radius: 4px 4px 0 0;
+    }
+    &:last-child {
+        .hairline-remove(bottom);
+        border-radius: 0 0 4px 4px;
+    }
+    &:first-child:last-child {
+        border-radius: 4px;
+    }
+}
+.actions-dialog-button {
+    cursor: pointer;
+    line-height: 43px;
+    font-size: 20px;
+    color: #007aff;
+    html:not(.watch-active-state) &:active, &.active-state {
+        background: @actionsdialogActiveButtonBg;
+    }
+}
+.actions-dialog-label {
+    font-size: 13px;
+    line-height: 1.3;
+    min-height: 44px;
+    padding: 8px 10px;
+    color: #8a8a8a;
+    .flexbox();
+    .justify-content(center);
+    .align-items(center);
+}

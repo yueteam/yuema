@@ -1,0 +1,65 @@
+@import "../../common/base";
+
+.btn-filter {
+	position: absolute;
+	z-index: 999;
+	top: 12px;
+	left: 50%;
+	margin-left: -50px;
+	width: 100px;
+	height: 35px;
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	line-height: 35px;
+	background-color: rgba(0, 199, 175, 0.5);
+	.border-radius(3px);
+	.icnfont {
+
+	}
+}
+.list {
+    background-color: #fff;
+    .item {
+        position: relative;
+        padding: 12px;
+        border-bottom: 1px solid @border-color;
+        .item-lnk {
+            .clearfix;
+            display: block;
+            color: @text-color;
+        }
+        .avatar {
+            float: left;
+            margin-right: 12px;
+            width: 68px;
+            height: 68px;
+            overflow: hidden;
+            img {
+                display: block;
+                width: 68px;
+                height: 68px;
+            }
+        }
+        .info-box {
+            height: 68px;
+            overflow: hidden;
+            .name {
+                margin-bottom: 6px;
+                font-size: 14px;
+            }
+            .info {
+                color: @gray;
+                line-height: 1.4;
+            }
+        }
+        .latest-date {
+            margin-top: 12px;
+            line-height: 1.6;
+            font-size: 14px;
+            .label {
+                color: @green-sea;
+            }
+        }
+    }
+}
