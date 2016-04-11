@@ -8,8 +8,10 @@ sudo npm install -g browserify
 ```
 
 ### 初始化项目后要做的事情
-* bower install
-* sudo npm install
+```bash
+bower install
+sudo npm install
+```
 
 ### server
 ```bash
