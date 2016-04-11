@@ -30,10 +30,10 @@ body {
 		.flex();
 		.opt-item {
 			position: relative;
-			line-height: 44px;
+			line-height: 40px;
         	text-align: center;
         	font-size: 20px;
-        	color: #333;
+        	color: #666;
 			background: @gray;
 			.flex-avg();
 			border-top: 1px solid @borderColor;
@@ -47,32 +47,66 @@ body {
 	        }
 		}
 	}
-	.what-block {
+	.opt-panel {
+		position: absolute;
+		z-index: 99;
+		top: 300px;
+		left: 0;
+		width: 100%;
+		.translate3d(0%,100%,0);
+		.transition(400ms);
 		font-size: 14px;
 		background: @light-gray;
+		&.open {
+			.translate3d(0%,0%,0);
+		}
 		h3 {
 			margin: 0;
 			padding-left: 15px;
 			height: 35px;
 			line-height: 35px;
+			color: #666;
 			font-size: 16px;
 			font-weight: 500;
 			background: @white;
 		}
 		.what-list {
 			.clearfix;
+			color: #666;
 			.what-item {
 				position: relative;
 				float: left;
+				padding-left: 15px;
 				width: 50%;
 				height: 50px;
 				line-height: 50px;
-	        	text-align: center;
+	        	text-align: left;
 	        	border-bottom: 1px solid @borderColor;
 	        	.border-box();
 				&:nth-child(odd) {
 					border-right: 1px solid @borderColor;
 				}
+				.iconfont {
+					margin-right: 10px;
+				}
+			}
+		}
+		.where-list {
+			color: #666;
+			.where-item {
+				padding-left: 15px;
+				height: 70px;
+				line-height: 70px;
+	        	border-bottom: 1px solid @borderColor;
+			}
+		}
+		.when-list {
+			color: #666;
+			.when-item {
+				padding-left: 15px;
+				height: 70px;
+				line-height: 70px;
+	        	border-bottom: 1px solid @borderColor;
 			}
 		}
 	}
