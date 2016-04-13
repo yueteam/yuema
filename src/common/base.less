@@ -161,6 +161,7 @@ textarea.form-control {
 .btn {
     display: inline-block;
     margin-bottom: 0;
+    width: 130px;
     height: 50px;
     line-height: 50px;
     color: #fff;
@@ -170,10 +171,19 @@ textarea.form-control {
     white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;
-    border-radius: 5px;
+    .border-radius(5px);
+}
+.btn-small {
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    .border-radius(2px);
 }
 .btn-primary {
     background: @alizarin;
+}
+.btn-green {
+    background: @green-sea;
 }
 .btn-gray {
     background: #adbbbd;

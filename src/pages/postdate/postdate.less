@@ -1,6 +1,7 @@
 @import "../../common/base";
 @import "../../components/loading/loading";
 @import "../../components/dialog/dialog";
+@import "../../components/calendar/calendar";
 
 body {
 	position: relative;
@@ -10,14 +11,35 @@ body {
 }
 .post-box {
 	.textarea-box {
+		position: relative;
 		.date-desc {
 			display: block;
-			padding: 10px;
+			padding: 10px 10px 50px;
 			width: 100%;
 			height: 256px;
 			font-size: 16px;
 			background: #fff;
 			.border-box();
+		}
+		.bar {
+			position: absolute;
+			z-index: 9;
+			left: 0;
+			bottom: 0;
+			padding: 0 15px;
+			width: 100%;
+			height: 40px;
+			line-height: 30px;
+			.clearfix();
+			.border-box();
+			.opt {
+				margin-right: 15px;
+				color: #999;
+				.iconfont {
+					margin-right: 5px;
+					font-size: 12px;
+				}
+			}
 		}
 	}
 	.post-option {
@@ -86,6 +108,9 @@ body {
 				&:nth-child(odd) {
 					border-right: 1px solid @borderColor;
 				}
+				&.selected {
+					color: @green-sea;
+				}
 				.iconfont {
 					margin-right: 10px;
 				}
@@ -103,10 +128,20 @@ body {
 		.when-list {
 			color: #666;
 			.when-item {
+				position: relative;
 				padding-left: 15px;
 				height: 70px;
 				line-height: 70px;
 	        	border-bottom: 1px solid @borderColor;
+	        	#calLink {
+	        		position: absolute;
+	        		z-index: 9;
+	        		top: 0;
+	        		left: 0;
+	        		opacity: 0;
+	        		width: 100%;
+	        		height: 70px;
+	        	}
 			}
 		}
 	}
