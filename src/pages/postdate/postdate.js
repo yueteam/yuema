@@ -65,11 +65,11 @@ $(function() {
             	if($this.hasClass('selected')) {
             		return false;
             	}
-            	submitData.tag = val;
             	$('.what-list .selected').removeClass('selected');
             	$this.addClass('selected');
             	$('#optWhat').html(text).show();
             	getOptWhereWidth();
+            	submitData.tag = val;
             });
 
             // 选择约时间
@@ -98,6 +98,7 @@ $(function() {
                 footer: true,
                 onChange: function (p, values) {
                 	var date = Utils.formatDate(new Date(values[0]));
+                	date = date.replace(/\-/g,'/');
                 	$('#optWhen').html('<span class="iconfont icon-calendar"></span>'+date).show();
                 	getOptWhereWidth();
                 }
@@ -105,15 +106,18 @@ $(function() {
 
             // 发送
             $(document).on('tap', '#sendBtn', function () {
-            	submitData.desc = $.trim($('#dateDesc').val());
+            	var desc = $.trim($('#dateDesc').val());
 
-            	if(submitData.desc === '') {
+            	if(desc === '') {
             		Tips.show({
 	                    type: 'error',
 	                    title: '说点什么吧'
 	                });
             	} else {
-            		submitData.date = $('#calLink').val();
+            		submitData.desc = desc;
+            		if($('#calLink').val() !== '') {
+            			submitData.date = $('#calLink').val();
+            		}
             		console.log(submitData);
             		me.doSubmit();
             	}
