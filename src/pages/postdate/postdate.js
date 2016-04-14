@@ -47,6 +47,15 @@ $(function() {
             	$('.'+opt+'-block').addClass('open');
             });
 
+            var getOptWhereWidth = function() {
+            	var conW = $('.bar-con').width(),
+            		whatW = $('#optWhat').width(),
+            		whenW = $('#optWhen').width();
+
+            	var whereW = conW - whatW - whenW - 33;
+            	$('#optWhere').css('maxWidth', whereW);
+            };
+
             // 选择约什么
             $(document).on('tap', '.what-item', function () {
             	var $this = $(this),
@@ -59,7 +68,8 @@ $(function() {
             	submitData.tag = val;
             	$('.what-list .selected').removeClass('selected');
             	$this.addClass('selected');
-            	$('#optWhat').html(text);
+            	$('#optWhat').html(text).show();
+            	getOptWhereWidth();
             });
 
             // 选择约时间
@@ -67,11 +77,12 @@ $(function() {
             	var $this = $(this),
             		val = $this.data('val');
 
-            	if(val == 3) {
-
-            	} else {
+            	$('.when-list .selected').removeClass('selected');
+            	$this.addClass('selected');
+            	if(val != 3) {
             		var text = $this.html();
-            		$('#optWhen').html('<span class="iconfont icon-calendar"></span>'+text);
+            		$('#optWhen').html('<span class="iconfont icon-calendar"></span>'+text).show();
+            		getOptWhereWidth();
             	}
             	submitData.when = val;
             });
@@ -86,7 +97,9 @@ $(function() {
                 input: $('#calLink'),
                 footer: true,
                 onChange: function (p, values) {
-
+                	var date = Utils.formatDate(new Date(values[0]));
+                	$('#optWhen').html('<span class="iconfont icon-calendar"></span>'+date).show();
+                	getOptWhereWidth();
                 }
             });
 
