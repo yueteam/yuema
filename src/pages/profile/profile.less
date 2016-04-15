@@ -137,7 +137,9 @@ body {
 		position: relative;
 		float: left;
 		width: 50%;
-		overflow: hidden;
+		.tags-con {
+			overflow-y: auto;
+		}
 		.tag {
 			position: relative;
 			float: left;
@@ -149,19 +151,22 @@ body {
 			font-size: 14px;
 			.center();
 			.border-box();
+			.hairline(right, @borderColor);
+			.hairline(top, @borderColor);
 			em {
 				color: @red-color;
 				font-size: 16px;
 			}
 			&:nth-child(1) {
-				.hairline(right, #ddd);
+				.hairline-remove(top);
 			}
 			&:nth-child(2) {
-				.hairline(bottom, #ddd);
+				.hairline-remove(top);
 			}
 		}
 		.tags-count {
 			position: absolute;
+			z-index: 99;
 			bottom: 0;
 			left: 0;
 			width: 50%;
