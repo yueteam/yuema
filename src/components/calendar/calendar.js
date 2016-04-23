@@ -751,9 +751,9 @@
         if (transitionEndCallback) {
             self.onMonthChangeEnd(dir, true);
         }
-        if (!self.params.css) {
-            self.onMonthChangeEnd(dir);
-        }
+        // if (!self.params.css) {
+        //     self.onMonthChangeEnd(dir);
+        // }
         self.animating = false;
     };
     calendar.prototype.nextYear = function() {
