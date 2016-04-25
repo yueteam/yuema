@@ -80,6 +80,7 @@ body {
 		position: relative;
 		.hairline(top, rgba(255, 255, 255, 0.3));
 		.lnk-date {
+	        position: relative;
 			display: block;
 			padding: 20/20rem 40px;
 			background-color: @blue-bg;
@@ -95,9 +96,22 @@ body {
 	        	.text-overflow();
 	        }
 	        .date-info {
+	        	margin-top: 5px;
 	        	color: @silver;
-	        	font-size: 14px;
+	        	font-size: 12px;
+	        	.iconfont {
+	        		margin-right: 3px;
+	        		font-size: 12px;
+	        	}
+	        	.time, .address {
+	        		margin-right: 5px;
+	        	}
 	        }
+        	.icon-lquote {
+        		position: absolute;
+        		left: 20px;
+        		top: 15px;
+        	}
 	    }
 	}
 	.photo {
@@ -137,6 +151,7 @@ body {
 		position: relative;
 		float: left;
 		width: 50%;
+		overflow: hidden;
 		.tags-con {
 			overflow-y: auto;
 		}

@@ -66,6 +66,29 @@ body {
     }
 }
 
+.g-yue {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    z-index: 9;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    text-align: center;
+    background-color: @alizarin;
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: 50%;
+    .box-shadow(0 0 30px rgba(255,109,108,0.8));
+    &.disabled {
+        color: #333;
+        background-color: @silver;
+        box-shadow: none;
+    }
+    .iconfont {
+        font-size: 13px;
+    }
+}
 .ui-prices() {
     font-style: normal;
     font-weight: lighter;
