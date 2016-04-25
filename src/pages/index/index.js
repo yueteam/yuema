@@ -1,6 +1,7 @@
 $(function() {
 	var Utils = require("../../common/utils");
 	var Flipsnap = require("../../components/flipsnap");
+	var Yue = require("../../mods/yue/yue");
 
 	var $pointer = $('.icons i'),
 		$item = $('.scroller .item');
@@ -26,8 +27,6 @@ $(function() {
 		content: 'hahaha'
 	});
 
-	$(document).on('tap', '.menu-toggle-button', function(){
-		$(this).prev('.menu-items').toggleClass('active');
-	});
+	Yue.init();
 
 });
