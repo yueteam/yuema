@@ -1,0 +1,80 @@
+@import "../../common/base";
+@import "../../mods/yue/yue";
+
+body {
+    min-height: auto;
+    background: #fff;
+}
+.g-yue {
+    top: auto;
+    bottom: 20px;
+    right: 0;
+}
+.profile {
+    .clearfix;
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    padding: 15px 20px;
+    width: 100%;
+    background: @clouds;
+    .avatar {
+        float: left;
+        margin-right: 12px;
+        width: 80px;
+        height: 80px;
+        overflow: hidden;
+        img {
+            display: block;
+            width: 80px;
+            height: 80px;
+        }
+    }
+    .info {
+        height: 80px;
+        overflow: hidden;
+        .name {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .info-row {
+            color: #666;
+            font-size: 14px;
+        }
+    }
+}
+.list {
+    margin-top: 110px;
+    padding: 0 30px;
+    background-color: #fff;
+    .item {
+        position: relative;
+        padding: 20px 0;
+        border-bottom: 1px solid @border-color;
+        .date-words {
+            line-height: 1.8;
+            font-size: 16px;
+            .icon-lquote {
+                position: absolute;
+                top: 18px;
+                left: 0;
+            }
+            .label {
+                padding-left: 20px;
+                color: @green-sea;
+            }
+        }
+        .date-info {
+            line-height: 1.8;
+            color: #999;
+            .time, .address {
+                margin-right: 10px;
+            }
+            .iconfont {
+                margin-right: 3px;
+                font-size: 12px;
+            }
+        }
+    }
+}
