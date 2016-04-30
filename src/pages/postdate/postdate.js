@@ -1,5 +1,6 @@
 $(function() {
 	var Utils = require('../../common/utils');
+    var Apimap = require('../../common/apimap');
 	var Tips = require('../../components/tips');
 	var Ajax = require('../../components/ajax');
 	var Dialog = require('../../components/dialog/dialog');
@@ -69,7 +70,7 @@ $(function() {
             	$this.addClass('selected');
             	$('#optWhat').html(text).show();
             	getOptWhereWidth();
-            	submitData.tag = val;
+            	submitData.typeId = val;
             });
 
             // 选择约时间
@@ -84,7 +85,7 @@ $(function() {
             		$('#optWhen').html('<span class="iconfont icon-calendar"></span>'+text).show();
             		getOptWhereWidth();
             	}
-            	submitData.when = val;
+            	submitData.datingTimeType = val;
             });
 
             // 日历组件
@@ -114,9 +115,9 @@ $(function() {
 	                    title: '说点什么吧'
 	                });
             	} else {
-            		submitData.desc = desc;
+            		submitData.article = desc;
             		if($('#calLink').val() !== '') {
-            			submitData.date = $('#calLink').val();
+            			submitData.datingTime = $('#calLink').val();
             		}
             		console.log(submitData);
             		me.doSubmit();
@@ -133,9 +134,8 @@ $(function() {
 
             Loading.show();
            
-            Ajax.post('http://test.yuema.us/open-api/regist', {
-            		'method': 'regist',
-					'userInfo': JSON.stringify(submitData)
+            Ajax.post(Apimap.postDatingApi, {
+					'datingInfo': JSON.stringify(submitData)
 				},
 				function(d){
 					Loading.hide();
