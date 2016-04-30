@@ -1,4 +1,4 @@
-var apiPerfix = 'http://test.yuema.us:8888/';
+var apiPerfix = 'http://www.yuema.us:8888/';
 var Apimap = {
     loginApi: apiPerfix + 'open-api/login',
     registApi: apiPerfix + 'open-api/regist',
