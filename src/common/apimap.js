@@ -1,4 +1,4 @@
-var apiPerfix = 'http://www.yuema.us:8888/';
+var apiPerfix = window.location.protocol + '//'+window.location.host+'/';
 var Apimap = {
     loginApi: apiPerfix + 'open-api/login',
     registApi: apiPerfix + 'open-api/regist',
