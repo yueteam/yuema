@@ -15,6 +15,7 @@ $(function() {
     	init: function() {
     		var me = this;
 
+            Loading.show();
     		me.getData(function() {
     			me.initEvent();
     		});
@@ -33,7 +34,7 @@ $(function() {
             Mscroll.init({
                 'scrollToBottom': function(){
                     if(pageEnd) {
-                        monitor.stop();
+                        Mscroll.stop();
                         return;
                     }
 
@@ -43,8 +44,7 @@ $(function() {
                     });
 
                     me.getData(function(){
-                        monitor.after();
-                        loading.hide();
+                        Mscroll.after();
                     });
                 }
             });
@@ -55,8 +55,6 @@ $(function() {
          */
         getData: function (cb) {
             var me = this;
-
-            Loading.show();
            
             Ajax.get(Apimap.listApi, {
 					'page': pageNo
@@ -76,7 +74,7 @@ $(function() {
 				    		}
 				    	} else {
 				    		me.renderData(listData);
-				    		ui.$loadmore.html('上拉加载更多');
+				    		$('#loadmore').html('上拉加载更多');
 				    		pageNo++;
 				    	}
 				    	cb & cb();

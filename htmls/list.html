@@ -29,6 +29,7 @@
     <ul class="list">
         
     </ul>
+    <div id="loadmore"></div>
 </div>
 
 <script id="listTmpl" type="text/tmpl">
@@ -47,8 +48,8 @@
                 <span class="label">约吗？</span><%= list[i].article %>
             </div>
             <div class="date-info">
-                <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
                 <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
+                <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
             </div>
         </a>
         <a class="g-yue" href="javascript:;" data-id="<%= list[i].uUID %>">

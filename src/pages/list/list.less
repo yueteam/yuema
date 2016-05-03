@@ -1,5 +1,7 @@
 @import "../../common/base";
 @import "../../mods/yue/yue";
+@import "../../components/loading/loading";
+@import "../../components/dialog/dialog";
 
 .btn-filter {
 	position: absolute;
@@ -15,9 +17,6 @@
 	line-height: 35px;
 	background-color: rgba(0, 199, 175, 0.5);
 	.border-radius(3px);
-	.icnfont {
-
-	}
 }
 .list {
     background-color: #fff;
@@ -44,10 +43,10 @@
         }
         .info-box {
             height: 68px;
+            font-size: 14px;
             overflow: hidden;
             .name {
                 margin-bottom: 6px;
-                font-size: 14px;
             }
             .info {
                 color: #999;
@@ -57,9 +56,19 @@
         .latest-date {
             margin-top: 12px;
             line-height: 1.6;
-            font-size: 14px;
+            font-size: 16px;
             .label {
                 color: @green-sea;
+            }
+        }
+        .date-info {
+            color: #999;
+            .what, .address {
+                margin-right: 10px;
+            }
+            .iconfont {
+                margin-right: 3px;
+                font-size: 12px;
             }
         }
     }
