@@ -9,6 +9,7 @@ $(function() {
 	
 	var now = new Date(),
         today = new Date(now.setHours(0, 0, 0, 0)),
+        tommorrow = new Date(today.getTime() + 1 * 86400 * 1000),
         last30days = new Date(today.getTime() + 29 * 86400 * 1000);
 
        var submitData = {};
@@ -85,6 +86,13 @@ $(function() {
             		$('#optWhen').html('<span class="iconfont icon-calendar"></span>'+text).show();
             		getOptWhereWidth();
             	}
+                if(val == 1) {
+                    var theDate = Utils.formatDate(today);
+                    $('#calLink').val(theDate);
+                } else if(val == 2) {
+                    var theDate = Utils.formatDate(tommorrow);
+                    $('#calLink').val(theDate);
+                }
             	submitData.datingTimeType = val;
             });
 
