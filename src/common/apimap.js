@@ -7,7 +7,8 @@ var Apimap = {
     addressesListApi: apiPerfix + 'open-api/get/addresses-list',
     postDatingApi: apiPerfix + 'action/post/dating',
     requestDatingApi: apiPerfix + 'action/request/dating',
-    acceptDatingApi: apiPerfix + 'action/accept/dating'
+    acceptDatingApi: apiPerfix + 'action/accept/dating',
+    listApi: apiPerfix + 'open-api/query/dating/dating-list'
 };
 
 module.exports = Apimap;
