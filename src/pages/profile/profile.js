@@ -5,5 +5,4 @@ $(function() {
 	$('.photo').height(width/2);
 	$('.tags-con').height(width/2);
 
-	$('.details').addClass('open');
 });
