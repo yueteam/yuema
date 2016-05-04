@@ -73,3 +73,26 @@
         }
     }
 }
+.tag-list {
+    .clearfix;
+    padding: 20px 30px;
+    .tag-item {
+        float: left;
+        margin: 0 0 20px 0;
+        padding: 0 15px;
+        width: 35%;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 16px;
+        background: #fff;
+        border: 1px solid @border-color;
+        &:nth-child(even) {
+            float: right;
+        }
+        &.active {
+            color: #fff;
+            background: @turquoise;
+        }
+    }
+}

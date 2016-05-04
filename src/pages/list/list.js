@@ -10,6 +10,7 @@ $(function() {
 
 	var pageNo = 1;
 	var pageEnd = false;
+    var listType = 100;
 
 	var app = {
     	init: function() {
@@ -48,7 +49,48 @@ $(function() {
                     });
                 }
             });
+
+            //筛选
+            $(document).on('tap', '.btn-filter', function() {
+                Utils.stopEventTap();
+                $('.g-panel').addClass('open');
+            });
+
+            $(document).on('tap', '.tag-item', function() {
+                Utils.stopEventTap();
+
+                var $this = $(this),
+                    tagId = $this.data('val');
+                if($this.hasClass('active')) {
+                    $this.removeClass('active');
+                    listType = 100;
+                } else {
+                    $('.tag-list .active').removeClass('active');
+                    $this.addClass('active');
+                    listType = tagId;
+                }
+                $('.g-panel').removeClass('open');
+                me.switchTag();
+            });
 		},
+
+        /**
+         * 筛选后的渲染操作
+         * @return {[type]} [description]
+         */
+        switchTag : function() {
+            var me = this;
+
+            //初始化配置
+            pageNo = 1;
+            pageEnd = false;
+            $('.list').html('');
+            $('#loadmore').html('');
+            Nodata.hide();
+            $('body').scrollTop(0);
+            Mscroll.reopen();
+            me.getData();
+        },
 
 		/**
          * 获取列表数据
@@ -56,9 +98,18 @@ $(function() {
         getData: function (cb) {
             var me = this;
            
-            Ajax.get(Apimap.listApi, {
-					'page': pageNo
-				},
+            var apiData = {
+                'page': pageNo
+            };
+
+            if(listType != 100) {
+                apiData = {
+                    'page': pageNo,
+                    'type': 'category',
+                    'category': listType
+                };
+            }
+            Ajax.get(Apimap.listApi, apiData,
 				function(d){
 					Loading.hide();
 
