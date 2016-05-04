@@ -128,7 +128,7 @@ $(function() {
 				    		$('#loadmore').html('上拉加载更多');
 				    		pageNo++;
 				    	}
-				    	cb & cb();
+				    	cb && cb();
 				    } else {
 				    	Tips.show({
 		                    type: 'error',
