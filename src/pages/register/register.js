@@ -94,14 +94,7 @@ $(function() {
 				function(d){
 					Loading.hide();
 
-				    Tips.show({
-	                    type: 'success',
-	                    title: '注册成功'
-	                });
-
-                    setTimeout(function() {
-                        window.location.href = './perfectprofile.html';
-                    }, 500);
+				    window.location.href = './perfectprofile.html';
 				},
 				function(d){
 					Loading.hide();

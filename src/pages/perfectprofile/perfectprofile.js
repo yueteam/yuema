@@ -41,7 +41,7 @@ $(function() {
 
         	// 上传图片
         	$(".file-upload").on('change', function() {
-		    	$('#formFile').submit();
+		    	$('#formFile')[0].submit();
 		    });
 
             // 选择性别
@@ -53,6 +53,48 @@ $(function() {
 
                     $('#sex').val(sexVal);
                 }
+            });
+
+            // 选择城市
+            $(document).on('tap', '#chooseCity', function() {
+                Utils.stopEventTap();
+                $('.city-panel').addClass('open');
+            });
+
+            $(document).on('tap', '.city-item', function() {
+                Utils.stopEventTap();
+
+                var $this = $(this),
+                    text = $this.text(),
+                    value = $this.data('val');
+                if(!$this.hasClass('active')) {
+                    $('.city-list .active').removeClass('active');
+                    $this.addClass('active');
+                    $('#chooseCity').text(text);
+                    $('#city').val(value);
+                }
+                $('.city-panel').removeClass('open');
+            });
+
+            // 选择圈子
+            $(document).on('tap', '#chooseQz', function() {
+                Utils.stopEventTap();
+                $('.qz-panel').addClass('open');
+            });
+
+            $(document).on('tap', '.qz-item', function() {
+                Utils.stopEventTap();
+
+                var $this = $(this),
+                    text = $this.text(),
+                    value = $this.data('val');
+                if(!$this.hasClass('active')) {
+                    $('.qz-list .active').removeClass('active');
+                    $this.addClass('active');
+                    $('#chooseQz').text(text);
+                    $('#socialId').val(value);
+                }
+                $('.qz-panel').removeClass('open');
             });
 
 		    // 注册提交事件
@@ -111,6 +153,10 @@ $(function() {
 	                    type: 'success',
 	                    title: '保存成功'
 	                });
+
+                    setTimeout(function() {
+                        window.location.href = './profile.html';
+                    }, 500);
 				},
 				function(d){
 					Loading.hide();
