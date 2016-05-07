@@ -71,7 +71,7 @@ $(function() {
                     $('.city-list .active').removeClass('active');
                     $this.addClass('active');
                     $('#chooseCity').text(text);
-                    $('#city').val(value);
+                    $('#cityId').val(value);
                 }
                 $('.city-panel').removeClass('open');
             });
