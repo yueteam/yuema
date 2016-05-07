@@ -41,7 +41,7 @@ $(function() {
 
         	// 上传图片
         	$(".file-upload").on('change', function() {
-		    	$('#formFile').submit();
+		    	$('#formFile')[0].submit();
 		    });
 
             // 选择性别
