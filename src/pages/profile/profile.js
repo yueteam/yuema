@@ -19,6 +19,7 @@ $(function() {
     		var me = this;
 
     		var scrollerW = width * $('.scroller .item').length;
+            $('.scroller .item').width(width);
     		$('.scroller').width(scrollerW);
             me.initEvent();   		
     	},

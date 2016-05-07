@@ -26,14 +26,18 @@
     <div class="basic-info">
         <div class="scroller">
             <div class="item">
-                <img src="http://tp4.sinaimg.cn/5571833295/180/5722160098/0" alt="" />
+                <img src="../build/images/blank.gif" style="background-image:url(http://ww4.sinaimg.cn/mw690/00654QmXgw1f3lz8nko4bj31410qojw8.jpg)" alt="" />
             </div>
             <div class="item">
-                <img src="http://tp4.sinaimg.cn/5571833295/180/5722160098/0" alt="" />
+                <img src="../build/images/blank.gif" style="background-image:url(http://ww2.sinaimg.cn/mw690/00654QmXgw1f3lz8tt3ovj30qo1400zq.jpg)" alt="" />
+            </div>
+            <div class="item">
+                <img src="../build/images/blank.gif" style="background-image:url(http://ww3.sinaimg.cn/mw690/00654QmXgw1f3ducag03xj30ku0rsgqp.jpg)" alt="" />
             </div>
         </div>
         <div class="icons">
             <i class="current"></i>
+            <i></i>
             <i></i>
         </div>
         <div class="info">
@@ -58,46 +62,71 @@
                 <h3>0次<br>爽约</h3>
             </li>
         </ul>
-        <div class="latest-date">
-            <a href="./datelist.html" class="lnk-date">         
-                <div class="words">      
-                    <span class="iconfont icon-lquote"></span>
-                    约吗？一起喝杯咖啡聊聊人生！
-                </div>
-                <div class="date-info">
-                    <span class="time"><span class="iconfont icon-calendar"></span>随时</span>
-                    <span class="address"><span class="iconfont icon-location"></span>城北漫咖啡</span>
-                    <span class="what"><span class="iconfont icon-coffee"></span>喝点什么</span>
-                </div>
-            </a>
-        </div>
-        <div class="photo">
-            <a href="#" class="photo-preview">
-                <img src="http://ww1.sinaimg.cn/thumb180/00654QmXjw1euyrrorgdmj30sg0izq4s.jpg" alt="" />
-                <img src="http://ww1.sinaimg.cn/thumb180/00654QmXjw1euyrrqihb9j30iz0sgwgl.jpg" alt="" />
-                <img src="http://ww2.sinaimg.cn/thumb180/00654QmXjw1euyrrrkrpoj30iz0sg75m.jpg" alt="" />
-                <div class="photo-count">
-                    <em>+12</em><br>照片
-                </div>
-            </a>
-        </div>
-        <div class="tags">
-            <div class="tags-con">
-                <a href="javascript:;" class="tag"><em>5</em><br>有礼貌</a>
-                <a href="javascript:;" class="tag"><em>15</em><br>美女约吗</a>
-                <a href="javascript:;" class="tag"><em>15</em><br>清新脱俗</a>
-                <a href="javascript:;" class="tag"><em>3</em><br>一见倾心</a>
-                <a href="javascript:;" class="tag"><em>5</em><br>有礼貌</a>
-                <a href="javascript:;" class="tag"><em>15</em><br>美女约吗</a>
-                <a href="javascript:;" class="tag"><em>15</em><br>清新脱俗</a>
-                <a href="javascript:;" class="tag"><em>3</em><br>一见倾心</a>
-            </div>
-            <a href="javascript:;" class="tags-count">
-                <em>+5</em><br>标签
-            </a>
-        </div>
     </div>
 </div>
+<ul class="list">
+
+    <li class="item">
+        <div class="date-words">  
+            <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
+            美队3要上映了，周末去看吗
+        </div>
+        <div class="date-info">
+            <span class="time"><span class="iconfont icon-calendar"></span>2016/05/06</span>
+            <span class="what"><span class="iconfont icon-film"></span>电影</span>
+        </div>
+        <a class="g-yue" href="javascript:;" data-id="123">
+            <span class="iconfont icon-yes"></span>
+        </a>
+    </li>
+
+    <li class="item">
+        <div class="date-words">  
+            <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
+            美队3要上映了，周末去看吗
+        </div>
+        <div class="date-info">
+            <span class="time"><span class="iconfont icon-calendar"></span>2016/05/06</span>
+            <span class="what"><span class="iconfont icon-film"></span>电影</span>
+        </div>
+        <a class="g-yue" href="javascript:;" data-id="123">
+            <span class="iconfont icon-yes"></span>
+        </a>
+    </li>
+
+    <li class="item">
+        <div class="date-words">  
+            <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
+            美队3要上映了，周末去看吗
+        </div>
+        <div class="date-info">
+            <span class="time"><span class="iconfont icon-calendar"></span>2016/05/06</span>
+            <span class="what"><span class="iconfont icon-film"></span>电影</span>
+        </div>
+        <a class="g-yue" href="javascript:;" data-id="123">
+            <span class="iconfont icon-yes"></span>
+        </a>
+    </li>
+
+</ul>
+
+<script id="tmpl" type="text/tmpl">
+<% for(var i=0; i<list.length; i++){ %>
+    <li class="item">
+        <div class="date-words">  
+            <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
+            <%= list[i].words %>
+        </div>
+        <div class="date-info">
+            <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
+            <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].what %></span>
+        </div>
+        <a class="g-yue" href="javascript:;" data-id="<%= list[i].id %>">
+            <span class="iconfont icon-yes"></span>
+        </a>
+    </li>
+<% } %>
+</script>
 
 <script src="../build/js/base.js"></script>
 <!-- build:js -->

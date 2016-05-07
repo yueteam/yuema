@@ -73,6 +73,7 @@ $(function() {
                 }
 
             });
+            submitData.confirmPassWord = submitData.password;
 
             console.log('setSubmitData', submitData);
             me.doSubmit();
@@ -87,7 +88,6 @@ $(function() {
             Loading.show();
            
             Ajax.post(Apimap.registApi, {
-            		'method': 'regist',
 					'userInfo': JSON.stringify(submitData)
 				},
 				function(d){

@@ -1,4 +1,5 @@
 @import "../../common/base";
+@import "../../mods/yue/yue";
 
 body {
     -webkit-font-smoothing: antialiased;
@@ -9,12 +10,16 @@ body {
 	text-align: center;
 	.ui-slider;
 	.scroller{
-        .flex;
+        .clearfix;
         .item{ 
-        	.flex-avg();
-        	overflow: hidden;
+        	float: left;
+        	width: 100%;
         	img {
+        		display: block;
                 width: 100%;
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
         	}
         }
     }
@@ -83,126 +88,38 @@ body {
 			}
 		}
 	}
-	.latest-date {
-		position: relative;
-		.hairline(top, rgba(255, 255, 255, 0.3));
-		.lnk-date {
-	        position: relative;
-			display: block;
-			padding: 20/20rem 40px;
-			background-color: @blue-bg;
-	        .encoded-svg-background("<svg viewBox='0 0 60 120' xmlns='http://www.w3.org/2000/svg'><path d='m60 61.5-38.25 38.25-9.75-9.75 29.25-28.5-29.25-28.5 9.75-9.75z' fill='#ffffff'/></svg>");
-	        background-size: 10/20rem 20/20rem;
-	        background-repeat: no-repeat;
-	        background-position: 95% center;
-	        background-position: -webkit-calc(~"100% - 20px") center;
-	        background-position: calc(~"100% - 20px") center;
-	        .words {
-	        	font-size: 16px;
-	        	color: #fff;
-	        	.text-overflow();
-	        }
-	        .date-info {
-	        	margin-top: 5px;
-	        	color: @silver;
-	        	font-size: 12px;
-	        	.iconfont {
-	        		margin-right: 3px;
-	        		font-size: 12px;
-	        	}
-	        	.time, .address {
-	        		margin-right: 5px;
-	        	}
-	        }
-        	.icon-lquote {
-        		position: absolute;
-        		left: 20px;
-        		top: 15px;
-        	}
-	    }
-	}
-	.photo {
-		position: relative;
-		float: left;
-		width: 50%;
-		overflow: hidden;
-		a  {
-			display: block;
-			width: 100%;
-			.clearfix;
-			img {
-				float: left;
-				width: 50%;
-				opacity: 0.5;
-			}
-			.photo-count {
-				position: absolute;
-				bottom: 0;
-				right: 0;
-				width: 50%;
-				height: 50%;
-  				color: #fff;
-  				font-size: 16px;
-  				text-align: center;
-				background: @green-sea;
-				.center();
-				.box-shadow(0 0 15px rgba(0, 0, 0, 0.5));
-				em {
-  					font-size: 18px;
-  					font-weight: bold;
-				}
-			}
-		}
-	}
-	.tags {
-		position: relative;
-		float: left;
-		width: 50%;
-		overflow: hidden;
-		.tags-con {
-			overflow-y: auto;
-		}
-		.tag {
-			position: relative;
-			float: left;
-			width: 50%;
-			height: 50%;
-			padding: 0 10px;
-			text-align: center;
-			color: @text-color;
-			font-size: 14px;
-			.center();
-			.border-box();
-			.hairline(right, @borderColor);
-			.hairline(top, @borderColor);
-			em {
-				color: @red-color;
-				font-size: 16px;
-			}
-			&:nth-child(1) {
-				.hairline-remove(top);
-			}
-			&:nth-child(2) {
-				.hairline-remove(top);
-			}
-		}
-		.tags-count {
-			position: absolute;
-			z-index: 99;
-			bottom: 0;
-			left: 0;
-			width: 50%;
-			height: 50%;
-			color: @text-color;
-			font-size: 16px;
-			text-align: center;
-			background: #fff;
-			.center();
-			.box-shadow(0 0 15px rgba(0, 0, 0, 0.5));
-			em {
-				font-size: 18px;
-				font-weight: bold;
-			}
-		}
-	}
+}
+.list {
+    margin-top: 20px;
+    padding: 0 30px;
+    background-color: #fff;
+    .item {
+        position: relative;
+        padding: 20px 0;
+        border-bottom: 1px solid @border-color;
+        .date-words {
+            line-height: 1.8;
+            font-size: 16px;
+            .icon-lquote {
+                position: absolute;
+                top: 18px;
+                left: 0;
+            }
+            .label {
+                padding-left: 20px;
+                color: @green-sea;
+            }
+        }
+        .date-info {
+            line-height: 1.8;
+            color: #999;
+            .time, .address {
+                margin-right: 10px;
+            }
+            .iconfont {
+                margin-right: 3px;
+                font-size: 12px;
+            }
+        }
+    }
 }
