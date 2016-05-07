@@ -94,6 +94,8 @@ $(function() {
                 } else if(val == 2) {
                     var theDate = Utils.formatDate(tommorrow);
                     $('#calLink').val(theDate);
+                } else if(val == 0) {
+                    $('#calLink').val('');
                 }
             	// submitData.datingTimeType = val;
             });
