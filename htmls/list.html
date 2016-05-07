@@ -69,19 +69,21 @@
     <li class="item">
         <a class="item-lnk" href="./profile.html?id=<%= list[i].userId %>">
             <div class="avatar">
-                <img src="https://gtms03.alicdn.com/tps/i3/TB1yeWeIFXXXXX5XFXXuAZJYXXX-210-210.png_80x80.jpg" alt="" />
+                <img src="<%= list[i].postUserInfo.avatar %>" alt="" />
             </div>
             <div class="info-box">
                 <div class="name"><%= list[i].postUserInfo.nickName %></div>
-                <div class="info"><%= list[i].age %>岁, <%= list[i].sex %>, 教师</div>
-                <div class="info">杭州市</div>
+                <div class="info"><%= list[i].age %>岁, <%= list[i].sex %>, <%= list[i].city %></div>
+                <div class="info"><%= list[i].profession %></div>
             </div>
             <div class="latest-date">
                 <span class="label">约吗？</span><%= list[i].article %>
             </div>
             <div class="date-info">
                 <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
+                <% if(list[i].time){ %>
                 <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
+                <% } %>
             </div>
         </a>
         <a class="g-yue" href="javascript:;" data-id="<%= list[i].uUID %>">

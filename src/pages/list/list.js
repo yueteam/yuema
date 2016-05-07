@@ -171,24 +171,56 @@ $(function() {
         		'9': '自驾',
         		'1': '其他'       		
         	};
+            var cityMap = {
+                '110100': '北京',
+                '310100': '上海',
+                '440100': '广州',
+                '440300': '深圳',
+                '330100': '杭州',
+                '510100': '成都'
+            };
+            var socialMap = {
+                '1': '互联网/IT',
+                '2': '金融财务',
+                '3': '艺术/设计',
+                '4': '模特/演艺',
+                '5': '创业/投资',
+                '6': '摄影制作',
+                '7': '影视娱乐',
+                '8': '音乐/舞蹈',
+                '9': '广告传媒',
+                '10': '教育/体育'
+            };
         	$.each(listArr, function(index, item){
         		var sex = item.postUserInfo.sex,
         			birthday = item.postUserInfo.birthday,
-        			postTime = item.postTime,
+        			datingTime = item.datingTime || '',
+                    cityId = item.postUserInfo.cityId,
+                    socialId = item.postUserInfo.socialId,
         			typeId = item.typeId;
 
         		listArr[index].age = new Date().getFullYear() - parseInt(birthday.substr(0,4));
         		listArr[index].sex = sex === 'M' ? '男' : '女';
-        		listArr[index].time = postTime.substr(0,10);
+                if(datingTime !== '') {
+        		    listArr[index].time = datingTime.substr(0,10);
+                }
         		listArr[index].iconCls = iconMap[typeId];
         		listArr[index].typeName = typeName[typeId];
+                listArr[index].city = cityMap[cityId];
+
+                var profession = '混'+socialMap[socialId]+'圈';
+                if(item.postUserInfo.career && item.postUserInfo.career !== '') {
+                    profession += '的'+item.postUserInfo.career;
+                }
+                listArr[index].profession = profession;
+
         	});
         	var html = Utils.template($('#listTmpl').html(), 
 	        	{
 					list: listArr
 				});
 
-			$('.list').html(html);
+			$('.list').append(html);
         }
     };
 

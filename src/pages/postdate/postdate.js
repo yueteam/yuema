@@ -95,7 +95,7 @@ $(function() {
                     var theDate = Utils.formatDate(tommorrow);
                     $('#calLink').val(theDate);
                 }
-            	submitData.datingTimeType = val;
+            	// submitData.datingTimeType = val;
             });
 
             // 日历组件
