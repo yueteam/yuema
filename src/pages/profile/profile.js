@@ -7,18 +7,13 @@ $(function() {
 	var Loading = require('../../components/loading/loading');
 	var Flipsnap = require("../../components/flipsnap");
 	var Yue = require("../../mods/yue/yue");
-	
-	var width = $(window).width();
-	$('.photo').height(width/2);
-	$('.tags-con').height(width/2);
-
-	$('.basic-info').height(width);
-
+    var width = $(window).width();
 	var app = {
     	init: function() {
     		var me = this;
 
     		var scrollerW = width * $('.scroller .item').length;
+            $('.basic-info').height(width);
             $('.scroller .item').width(width);
     		$('.scroller').width(scrollerW);
             me.initEvent();   		
