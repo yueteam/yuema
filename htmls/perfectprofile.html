@@ -11,86 +11,52 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <link rel="apple-touch-icon" href="favicon.png" />
     <link rel="Shortcut Icon" href="favicon.png" type="image/x-icon" />
-    <title>注册</title>
+    <title>完善资料</title>
 
     <script>g_start = new Date();</script>
 
     <!-- build:css -->
-    <link rel="stylesheet" href="../build/css/register.css">
+    <link rel="stylesheet" href="../build/css/perfectprofile.css">
     <!-- endbuild -->
 
 </head>
 <body>
 
-<div class="page-content">
-    <div class="reg-form">
-        <div class="form-row mtb15">
-            <label class="label"><span class="required">*</span>头像</label>
-            <div class="form-item">
-                <input type="hidden" id="avatar" class="item-input" data-submit="true" data-check="true" data-require-msg="请上传头像" data-rule="require" />
-                <form enctype="multipart/form-data" id="formFile" name="formFile" method="post" action="#" target="frameFile">
-                <a class="item-lnk" href="javascript:;">
-                    <input type="file" name="fileUpload" class="file-upload" />
-                    <img id="avatarImg" src="http://assets.alicdn.com/g/s.gif" alt="" />
-                </a>
-                </form>
+<div class="page-content">   
+    <div class="avatar-row">
+        <form enctype="multipart/form-data" id="formFile" name="formFile" method="post" action="#" target="frameFile">
+            <div class="avatar-box">
+                <span class="iconfont icon-photo"></span>
+                <input type="file" name="fileUpload" class="file-upload" />
+                <img id="avatarImg" src="http://assets.alicdn.com/g/s.gif" alt="" />
             </div>
-        </div>
+        </form>
         <iframe id="frameFile" name="frameFile" style="display: none;"></iframe>
-        <div class="form-row">
-            <label class="label"><span class="required">*</span>昵称</label>
-            <div class="form-item">
-                <input type="text" id="nickName" class="item-input"
-                data-submit="true" data-check="true" data-require-msg="请填写昵称" data-nickname-msg="只支持英文汉字数字" data-maxlength-msg="昵称最多20个字" placeholder="最多20个字" data-rule="require|nickname" data-maxlength="20" />
-            </div>
-        </div>
-        <div class="form-row">
-            <label class="label"><span class="required">*</span>性别</label>
-            <div class="form-item">
-                <input type="text" id="sex" class="item-input" data-submit="true" data-check="true" data-require-msg="请填写性别" placeholder="最多20个字" data-rule="require" />
-            </div>
-        </div>
-        <div class="form-row">
-            <label class="label"><span class="required">*</span>职业</label>
-            <div class="form-item">
-                <input type="text" id="profession" class="item-input" data-submit="true" data-check="true" data-require-msg="请填写职业" placeholder="" data-rule="require" />
-            </div>
-        </div>
-        <div class="form-row">
-            <label class="label"><span class="required">*</span>所在公司</label>
-            <div class="form-item">
-                <input type="text" id="company" class="item-input" data-submit="true" data-check="true" data-require-msg="请填写所在公司" placeholder="" data-rule="require" />
-            </div>
-        </div>
-        <div class="form-row">
-            <label class="label"><span class="required">*</span>出生日期</label>
-            <div class="form-item">
-                <input type="date" id="birthday" class="item-input date-input" style="width:120px;" value=""
-                data-submit="true" data-check="true" data-require-msg="请选择出生日期" data-rule="require"
-                 />
-            </div>
-        </div>
-        <div class="form-row">
-            <label class="label">姓名</label>
-            <div class="form-item">
-                <input type="text" id="name" class="item-input" data-submit="true" data-check="true" data-maxlength-msg="最多20个字" placeholder="保密" data-maxlength="20" />
-            </div>
-        </div>
-        <div class="form-row">
-            <label class="label">手机号码</label>
-            <div class="form-item">
-                <input type="tel" id="mobilePhone" class="item-input" data-submit="true" data-check="true" data-mobile-msg="请输入正确的手机号码" placeholder="保密" data-rule="mobile" />
-            </div>
-        </div>
     </div>
-    <div class="action">
-        <a class="btn btn-primary" id="save">提交</a>
+    <div class="fm">
+        <div class="sex-row">
+            <a class="sex-item" data-val="m" href="javascript:;">男</a>
+            <a class="sex-item" data-val="f" href="javascript:;">女</a>
+        </div>
+        <input type="hidden" id="sex" data-submit="true" data-check="true" data-require-msg="请选择性别" data-rule="require" />
+        <div class="form-row">
+            <input type="text" id="profession" class="form-control" data-submit="true" data-check="true" data-require-msg="请填写职业" placeholder="请填写职业" data-rule="require" />
+        </div>
+        <div class="form-row">
+            <input type="text" id="company" class="form-control" data-submit="true" data-check="true" data-require-msg="请填写所在公司" placeholder="请填写所在公司" data-rule="require" />
+        </div>
+        <div class="form-row">
+            <input type="date" id="birthday" class="form-control date-input" data-submit="true" data-check="true" data-require-msg="请选择出生日期" data-rule="require" placeholder="请填写出生日期" />
+        </div> 
+    </div>  
+    <div class="form-row">
+        <a class="btn btn-green" id="save">保存</a>
     </div>
 </div>
 
 <script src="../build/js/base.js"></script>
 <!-- build:js -->
-<script src="../build/js/register.js"></script>
+<script src="../build/js/perfectprofile.js"></script>
 <!-- endbuild -->
 
 <!-- 加载脚本 -->
@@ -98,8 +64,10 @@
     g_mstart = new Date();
 
     function uploadSuccess(msg) {
-        $('#avatarImg').attr('src', msg);
+        console.log(msg);
+        // $('#avatarImg').attr('src', msg);
     }
+
 </script>
 </body>
 </html>
