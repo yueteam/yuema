@@ -73,6 +73,7 @@ $(function() {
                 }
 
             });
+            submitData.password = CryptoJS.SHA1(submitData.password).toString();
             submitData.confirmPassWord = submitData.password;
 
             console.log('setSubmitData', submitData);
@@ -95,7 +96,7 @@ $(function() {
 
 				    Tips.show({
 	                    type: 'success',
-	                    title: '保存成功'
+	                    title: '注册成功'
 	                });
 				},
 				function(d){
