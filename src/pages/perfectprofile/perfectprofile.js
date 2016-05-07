@@ -1,12 +1,13 @@
+var Utils = require('../../common/utils');
+var Apimap = require('../../common/apimap');
+var Loading = require('../../components/loading/loading');
+var Tips = require('../../components/tips');
+var FormValid = require('../../components/formvalid');
+var Ajax = require('../../components/ajax');
 $(function() {
-	var Utils = require('../../common/utils');
-	var Loading = require('../../components/loading/loading');
-	var Tips = require('../../components/tips');
-	var FormValid = require('../../components/formvalid');
-	var Ajax = require('../../components/ajax');
 
     var fv = new FormValid({
-        container: '.reg-form',
+        container: '.fm',
         checkIntime: false,
         handAllResult: function (errors) {
             if (errors.length) {
@@ -43,6 +44,17 @@ $(function() {
 		    	$('#formFile').submit();
 		    });
 
+            // 选择性别
+            $('.sex-item').on('tap', function() {
+                if(!$(this).hasClass('selected')) {
+                    var sexVal = $(this).data('val');
+                    $('.sex-row .selected').removeClass('selected');
+                    $(this).addClass('selected');
+
+                    $('#sex').val(sexVal);
+                }
+            });
+
 		    // 注册提交事件
             $('#save').on('tap', function () {
                 var $this = $(this);
@@ -64,9 +76,7 @@ $(function() {
         setSubmitData: function () {
         	var me = this;
 
-            submitData.avatar = 'http://gw.alicdn.com/tfscom/TB1uxsQLVXXXXcsXVXXq6xXFXXX';
-
-            $('.reg-form').find('[data-submit]').each(function() {
+            $('.fm').find('[data-submit]').each(function() {
 
                 var $this = $(this);
                 var isSubmit = $this.data('submit');
@@ -91,8 +101,7 @@ $(function() {
 
             Loading.show();
            
-            Ajax.post('http://test.yuema.us/open-api/regist', {
-            		'method': 'regist',
+            Ajax.post(Apimap.perfectApi, {
 					'userInfo': JSON.stringify(submitData)
 				},
 				function(d){

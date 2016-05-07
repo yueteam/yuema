@@ -98,6 +98,10 @@ $(function() {
 	                    type: 'success',
 	                    title: '注册成功'
 	                });
+
+                    setTimeout(function() {
+                        window.location.href = './perfectprofile.html';
+                    }, 500);
 				},
 				function(d){
 					Loading.hide();
