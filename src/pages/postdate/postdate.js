@@ -21,6 +21,7 @@ $(function() {
     		$('#dateDesc').focus();
 
     		var listH = $(window).height() - 300;
+            $('.panels').height(listH);
     		$('.opt-panel').height(listH);
 
     		this.initEvent();
