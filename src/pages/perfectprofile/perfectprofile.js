@@ -1,11 +1,9 @@
 $(function() {
 	var Utils = require('../../common/utils');
-    var Apimap = require('../../common/apimap');
 	var Loading = require('../../components/loading/loading');
 	var Tips = require('../../components/tips');
 	var FormValid = require('../../components/formvalid');
 	var Ajax = require('../../components/ajax');
-    var CryptoJS = require('../../components/sha1');
 
     var fv = new FormValid({
         container: '.reg-form',
@@ -40,6 +38,11 @@ $(function() {
         initEvent: function () {
         	var me = this;
 
+        	// 上传图片
+        	$(".file-upload").on('change', function() {
+		    	$('#formFile').submit();
+		    });
+
 		    // 注册提交事件
             $('#save').on('tap', function () {
                 var $this = $(this);
@@ -60,6 +63,8 @@ $(function() {
          */
         setSubmitData: function () {
         	var me = this;
+
+            submitData.avatar = 'http://gw.alicdn.com/tfscom/TB1uxsQLVXXXXcsXVXXq6xXFXXX';
 
             $('.reg-form').find('[data-submit]').each(function() {
 
@@ -86,7 +91,7 @@ $(function() {
 
             Loading.show();
            
-            Ajax.post(Apimap.registApi, {
+            Ajax.post('http://test.yuema.us/open-api/regist', {
             		'method': 'regist',
 					'userInfo': JSON.stringify(submitData)
 				},

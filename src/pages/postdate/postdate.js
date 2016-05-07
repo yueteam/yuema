@@ -12,7 +12,9 @@ $(function() {
         tommorrow = new Date(today.getTime() + 1 * 86400 * 1000),
         last30days = new Date(today.getTime() + 29 * 86400 * 1000);
 
-       var submitData = {};
+       var submitData = {
+    		   typeId:1
+       };
 
 	var app = {
     	init: function() {
