@@ -152,7 +152,7 @@ $(function() {
 
 				    Tips.show({
 	                    type: 'success',
-	                    title: '保存成功'
+	                    title: '发布成功'
 	                });
 				},
 				function(d){
