@@ -3,13 +3,13 @@
 var Apimap = {
     loginApi: apiPerfix + 'open-api/login',
     registApi: apiPerfix + 'open-api/simple-regist',
-    perfectApi: apiPerfix + 'action/user/update/user-info',
-    provincesListApi: apiPerfix + 'open-api/get/provinces-list',
-    citiesListApi: apiPerfix + 'open-api/get/cities-list',
-    addressesListApi: apiPerfix + 'open-api/get/addresses-list',
-    postDatingApi: apiPerfix + 'action/post/dating',
-    requestDatingApi: apiPerfix + 'action/request/dating',
-    acceptDatingApi: apiPerfix + 'action/accept/dating',
+    perfectApi: apiPerfix + 'action/user/update',
+    provincesListApi: apiPerfix + 'open-api/query/provinces-list',
+    citiesListApi: apiPerfix + 'open-api/query/cities-list',
+    addressesListApi: apiPerfix + 'open-api/query/addresses-list',
+    postDatingApi: apiPerfix + 'action/dating/post',
+    requestDatingApi: apiPerfix + 'action/dating/request',
+    acceptDatingApi: apiPerfix + 'action/dating/accept',
     listApi: apiPerfix + 'open-api/query/dating/dating-list'
 };
 
