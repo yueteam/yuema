@@ -3,11 +3,15 @@ $(function() {
 	var Apimap = require('../../common/apimap');
 	var Tips = require('../../components/tips');
 	var Ajax = require('../../components/ajax');
-	var Nodata = require('../../components/nodata');
+    var Nodata = require('../../components/nodata');
 	var Loading = require('../../components/loading/loading');
 	var Flipsnap = require("../../components/flipsnap");
 	var Yue = require("../../mods/yue/yue");
+
     var width = $(window).width();
+    // 个人id
+    var profileId = Utils.getUrlParam('id');
+
 	var app = {
     	init: function() {
     		var me = this;
@@ -16,7 +20,10 @@ $(function() {
             $('.basic-info').height(width);
             $('.scroller .item').width(width);
     		$('.scroller').width(scrollerW);
-            me.initEvent();   		
+
+            me.getData(function() {
+                me.initEvent(); 
+            });  		
     	},
 
     	/**
@@ -44,39 +51,24 @@ $(function() {
         getData: function (cb) {
             var me = this;
            
-            Ajax.get(Apimap.listApi, {
-					'page': pageNo
+            Ajax.get(Apimap.profileApi, {
+					'id': profileId
 				},
 				function(d){
 					Loading.hide();
 
-				    if(d.result && d.result.datingList) {
-				    	var listData  = d.result.datingList;
+				    if(d.result && d.result.userInfo) {
+				    	me.renderData(d.result);
 
-				    	if(listData.length === 0) {
-				    		pageEnd = true;
-				    		if(pageNo === 1) {
-				    			Nodata.show('现在暂时没什么约会，过会来看看吧~');
-				    		} else {
-				    			$('#loadmore').html('没有更多约会了~');
-				    		}
-				    	} else {
-				    		me.renderData(listData);
-				    		$('#loadmore').html('上拉加载更多');
-				    		pageNo++;
-				    	}
 				    	cb & cb();
 				    } else {
-				    	Tips.show({
-		                    type: 'error',
-		                    title: '返回的数据格式有问题'
-		                });
-				    }
+                        Nodata.show('返回的数据格式有问题');
+                    }
 				},
 				function(d){
 					Loading.hide();
 
-	                Nodata.show(d.resultMsg);
+                    Nodata.show(d.resultMsg);
 				}
 			);
 
@@ -85,47 +77,85 @@ $(function() {
         /**
          * 渲染列表数据
          */
-        renderData: function (listArr) {
+        renderData: function (data) {
         	var iconMap = {
-        		'2': 'icon-coffee',
-        		'3': 'icon-food',
-        		'4': 'icon-film',
-        		'5': 'icon-run',
-        		'6': 'icon-photo',
-        		'7': 'icon-badminton',
-        		'8': 'icon-riding',
-        		'9': 'icon-drive',
-        		'1': 'icon-lquote'
-        	};
-        	var typeName = {
-        		'2': '喝咖啡/茶',
-        		'3': '美食',
-        		'4': '看电影',
-        		'5': '跑步',
-        		'6': '摄影',
-        		'7': '羽毛球',
-        		'8': '骑行',
-        		'9': '自驾',
-        		'1': '其他'       		
-        	};
-        	$.each(listArr, function(index, item){
-        		var sex = item.postUserInfo.sex,
-        			birthday = item.postUserInfo.birthday,
-        			postTime = item.postTime,
-        			typeId = item.typeId;
+                '2': 'icon-coffee',
+                '3': 'icon-food',
+                '4': 'icon-film',
+                '5': 'icon-run',
+                '6': 'icon-photo',
+                '7': 'icon-badminton',
+                '8': 'icon-riding',
+                '9': 'icon-drive',
+                '1': 'icon-lquote'
+            };
+            var typeName = {
+                '2': '喝咖啡/茶',
+                '3': '美食',
+                '4': '看电影',
+                '5': '跑步',
+                '6': '摄影',
+                '7': '羽毛球',
+                '8': '骑行',
+                '9': '自驾',
+                '1': '其他'               
+            };
+            var cityMap = {
+                '110100': '北京',
+                '310100': '上海',
+                '440100': '广州',
+                '440300': '深圳',
+                '330100': '杭州',
+                '510100': '成都'
+            };
+            var socialMap = {
+                '1': '互联网/IT',
+                '2': '金融财务',
+                '3': '艺术/设计',
+                '4': '模特/演艺',
+                '5': '创业/投资',
+                '6': '摄影制作',
+                '7': '影视娱乐',
+                '8': '音乐/舞蹈',
+                '9': '广告传媒',
+                '10': '教育/体育'
+            };
+            var userInfo = data.userInfo,
+                listArr = data.postDatingList;
 
-        		listArr[index].age = new Date().getFullYear() - parseInt(birthday.substr(0,4));
-        		listArr[index].sex = sex === 'M' ? '男' : '女';
-        		listArr[index].time = postTime.substr(0,10);
-        		listArr[index].iconCls = iconMap[typeId];
-        		listArr[index].typeName = typeName[typeId];
-        	});
-        	var html = Utils.template($('#listTmpl').html(), 
+            var sex = userInfo.sex,
+                birthday = userInfo.birthday,
+                cityId = userInfo.cityId,
+                socialId = userInfo.socialId;
+            userInfo.age = new Date().getFullYear() - parseInt(birthday.substr(0,4));
+            userInfo.sex = sex === 'M' ? '男' : '女';
+            userInfo.city = cityMap[cityId];    
+            var profession = '混' + socialMap[socialId] + '圈';
+            if(userInfo.career && userInfo.career !== '') {
+                profession += '的' + userInfo.career;
+            }
+            userInfo.profession = profession;
+
+            $.each(listArr, function(index, item){
+                var datingTime = item.datingTime || '',
+                    typeId = item.typeId;
+                
+                if(datingTime !== '') {
+                    listArr[index].time = datingTime.substr(0,10);
+                } else {
+                    listArr[index].time = '随时';
+                }
+                listArr[index].iconCls = iconMap[typeId];
+                listArr[index].typeName = typeName[typeId];           
+
+            });
+        	var html = Utils.template($('#tmpl').html(), 
 	        	{
+                    info: userInfo,
 					list: listArr
 				});
 
-			$('.list').html(html);
+			$('.page-content').html(html);
         }
     };
 

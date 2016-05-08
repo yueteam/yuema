@@ -1,5 +1,5 @@
-var apiPerfix = window.location.protocol + '//'+window.location.host+'/';
-//var apiPerfix = window.location.protocol + '//www.yuema.us/';
+// var apiPerfix = window.location.protocol + '//'+window.location.host+'/';
+var apiPerfix = window.location.protocol + '//www.yuema.us/';
 var Apimap = {
     loginApi: apiPerfix + 'open-api/login',
     registApi: apiPerfix + 'open-api/simple-regist',
@@ -10,7 +10,8 @@ var Apimap = {
     postDatingApi: apiPerfix + 'action/dating/post',
     requestDatingApi: apiPerfix + 'action/dating/request',
     acceptDatingApi: apiPerfix + 'action/dating/accept',
-    listApi: apiPerfix + 'open-api/query/dating/dating-list'
+    listApi: apiPerfix + 'open-api/query/dating/dating-list',
+    profileApi: apiPerfix + 'open-api/query/home-info'
 };
 
 module.exports = Apimap;

@@ -68,6 +68,24 @@ var Utils = {
     },
 
     /**
+     * 获取网络状态是否良好
+     * @return {[type]} [description]
+     */
+    getNetworkState : function () {
+        var timingTime = 150;
+        //默认网络状况不好
+        var isGoodState = false;
+
+        if(window.performance){
+            var timing = window.performance.timing;
+            var time = timing.responseEnd - timing.domainLookupStart; //从请求发起到返回的时间
+            isGoodState = time > timingTime ? false : true;   //(本地pc10~ms   chorme network 模拟效果3g 100~ 图片加载比较流畅 edge 250 300~ 图片不流畅)
+        }
+
+        return isGoodState;
+    },
+
+    /**
      * 判断是否IOS操作系统，判断android也可以采用这个方法
      * @return {Boolean} [description]
      */
@@ -97,6 +115,14 @@ var Utils = {
      * @return {Boolean} [description]
      */
     isWeixin: function() {
+        return ua.indexOf('MicroMessenger') > -1;
+    },
+
+    /**
+     * 判断是否已登录
+     * @return {Boolean} [description]
+     */
+    isLogin: function() {
         return ua.indexOf('MicroMessenger') > -1;
     },
 
