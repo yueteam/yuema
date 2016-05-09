@@ -21,7 +21,7 @@ $(function() {
                 $('.basic-info').height(width);
                 $('.scroller .item').width(width);
                 $('.scroller').width(scrollerW);
-                
+
                 me.initEvent(); 
             });  		
     	},
@@ -151,6 +151,7 @@ $(function() {
                 listArr[index].article = item.datingInfo.article;   
 
             });
+            
         	var html = Utils.template($('#tmpl').html(), 
 	        	{
                     info: userInfo,
