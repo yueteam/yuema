@@ -10,7 +10,7 @@ $(function() {
 
     var width = $(window).width();
     // 个人id
-    var profileId = Utils.getUrlParam('id');
+    var profileId = Utils.getUrlParam('id') || '';
 
 	var app = {
     	init: function() {
@@ -34,15 +34,15 @@ $(function() {
 
         	Yue.init();
 
-        	var $pointer = $('.icons i');
+        	// var $pointer = $('.icons i');
 			var flipsnap = Flipsnap('.scroller', {
 			    distance: width
 			});
 
-			flipsnap.element.addEventListener('fspointmove', function() {
-				$pointer.filter('.current').removeClass('current');
-			    $pointer.eq(flipsnap.currentPoint).addClass('current');
-			}, false);
+			// flipsnap.element.addEventListener('fspointmove', function() {
+			// 	$pointer.filter('.current').removeClass('current');
+			//     $pointer.eq(flipsnap.currentPoint).addClass('current');
+			// }, false);
 		},
 
 		/**
@@ -151,11 +151,11 @@ $(function() {
                 listArr[index].article = item.datingInfo.article;   
 
             });
-            
+
         	var html = Utils.template($('#tmpl').html(), 
 	        	{
-                    info: userInfo,
-					list: listArr
+                    'info': userInfo,
+					'list': listArr
 				});
 
 			$('.page-content').html(html);
