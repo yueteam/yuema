@@ -16,12 +16,12 @@ $(function() {
     	init: function() {
     		var me = this;
 
-    		var scrollerW = width * $('.scroller .item').length;
-            $('.basic-info').height(width);
-            $('.scroller .item').width(width);
-    		$('.scroller').width(scrollerW);
-
             me.getData(function() {
+                var scrollerW = width * $('.scroller .item').length;
+                $('.basic-info').height(width);
+                $('.scroller .item').width(width);
+                $('.scroller').width(scrollerW);
+                
                 me.initEvent(); 
             });  		
     	},
