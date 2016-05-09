@@ -1,5 +1,7 @@
- var apiPerfix = window.location.protocol + '//'+window.location.host+'/';
-//var apiPerfix = window.location.protocol + '//www.yuema.us/';
+var apiPerfix = window.location.protocol + '//'+window.location.host+'/';
+if(window.location.hostname === 'w.yuema.us') {
+    apiPerfix = window.location.protocol + '//www.yuema.us/';
+}
 var Apimap = {
     loginApi: apiPerfix + 'open-api/login',
     registApi: apiPerfix + 'open-api/simple-regist',
