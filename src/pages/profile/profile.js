@@ -121,7 +121,7 @@ $(function() {
                 '10': '教育/体育'
             };
             var userInfo = data.userInfo,
-                listArr = data.postDatingList;
+                listArr = data.postDatingInfoList;
 
             var sex = userInfo.sex,
                 birthday = userInfo.birthday,
@@ -137,8 +137,8 @@ $(function() {
             userInfo.profession = profession;
 
             $.each(listArr, function(index, item){
-                var datingTime = item.datingTime || '',
-                    typeId = item.typeId;
+                var datingTime = item.datingInfo.datingTime || '',
+                    typeId = item.datingInfo.typeId;
                 
                 if(datingTime !== '') {
                     listArr[index].time = datingTime.substr(0,10);
@@ -146,7 +146,9 @@ $(function() {
                     listArr[index].time = '随时';
                 }
                 listArr[index].iconCls = iconMap[typeId];
-                listArr[index].typeName = typeName[typeId];           
+                listArr[index].typeName = typeName[typeId];   
+                listArr[index].id = item.datingInfo.uUID;  
+                listArr[index].article = item.datingInfo.article;   
 
             });
         	var html = Utils.template($('#tmpl').html(), 
