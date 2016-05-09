@@ -194,10 +194,10 @@ $(function() {
         	$.each(listArr, function(index, item){
         		var sex = item.postUserInfo.sex,
         			birthday = item.postUserInfo.birthday,
-        			datingTime = item.datingTime || '',
+        			datingTime = item.datingInfo.datingTime || '',
                     cityId = item.postUserInfo.cityId,
                     socialId = item.postUserInfo.socialId,
-        			typeId = item.typeId;
+        			typeId = item.datingInfo.typeId;
 
         		listArr[index].age = new Date().getFullYear() - parseInt(birthday.substr(0,4));
         		listArr[index].sex = sex === 'M' ? '男' : '女';

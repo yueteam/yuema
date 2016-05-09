@@ -67,9 +67,9 @@
 <script id="listTmpl" type="text/tmpl">
 <% for(var i=0; i<list.length; i++){ %>
     <li class="item">
-        <a class="item-lnk" href="./profile.html?id=<%= list[i].userId %>">
+        <a class="item-lnk" href="./profile.html?id=<%= list[i].postUserInfo.id %>">
             <div class="avatar">
-                <img src="<%= list[i].postUserInfo.avatar %>" alt="" />
+                <img src="<%= list[i].postUserInfo.avatar %>_s120" alt="" />
             </div>
             <div class="info-box">
                 <div class="name"><%= list[i].postUserInfo.nickName %></div>
@@ -77,7 +77,7 @@
                 <div class="info"><%= list[i].profession %></div>
             </div>
             <div class="latest-date">
-                <span class="label">约吗？</span><%= list[i].article %>
+                <span class="label">约吗？</span><%= list[i].datingInfo.article %>
             </div>
             <div class="date-info">
                 <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
@@ -86,7 +86,7 @@
                 <% } %>
             </div>
         </a>
-        <a class="g-yue" href="javascript:;" data-id="<%= list[i].uUID %>">
+        <a class="g-yue" href="javascript:;" data-id="<%= list[i].datingInfo.uUID %>">
             <span class="iconfont icon-yes"></span>
         </a>
     </li>
