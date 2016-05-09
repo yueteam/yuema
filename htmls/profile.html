@@ -42,7 +42,9 @@
             </div>
         </div>
         <div class="side-action">
+        <% if(myHome){ %>
             <a class="pub-date" href="./postdate.html"><span class="iconfont icon-send"></span></a>
+        <% } %>
         </div>
     </div>
     <div class="details">
@@ -66,9 +68,11 @@
                 <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
                 <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
             </div>
+            <% if(myHome){ %>
             <a class="g-yue" href="javascript:;" data-id="<%= list[i].id %>" data-uid="<%= info.id %>">
                 <span class="iconfont icon-yes"></span>
             </a>
+            <% } %>
         </li>
     <% } %>
     </ul>

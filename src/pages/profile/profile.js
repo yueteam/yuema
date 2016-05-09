@@ -154,6 +154,7 @@ $(function() {
 
         	var html = Utils.template($('#tmpl').html(), 
 	        	{
+                    'myHome': data.myHome,
                     'info': userInfo,
 					'list': listArr
 				});
