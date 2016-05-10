@@ -160,6 +160,7 @@ $(function() {
 				});
 
 			$('.page-content').html(html);
+            document.title = userInfo.nickName;
         }
     };
 
