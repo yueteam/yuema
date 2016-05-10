@@ -7,6 +7,7 @@ $(function() {
 	var Loading = require('../../components/loading/loading');
 	var Flipsnap = require("../../components/flipsnap");
 	var Yue = require("../../mods/yue/yue");
+    var Notice = require("../../mods/notice/notice");
 
     var width = $(window).width();
     // 个人id
@@ -33,6 +34,7 @@ $(function() {
         	var me = this;
 
         	Yue.init();
+            Notice.initialize();
 
         	// var $pointer = $('.icons i');
 			var flipsnap = Flipsnap('.scroller', {
