@@ -1,3 +1,4 @@
+var Utils = require("../../common/utils");
 var Apimap = require('../../common/apimap');
 var Tips = require('../../components/tips');
 var Ajax = require('../../components/ajax');
@@ -8,6 +9,8 @@ module.exports = {
     init: function() {
         var me = this;
         $(document).on('tap', '.g-yue', function(){
+            Utils.stopEventTap();
+            
             var id = $(this).data('id'),
                 userId = $(this).data('uid');
             var bdHtml = [
