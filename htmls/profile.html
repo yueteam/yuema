@@ -81,20 +81,25 @@
                 </a>
                 <% } %>
                 <% 
-                    var requestUsersInfo = list[i].requestUsersInfo;
-                    if(myHome && requestUsersInfo.length>0){ 
+                    var requestUserInfos = list[i].requestUserInfos;
+                    if(requestUserInfos.length>0){ 
                 %>
                 <div class="request-list">
                     <span class="arrow"></span>
-                    <% for(var j=0; j<requestUsersInfo.length; j++){ %>
+                    <% 
+                        for(var j=0; j<requestUserInfos.length; j++){ 
+                        var requestDatingUserInfo = requestUserInfos[j].requestDatingUserInfo;
+                        var requestDatingMessage = requestUserInfos[j].requestDatingMessage;
+                    %>
                     <div class="request-item">
                         <div class="avatar">
-                            <a href="./profile.html?id=<%= requestUsersInfo[j].id %>">
-                                <img src="<%= requestUsersInfo[j].avatar %>_s60" alt="<%= requestUsersInfo[j].nickName %>" />
+                            <a href="./profile.html?id=<%= requestDatingUserInfo.id %>">
+                                <img src="<%= requestDatingUserInfo.avatar %>_s60" alt="<%= requestDatingUserInfo.nickName %>" />
                             </a>
                         </div>
                         <div class="info">
-                            <div class="name"><%= requestUsersInfo[j].nickName %></div>
+                            <div class="name"><%= requestDatingUserInfo.nickName %></div>
+                            <div class="words"><%= requestDatingMessage %></div>
                         </div>
                     </div>
                     <% } %>
