@@ -45,6 +45,20 @@ $(function() {
 			// 	$pointer.filter('.current').removeClass('current');
 			//     $pointer.eq(flipsnap.currentPoint).addClass('current');
 			// }, false);
+
+            $(document).on('tap', '.tab-item', function () {
+                var $this = $(this),
+                    tab = $this.data('tab');
+
+                if($this.hasClass('current')) {
+                    return false;
+                }
+
+                $('.tab-bar .current').removeClass('current');
+                $this.addClass('current');
+                $('.dating-list').hide();
+                $('#tab'+tab).show();
+            });
 		},
 
 		/**

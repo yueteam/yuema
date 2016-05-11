@@ -57,25 +57,72 @@
             </li>
         </ul>
     </div>
-    <ul id="datingList" class="dating-list">
-    <% for(var i=0; i<list.length; i++){ %>
-        <li class="item">
-            <div class="date-words">  
-                <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
-                <%= list[i].article %>
-            </div>
-            <div class="date-info">
-                <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
-                <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
-            </div>
-            <% if(!myHome){ %>
-            <a class="g-yue" href="javascript:;" data-id="<%= list[i].id %>" data-uid="<%= info.id %>">
-                <span class="iconfont icon-yes"></span>
-            </a>
-            <% } %>
-        </li>
-    <% } %>
-    </ul>
+    <div class="dating-tab">
+        <% if(myHome){ %>
+        <div class="tab-bar">
+            <a class="tab-item current" data-tab="1" href="javascript:;">我发起的</a>
+            <a class="tab-item" data-tab="2" href="javascript:;">我回应的</a>
+        </div>
+        <% } %>
+        <ul id="tab1" class="dating-list">
+        <% for(var i=0; i<list.length; i++){ %>
+            <li class="item">
+                <div class="date-words">  
+                    <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
+                    <%- list[i].article %>
+                </div>
+                <div class="date-info">
+                    <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
+                    <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
+                </div>
+                <% if(!myHome){ %>
+                <a class="g-yue" href="javascript:;" data-id="<%= list[i].id %>" data-uid="<%= info.id %>">
+                    <span class="iconfont icon-yes"></span>
+                </a>
+                <% } %>
+                <% 
+                    var requestUsersInfo = list[i].requestUsersInfo;
+                    if(myHome && requestUsersInfo.length>0){ 
+                %>
+                <div class="request-list">
+                    <span class="arrow"></span>
+                    <% for(var j=0; j<requestUsersInfo.length; j++){ %>
+                    <div class="request-item">
+                        <div class="avatar">
+                            <a href="./profile.html?id=<%= requestUsersInfo[j].id %>">
+                                <img src="<%= requestUsersInfo[j].avatar %>_s60" alt="<%= requestUsersInfo[j].nickName %>" />
+                            </a>
+                        </div>
+                        <div class="info">
+                            <div class="name"><%= requestUsersInfo[j].nickName %></div>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+                <% } %>
+            </li>
+        <% } %>
+        </ul>
+        <ul id="tab2" class="dating-list">
+        <% for(var i=0; i<list.length; i++){ %>
+            <li class="item">
+                <div class="date-words">  
+                    <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
+                    <%- list[i].article %>
+                </div>
+                <div class="date-info">
+                    <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
+                    <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
+                </div>
+                <% if(!myHome){ %>
+                <a class="g-yue" href="javascript:;" data-id="<%= list[i].id %>" data-uid="<%= info.id %>">
+                    <span class="iconfont icon-yes"></span>
+                </a>
+                <% } %>
+            </li>
+        <% } %>
+        </ul>
+    </div>
 </script>
 
 <script src="../build/js/base.js"></script>

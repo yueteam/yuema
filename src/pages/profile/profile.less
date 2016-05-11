@@ -98,8 +98,29 @@ body {
 		}
 	}
 }
+.dating-tab {
+    margin-top: 20px;	
+    .tab-bar {
+    	.clearfix;
+    	.tab-item {
+    		position: relative;
+		    float: left;
+		    width: 50%;
+		    height: 50px;
+		    line-height: 50px;
+    		text-align: center;
+		    font-size: 14px;
+		    color: @text-color;	
+		    background: #fff;
+		    border-bottom: 1px solid @border-color;	    
+		    .border-box();
+		    &.current {
+		    	border-bottom: 1px solid @green-sea;
+		    }
+    	}
+    }
+}
 .dating-list {
-    margin-top: 20px;
     padding: 0 30px;
     background-color: #fff;
     .item {
@@ -135,5 +156,44 @@ body {
         	bottom: 20px;
         	right: 0;
         }
+        .request-list {
+        	position: relative;
+        	margin-top: 10px;
+        	padding: 10px;
+	        background: @gray;
+	        .arrow {
+	        	position: absolute;
+	        	z-index: 9;
+	        	top: -15px;
+	        	left: 20px;
+	        	height: 0;
+				width: 0;
+				overflow: hidden;
+				font-size: 0;
+				line-height: 0;
+				border-color: transparent transparent @gray transparent;
+				border-style: solid;
+				border-width: 8px;
+	        }
+	        .request-item {
+	        	.clearfix;
+	        	.avatar {
+	        		float: left;
+	        		margin-right: 10px;
+	        		width: 30px;
+	        		height: 30px;
+	        		overflow: hidden;
+	        		.border-radius(50%);
+	        		img {
+	        			display: block;
+	        			width: 30px;
+	        			height: 30px;
+	        		}
+	        	}
+	        	.info {
+	        		overflow: hidden;
+	        	}
+	        }
+	    }
     }
 }
