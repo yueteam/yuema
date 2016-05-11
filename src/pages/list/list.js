@@ -7,6 +7,7 @@ $(function() {
 	var Loading = require('../../components/loading/loading');
 	var Yue = require("../../mods/yue/yue");
 	var Mscroll = require('../../components/mscroll');
+    var Notice = require("../../mods/notice/notice");
 
 	var pageNo = 1;
 	var pageEnd = false;
@@ -30,6 +31,7 @@ $(function() {
         	var me = this;
 
         	Yue.init();
+            Notice.initialize();
 
         	//滚动监控
             Mscroll.init({

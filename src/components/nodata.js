@@ -4,7 +4,7 @@ module.exports = {
 
         if (!$('.g-nodata').length) {
             var $nodata  = '<div class="g-nodata">';
-                $nodata += '<i class="iconfont icon-nodata"></i><div></div>';
+                $nodata += '<i class="iconfont icon-warn"></i><div></div>';
                 $nodata += '</div>';
 
             $('body').append($nodata);
