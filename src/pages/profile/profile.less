@@ -159,7 +159,6 @@ body {
         .request-list {
         	position: relative;
         	margin-top: 10px;
-        	padding: 10px;
 	        background: @gray;
 	        .arrow {
 	        	position: absolute;
@@ -177,6 +176,11 @@ body {
 	        }
 	        .request-item {
 	        	.clearfix;
+	        	padding: 10px;
+	        	border-bottom: 1px solid @border-color;
+	        	&:last-child {
+	        		border: 0;
+	        	}
 	        	.avatar {
 	        		float: left;
 	        		margin-right: 10px;
@@ -192,6 +196,9 @@ body {
 	        	}
 	        	.info {
 	        		overflow: hidden;
+	        		.name {
+	        			padding: 5px 0;
+	        		}
 	        	}
 	        }
 	    }
