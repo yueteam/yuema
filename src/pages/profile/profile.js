@@ -6,6 +6,7 @@ $(function() {
     var Nodata = require('../../components/nodata');
 	var Loading = require('../../components/loading/loading');
 	var Flipsnap = require("../../components/flipsnap");
+    var Nav = require("../../mods/Nav/Nav");
 	var Yue = require("../../mods/yue/yue");
     var Notice = require("../../mods/notice/notice");
 
@@ -17,11 +18,14 @@ $(function() {
     	init: function() {
     		var me = this;
 
+            Loading.show();
             me.getData(function() {
                 var scrollerW = width * $('.scroller .item').length;
                 $('.basic-info').height(width);
                 $('.scroller .item').width(width);
                 $('.scroller').width(scrollerW);
+
+                Nav.init();
 
                 me.initEvent(); 
             });  		
@@ -181,6 +185,7 @@ $(function() {
 
 			$('.page-content').html(html);
             document.title = userInfo.nickName;
+            $('#header h1').text(userInfo.nickName);
         }
     };
 
