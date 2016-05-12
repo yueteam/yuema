@@ -74,6 +74,10 @@ $(function() {
 					Loading.hide();
 
 				    if(d.result && d.result.userInfo) {
+                        if(!d.result.userInfo.id) {
+                            Nodata.show('该用户不存在');
+                            return false;
+                        }
 				    	me.renderData(d.result);
 
 				    	cb & cb();
