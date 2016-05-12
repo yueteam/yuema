@@ -6,6 +6,7 @@ $(function() {
 	var Nodata = require('../../components/nodata');
 	var Loading = require('../../components/loading/loading');
 	var Yue = require("../../mods/yue/yue");
+    var Nav = require("../../mods/Nav/Nav");
 	var Mscroll = require('../../components/mscroll');
     var Notice = require("../../mods/notice/notice");
 
@@ -15,13 +16,9 @@ $(function() {
 
 	var app = {
     	init: function() {
-    		var me = this;
+    		var me = this;          
 
-            var jPanelMenu = {};
-            jPanelMenu = $.jPanelMenu({
-                menu: '.menu'
-            });
-            jPanelMenu.on();
+            Nav.init();
 
             Loading.show();
     		me.getData(function() {
@@ -59,7 +56,7 @@ $(function() {
             });
 
             //筛选
-            $(document).on('tap', '.btn-filter', function() {
+            $(document).on('tap', '.menu-filter', function() {
                 Utils.stopEventTap();
                 $('.g-panel').addClass('open');
             });
@@ -127,7 +124,7 @@ $(function() {
 				    	if(listData.length === 0) {
 				    		pageEnd = true;
 				    		if(pageNo === 1) {
-				    			Nodata.show('现在暂时没什么约会，过会来看看吧~');
+				    			Nodata.show('暂时没什么约会，过会来看看吧~');
 				    		} else {
 				    			$('#loadmore').html('没有更多约会了~');
 				    		}

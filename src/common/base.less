@@ -2,6 +2,7 @@
 @import "mixins";
 @import "reset";
 @import "iconfont";
+@import "../mods/nav/nav";
 
 html {
     width: 100%;
@@ -48,77 +49,6 @@ body {
         animation: rotate 1.2s linear infinite;
         background: data-uri('../images/loading.png') no-repeat 50% 50%;
     }
-}
-// 侧边导航栏
-.menu {
-    display: none;
-    background: #fff;
-    ul li {
-        margin-top: 20px;
-    }
-    .menu-item {
-        display: block;
-        padding-left: 20px;
-        width: 100%;
-        line-height: 40px;
-        color: #333;
-        font-size: 20px;
-        border-left: 5px solid #fff;
-        .border-box();
-        &.current {
-            border-left: 5px solid @green-sea;
-        }
-        .iconfont {
-            display: inline-block;
-            margin-right: 10px;
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-            text-align: center;
-            background: #e6e6e6;
-            .border-radius(50%);
-        }
-    }
-    .menu-profile {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        padding: 20px 30px;
-        width: 100%;
-        line-height: 40px;
-        color: #333;
-        font-size: 20px;
-        background: #e6e6e6;
-        .border-box();
-    }
-}
-.menu-trigger {
-    position: fixed;
-    z-index: 999;
-    top: 20px;
-    left: 20px;
-    margin: 0;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    border: 1px solid #607D8B;
-    -webkit-user-select: none;
-    user-select: none;
-}
-.menu-trigger:after {
-    height: 3px;
-    width: 15px;
-    position: absolute;
-    top: 10px;
-    left: 5px;
-    background: #607D8B;
-    box-shadow: 0 5px 0 #607D8B,0 -5px 0 #607D8B;
-    content: '';
-    display: block;
-    margin: auto 0;
-}
-.jPanelMenu-panel {
-    .box-shadow(0 0 20px rgba(0,0,0,.2));
 }
 // 无数据
 .g-nodata {

@@ -32,6 +32,7 @@ gulp.task('base', function() {
         './bower_components/zepto/src/ajax.js',
         './bower_components/promise/src/polyfillB.debug.js',
         './bower_components/naver/jquery.jpanelmenu.js',
+        './bower_components/headroom/dist/headroom.js',
         './src/common/touch.js',
         './src/common/device.js'
     ])
