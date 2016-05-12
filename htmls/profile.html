@@ -108,7 +108,8 @@
             </li>
         <% } %>
         </ul>
-        <ul id="tab2" class="dating-list">
+        <% if(myHome){ %>
+        <ul id="tab2" class="dating-list hide">
         <% for(var i=0; i<list.length; i++){ %>
             <li class="item">
                 <div class="date-words">  
@@ -127,6 +128,7 @@
             </li>
         <% } %>
         </ul>
+        <% } %>
     </div>
 </script>
 
