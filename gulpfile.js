@@ -31,6 +31,7 @@ gulp.task('base', function() {
         './bower_components/zepto/src/event.js',
         './bower_components/zepto/src/ajax.js',
         './bower_components/promise/src/polyfillB.debug.js',
+        './bower_components/naver/jquery.jpanelmenu.js',
         './src/common/touch.js',
         './src/common/device.js'
     ])

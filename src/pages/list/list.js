@@ -17,6 +17,12 @@ $(function() {
     	init: function() {
     		var me = this;
 
+            var jPanelMenu = {};
+            jPanelMenu = $.jPanelMenu({
+                menu: '.menu'
+            });
+            jPanelMenu.on();
+
             Loading.show();
     		me.getData(function() {
     			me.initEvent();
