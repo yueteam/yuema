@@ -110,6 +110,7 @@
                         for(var j=0; j<requestUserInfos.length; j++){ 
                         var requestDatingUserInfo = requestUserInfos[j].requestDatingUserInfo;
                         var requestDatingMessage = requestUserInfos[j].requestDatingMessage;
+                        var requestDatingTime = requestUserInfos[j].requestDatingTime;
                     %>
                     <div class="request-item">
                         <div class="avatar">
@@ -118,8 +119,11 @@
                             </a>
                         </div>
                         <div class="info">
-                            <div class="name"><%= requestDatingUserInfo.nickName %></div>
-                            <div class="words"><%= requestDatingMessage %></div>
+                            <div class="name">
+                                <span class="pub-time"><%= requestDatingTime %></span>
+                                <%= requestDatingUserInfo.nickName %>
+                            </div>
+                            <div class="words"><%- requestDatingMessage %></div>
                         </div>
                     </div>
                     <% } %>
