@@ -119,11 +119,29 @@ var Utils = {
     },
 
     /**
+     * 获取cookie
+     * @return {Boolean} [description]
+     */
+    getCookie: function(name) {
+        var reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)'),
+            arr = document.cookie.match(reg);
+     
+        if(arr != null) { 
+            return unescape(arr[2]); 
+        }
+
+        return ''; 
+    },
+
+    /**
      * 判断是否已登录
      * @return {Boolean} [description]
      */
     isLogin: function() {
-        return ua.indexOf('MicroMessenger') > -1;
+        var me = this,
+            isLogin = me.getCookie('logined');
+
+        return isLogin !== '' ? true : false;
     },
 
     /**
