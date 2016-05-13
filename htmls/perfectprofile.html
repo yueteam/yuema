@@ -129,6 +129,7 @@
 
     function uploadSuccess(obj) {
         console.log(obj);
+        $('.preloader-indicator-overlay, .preloader-indicator-modal, .preloader-label').remove();
         if(obj.resultCode === 'SUCCESS') {
             var url = 'http://www.yuema.us' + obj.result;
             $('#avatar').val(url);

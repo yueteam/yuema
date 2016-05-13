@@ -16,7 +16,7 @@ var validatorType = {
     english : /^[A-Za-z]+$/,
     chinese : /^[\u0391-\uFFE5]+$/,
     userName : /^[A-Za-z0-9_]{3,}$/i,
-    nickname : /^[A-Za-z\u0391-\uFFE5][A-Za-z0-9\u0391-\uFFE5]{3,19}$/i,
+    nickname : /^[A-Za-z\u4E00-\u9FA5][A-Za-z0-9\u4E00-\u9FA5]{1,19}$/i,
     unSafe : /^(([^\^\.<>,;=?$"':#@！，。；《》｛｝【】￥…\]\[{}`])*)$/
 };
 

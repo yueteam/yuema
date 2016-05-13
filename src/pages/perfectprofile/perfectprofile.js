@@ -41,6 +41,7 @@ $(function() {
 
         	// 上传图片
         	$(".file-upload").on('change', function() {
+                Loading.show();
 		    	$('#formFile')[0].submit();
 		    });
 
