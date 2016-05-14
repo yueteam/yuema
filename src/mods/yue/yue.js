@@ -9,6 +9,11 @@ module.exports = {
     init: function() {
         var me = this;
         $(document).on('tap', '.g-yue', function(){
+            if(!Utils.isLogin()) {
+                window.location.href = './login.html';
+                return false;
+            }
+
             Utils.stopEventTap();
             
             var id = $(this).data('id'),
@@ -35,7 +40,7 @@ module.exports = {
     },
   
     /**
-     * 判断是否微信
+     * 发送信息
      * @return {Boolean} [description]
      */
     sendAsk: function(id, uid, message) {

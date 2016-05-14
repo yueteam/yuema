@@ -30,6 +30,11 @@ $(function() {
 
     var app = {
     	init: function() {
+            if(!Utils.isLogin()) {
+                window.location.href = './login.html';
+                return false;
+            }
+
             this.initEvent();
     	},
 
