@@ -35,6 +35,25 @@ $(function() {
                 return false;
             }
 
+            // 上传图片回调函数
+            uploadSuccess = function(obj) {
+                console.log(obj);
+                Loading.hide();
+                if(obj.resultCode === 'SUCCESS') {
+                    var url = 'http://www.yuema.us' + obj.result;
+                    $('#avatar').val(url);
+                    $('#avatarImg').attr('src', url);
+                } else {
+                    Tips.show({
+                        type: 'error',
+                        title: obj.resultMsg
+                    });
+                    // if(obj.resultCode === 'NEVER_LOGINED') {
+                    //     window.location.href = './login.html';
+                    // }
+                }
+            };
+
             this.initEvent();
     	},
 

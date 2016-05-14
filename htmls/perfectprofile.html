@@ -126,19 +126,7 @@
 <!-- 加载脚本 -->
 <script>
     g_mstart = new Date();
-
-    function uploadSuccess(obj) {
-        console.log(obj);
-        $('.preloader-indicator-overlay, .preloader-indicator-modal, .preloader-label').remove();
-        if(obj.resultCode === 'SUCCESS') {
-            var url = 'http://www.yuema.us' + obj.result;
-            $('#avatar').val(url);
-            $('#avatarImg').attr('src', url);
-        } else {
-            alert(obj.resultMsg);
-        }
-    }
-
+    var uploadSuccess;
 </script>
 </body>
 </html>
