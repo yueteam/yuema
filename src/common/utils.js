@@ -127,7 +127,7 @@ var Utils = {
             arr = document.cookie.match(reg);
      
         if(arr != null) { 
-            return unescape(arr[2]); 
+            return decodeURI(arr[2]); 
         }
 
         return ''; 

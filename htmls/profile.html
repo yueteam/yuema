@@ -58,6 +58,20 @@
                 <img src="../build/images/blank.gif" style="background-image:url(<%= info.avatar %>_s480)" alt="<%= info.nickName %>" />
             </div>
         </div>
+        <ul class="top-info">
+            <li class="info-city">
+                <div class="iconfont icon-location"></div>
+                <%= info.city %>
+            </li>
+            <li class="info-constellation">
+                <div class="iconfont icon-constellation"></div>
+                <%= info.constellation %>
+            </li>
+            <li class="info-age">
+                <div class="iconfont <%= info.sexCls %>"></div>
+                <%= info.age %>岁
+            </li>
+        </ul>
         <div class="info">
             <h2 class="name">
                 <%= info.nickName %>

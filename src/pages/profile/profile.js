@@ -153,6 +153,7 @@ $(function() {
                 socialId = userInfo.socialId;
             userInfo.age = new Date().getFullYear() - parseInt(birthday.substr(0,4));
             userInfo.sex = sex === 'M' ? '男' : '女';
+            userInfo.sexCls = sex === 'M' ? 'icon-male' : 'icon-female';
             userInfo.city = cityMap[cityId];    
             var profession = '混' + socialMap[socialId] + '圈';
             if(userInfo.career && userInfo.career !== '') {
