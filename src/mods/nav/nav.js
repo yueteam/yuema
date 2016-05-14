@@ -1,3 +1,4 @@
+var Utils = require('../../common/utils');
 module.exports = {
     init: function() {
         var me = this;
@@ -25,6 +26,12 @@ module.exports = {
             }
         });
         jPanelMenu.on();
+
+        if(Utils.isLogin()) {
+            var nick = Utils.getCookie('nick_name');
+            $('.menu-profile').attr('href', './profile.html');
+            $('.menu-profile .login-info').text(nick);
+        }
     }
   
 };
