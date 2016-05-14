@@ -63,7 +63,52 @@ $(function() {
                 $('.dating-list').hide();
                 $('#tab'+tab).show();
             });
+
+            $(document).on('tap', '.btn-accept', function(){
+                Utils.stopEventTap();
+                
+                var id = $(this).data('id'),
+                    userId = $(this).data('uid');
+
+                Dialog.confirm({'title': '答应Ta', 'body': '答应这个请求将不可取消，同时也将拒绝其他请求，确认答应吗？'}, function(){
+                    
+                    me.acceptAsk(id, userId);
+                });
+               
+            });
 		},
+
+        /**
+         * 发送信息
+         * @return {Boolean} [description]
+         */
+        acceptAsk: function(id, uid) {
+            var me = this;
+
+            Loading.show();
+           
+            Ajax.post(Apimap.acceptDatingApi, {
+                    'datingId': id,
+                    'userId': uid
+                },
+                function(d){
+                    Loading.hide();
+
+                    Tips.show({
+                        type: 'success',
+                        title: '您已答应，准备赴约吧'
+                    });
+                },
+                function(d){
+                    Loading.hide();
+
+                    Tips.show({
+                        type: 'error',
+                        title: d.resultMsg
+                    });
+                }
+            );
+        }
 
 		/**
          * 获取列表数据
