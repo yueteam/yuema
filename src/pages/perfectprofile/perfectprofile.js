@@ -30,10 +30,10 @@ $(function() {
 
     var app = {
     	init: function() {
-            if(!Utils.isLogin()) {
-                window.location.href = './login.html';
-                return false;
-            }
+            // if(!Utils.isLogin()) {
+            //     window.location.href = './login.html';
+            //     return false;
+            // }
 
             // 上传图片回调函数
             uploadSuccess = function(obj) {
@@ -48,9 +48,9 @@ $(function() {
                         type: 'error',
                         title: obj.resultMsg
                     });
-                    // if(obj.resultCode === 'NEVER_LOGINED') {
-                    //     window.location.href = './login.html';
-                    // }
+                    if(obj.resultCode === 'NEVER_LOGINED') {
+                        window.location.href = './login.html';
+                    }
                 }
             };
 

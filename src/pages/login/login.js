@@ -8,11 +8,6 @@ $(function() {
 
 	var app = {
     	init: function() {
-    		if(Utils.isLogin()) {
-                window.location.href = './profile.html';
-                return false;
-            }
-    		
     		this.initEvent();
     	},
 
