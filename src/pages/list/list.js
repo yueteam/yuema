@@ -208,6 +208,8 @@ $(function() {
         		listArr[index].sex = sex === 'M' ? '男' : '女';
                 if(datingTime !== '') {
         		    listArr[index].time = datingTime.substr(0,10);
+                } else {
+                    listArr[index].time = '随时';
                 }
         		listArr[index].iconCls = iconMap[typeId];
         		listArr[index].typeName = typeName[typeId];

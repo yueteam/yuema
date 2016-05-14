@@ -199,7 +199,7 @@ body {
 	        .request-item {
 	        	.clearfix;
 	        	position: relative;
-	        	padding: 10px 50px 10px 10px;
+	        	padding: 10px 50px 15px 10px;
 	        	border-bottom: 1px solid @border-color;
 	        	&:last-child {
 	        		border: 0;
@@ -220,11 +220,13 @@ body {
 	        	.info {
 	        		overflow: hidden;
 	        		.name {
-	        			padding: 2px 0 5px;
-						.clearfix;
+	        			padding: 2px 0;
 						.pub-time {
-							float: right;
+							position: absolute;
+							top: 8px;
+							right: 10px;
 							color: #999;
+							font-size: 12px;
 						}
 	        		}
 	        	}
