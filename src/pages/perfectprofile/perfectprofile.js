@@ -30,7 +30,7 @@ $(function() {
 
     var app = {
     	init: function() {
-    		this.initEvent();
+            this.initEvent();
     	},
 
     	/**

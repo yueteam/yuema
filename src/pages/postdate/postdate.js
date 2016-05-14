@@ -18,6 +18,11 @@ $(function() {
 
 	var app = {
     	init: function() {
+            if(!Utils.isLogin()) {
+                window.location.href = './login.html';
+                return false;
+            }
+
     		$('#dateDesc').focus();
 
     		var listH = $(window).height() - 300;

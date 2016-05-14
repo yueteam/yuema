@@ -1,4 +1,5 @@
 $(function() {
+	var Utils = require('../../common/utils');
 	var Apimap = require('../../common/apimap');
 	var Tips = require('../../components/tips');
 	var Ajax = require('../../components/ajax');
@@ -7,6 +8,10 @@ $(function() {
 
 	var app = {
     	init: function() {
+    		if(Utils.isLogin()) {
+                window.location.href = './profile.html';
+                return false;
+            }
     		
     		this.initEvent();
     	},
