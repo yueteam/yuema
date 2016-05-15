@@ -33,7 +33,7 @@
 <nav class="menu">
     <ul>
         <li>
-            <a class="menu-item current" href="./list.html"><span class="iconfont icon-followed"></span>想约谁</a>
+            <a class="menu-item" href="./list.html"><span class="iconfont icon-followed"></span>想约谁</a>
         </li>
         <li>
             <a class="menu-item" href="./postdate.html"><span class="iconfont icon-send"></span>发一个约会</a>
@@ -142,7 +142,7 @@
                             </div>
                             <div class="words"><%- requestDatingMessage %></div>
                         </div>
-                        <a href="javascript:;" class="btn btn-tiny btn-primary btn-accept" data-id="<%= requestDatingUserInfo.uUID %>" data-uid="<%= info.id %>">答应</a>
+                        <a href="javascript:;" class="btn btn-tiny btn-primary btn-accept" data-id="<%= requestDatingUserInfo.uUID %>" data-uid="<%= requestDatingUserInfo.id %>">答应</a>
                     </div>
                     <% } %>
                 </div>
