@@ -128,7 +128,6 @@
                         var requestDatingUserInfo = requestUserInfos[j].requestDatingUserInfo;
                         var requestDatingMessage = requestUserInfos[j].requestDatingMessage;
                         var requestDatingTime = requestUserInfos[j].requestDatingTime;
-                        requestDatingTime = requestDatingTime.substr(0,16).replace(/\-/g, '/');
                     %>
                     <div class="request-item">
                         <div class="avatar">
@@ -138,8 +137,8 @@
                         </div>
                         <div class="info">
                             <div class="name">
-                                <span class="pub-time"><%= requestDatingTime %></span>
                                 <%= requestDatingUserInfo.nickName %>
+                                <span class="pub-time"><%= requestDatingTime %></span>
                             </div>
                             <div class="words"><%- requestDatingMessage %></div>
                         </div>

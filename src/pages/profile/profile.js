@@ -6,6 +6,7 @@ $(function() {
     var Nodata = require('../../components/nodata');
 	var Loading = require('../../components/loading/loading');
 	var Flipsnap = require("../../components/flipsnap");
+    var DateFormat = require("../../components/date");
     var Dialog = require('../../components/dialog/dialog');
     var Nav = require("../../mods/Nav/Nav");
 	var Yue = require("../../mods/yue/yue");
@@ -219,7 +220,18 @@ $(function() {
                 listArr[index].iconCls = iconMap[typeId];
                 listArr[index].typeName = typeName[typeId];   
                 listArr[index].id = item.datingInfo.uUID;  
-                listArr[index].article = item.datingInfo.article;   
+                listArr[index].article = item.datingInfo.article; 
+
+                var requestUserInfos = item.requestUserInfos;
+                if(requestUserInfos.length>0){ 
+                    $.each(requestUserInfos, function(i, item1){
+                        if(item1.requestDatingTime) {
+                            var requestDatingTime = item1.requestDatingTime;
+                            requestDatingTime = requestDatingTime.substr(0,19).replace(/\-/g, '/');
+                            listArr[index].requestUserInfos[i].requestDatingTime = DateFormat.ago(requestDatingTime);
+                        }
+                    });
+                }
 
             });
 
