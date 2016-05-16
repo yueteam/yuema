@@ -224,7 +224,7 @@ $(function() {
 
                 var requestUserInfos = item.requestUserInfos;
                 if(requestUserInfos.length>0){ 
-                    if(requestUserInfos[0].accepted) { // 判断这个约会是否已完成
+                    if(requestUserInfos[0].requestDatingAccept) { // 判断这个约会是否已完成
                         listArr[index].done = true;
                     }
                     $.each(requestUserInfos, function(i, item1){
