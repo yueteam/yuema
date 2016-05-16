@@ -142,7 +142,15 @@
                             </div>
                             <div class="words"><%- requestDatingMessage %></div>
                         </div>
+                        <% if(list[i].done) { %>
+                            <% if(j==0 && requestDatingUserInfo.accepted) { %>
+                            <span class="iconfont icon-checked"></span>
+                            <% } else { %> 
+                            <span class="iconfont icon-no"></span>
+                            <% } %>
+                        <% } else { %>                       
                         <a href="javascript:;" class="btn btn-tiny btn-primary btn-accept" data-id="<%= list[i].id %>" data-uid="<%= requestDatingUserInfo.id %>">答应</a>
+                        <% } %>
                     </div>
                     <% } %>
                 </div>

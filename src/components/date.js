@@ -15,7 +15,7 @@ module.exports = {
             "q+" : Math.floor((date.getMonth()+3)/3), //quarter 
             "S" : date.getMilliseconds() //millisecond 
         }
-        if(/(y+)/.test(format)) {
+        if(/(y+)/i.test(format)) {
             format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
         }
         for(var k in o) {
@@ -58,7 +58,7 @@ module.exports = {
         } else if(_day>=1) {
             result = parseInt(_day) +"天前";
         } else if(_hour>=1) {
-            result = parseInt(_hour) +"个小时前";
+            result = parseInt(_hour) +"小时前";
         } else if(_min>=1) {
             result = parseInt(_min) +"分钟前";
         } else {
