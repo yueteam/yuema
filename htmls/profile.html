@@ -102,6 +102,22 @@
         </div>
         <% } %>
         <ul id="tab1" class="dating-list">
+        <% if(list.length==0){ %>
+            <li class="empty-item">
+            <% if(myHome){ %>
+                <div class="empty-tip">
+                试试发个约会呗，看看谁想撩你？
+                </div>
+                <a href="./postdate.html" class="btn btn-green">
+                    <span class="iconfont icon-send"></span>发约会
+                </a>
+            <% }else{ %>
+                <div class="empty-tip">
+                啊哦~ Ta还没发过约会呢~
+                </div>
+            <% } %>
+            </li> 
+        <% } %>
         <% for(var i=0; i<list.length; i++){ %>
             <li class="item">
                 <div class="date-words">  
