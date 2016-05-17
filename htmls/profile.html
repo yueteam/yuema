@@ -51,6 +51,7 @@
    
 </div>
 
+
 <script id="tmpl" type="text/tmpl">
     <div class="basic-info">
         <div class="scroller">
@@ -109,7 +110,7 @@
                 试试发个约会呗，看看谁想撩你？
                 </div>
                 <a href="./postdate.html" class="btn btn-green">
-                    <span class="iconfont icon-send"></span>发约会
+                    <span class="iconfont icon-send"></span>发起约会
                 </a>
             <% }else{ %>
                 <div class="empty-tip">
@@ -176,26 +177,34 @@
         </ul>
         <% if(myHome){ %>
         <ul id="tab2" class="dating-list hide">
-        <% for(var i=0; i<list.length; i++){ %>
-            <li class="item">
-                <div class="date-words">  
-                    <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
-                    <%- list[i].article %>
-                </div>
-                <div class="date-info">
-                    <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
-                    <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
-                </div>
-                <% if(!myHome){ %>
-                <a class="g-yue" href="javascript:;" data-id="<%= list[i].id %>" data-uid="<%= info.id %>">
-                    <span class="iconfont icon-yes"></span>
-                </a>
-                <% } %>
-            </li>
-        <% } %>
+        
         </ul>
         <% } %>
     </div>
+</script>
+<script id="askListTmpl" type="text/tmpl">
+<% if(list.length==0){ %>
+<li class="empty-item">
+    <div class="empty-tip">
+    快去看看有没有心仪的约会，晚了就被别人约走了！
+    </div>
+    <a href="./list.html" class="btn btn-primary">
+        <span class="iconfont icon-yes"></span>寻找约会
+    </a>
+</li> 
+<% } %>
+<% for(var i=0; i<list.length; i++){ %>
+<li class="item">
+    <div class="date-words">  
+        <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
+        <%- list[i].article %>
+    </div>
+    <div class="date-info">
+        <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
+        <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
+    </div>
+</li>
+<% } %>
 </script>
 
 <script src="../build/js/base.js"></script>

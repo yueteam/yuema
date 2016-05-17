@@ -72,7 +72,7 @@ $(function() {
                 var id = $(this).data('id'),
                     userId = $(this).data('uid');
 
-                Dialog.confirm({'title': '答应Ta', 'body': '答应这个请求将不可取消，同时也将拒绝其他请求，确认答应吗？'}, function(){
+                Dialog.confirm({'title': '答应Ta', 'body': '答应这个请求的同时将拒绝掉其他请求，确认答应吗？'}, function(){
                     
                     me.acceptAsk(id, userId);
                 });
