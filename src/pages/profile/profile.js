@@ -64,7 +64,7 @@ $(function() {
                         return;
                     }
 
-                    if(currentTab != 2) {
+                    if(currentTab != 2 && !$('#tab2').data('init')) {
                         return false;
                     }
                     pageNo > 1 && $('#loadmore').html('');
@@ -88,7 +88,7 @@ $(function() {
 
                 $('.tab-bar .current').removeClass('current');
                 $this.addClass('current');
-                $('.dating-list').hide();
+                $('.tab-con').hide();
                 $('#tab'+tab).show();
 
                 if(tab == 2 && !$('#tab2').data('init')) {
