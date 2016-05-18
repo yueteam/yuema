@@ -8,7 +8,7 @@ $(function() {
 	var Flipsnap = require("../../components/flipsnap");
     var DateFormat = require("../../components/date");
     var Dialog = require('../../components/dialog/dialog');
-    var Nav = require("../../mods/Nav/Nav");
+    var Nav = require("../../mods/nav/nav");
 	var Yue = require("../../mods/yue/yue");
     var Notice = require("../../mods/notice/notice");
     var Mscroll = require('../../components/mscroll');
@@ -58,11 +58,15 @@ $(function() {
             //滚动监控
             Mscroll.init({
                 'scrollToBottom': function(){
+                    var currentTab =  $('.tab-bar .current').data('tab');
                     if(pageEnd) {
                         Mscroll.stop();
                         return;
                     }
 
+                    if(currentTab != 2) {
+                        return false;
+                    }
                     pageNo > 1 && $('#loadmore').html('');
                     Loading.show({
                         renderTo: '#loadmore'
