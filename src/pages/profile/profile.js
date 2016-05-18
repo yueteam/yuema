@@ -20,14 +20,14 @@ $(function() {
     	init: function() {
     		var me = this;
 
+            Nav.init();
+            
             Loading.show();
             me.getData(function() {
                 var scrollerW = width * $('.scroller .item').length;
                 $('.basic-info').height(width);
                 $('.scroller .item').width(width);
                 $('.scroller').width(scrollerW);
-
-                Nav.init();
 
                 me.initEvent(); 
             });  		
