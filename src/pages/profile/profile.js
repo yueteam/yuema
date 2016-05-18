@@ -11,16 +11,18 @@ $(function() {
     var Nav = require("../../mods/Nav/Nav");
 	var Yue = require("../../mods/yue/yue");
     var Notice = require("../../mods/notice/notice");
+    var Mscroll = require('../../components/mscroll');
 
     var width = $(window).width();
     // 个人id
     var profileId = Utils.getUrlParam('id') || '';
 
+    var pageNo = 1;
+    var pageEnd = false;
+
 	var app = {
     	init: function() {
     		var me = this;
-
-            Nav.init();
             
             Loading.show();
             me.getData(function() {
@@ -29,6 +31,7 @@ $(function() {
                 $('.scroller .item').width(width);
                 $('.scroller').width(scrollerW);
 
+                Nav.init();
                 me.initEvent(); 
             });  		
     	},
@@ -51,6 +54,25 @@ $(function() {
 			// 	$pointer.filter('.current').removeClass('current');
 			//     $pointer.eq(flipsnap.currentPoint).addClass('current');
 			// }, false);
+
+            //滚动监控
+            Mscroll.init({
+                'scrollToBottom': function(){
+                    if(pageEnd) {
+                        Mscroll.stop();
+                        return;
+                    }
+
+                    pageNo > 1 && $('#loadmore').html('');
+                    Loading.show({
+                        renderTo: '#loadmore'
+                    });
+
+                    me.getAskListData(function(){
+                        Mscroll.after();
+                    });
+                }
+            });
 
             $(document).on('tap', '.tab-item', function () {
                 var $this = $(this),
@@ -264,13 +286,18 @@ $(function() {
 
             Loading.show();
             Ajax.get(Apimap.myRequestApi, {
-                    
+                    page: pageNo
                 },
                 function(d){
                     Loading.hide();
 
                     if(d.result && d.result.datingList) {
-                        
+                        if(d.result.datingList.length === 0) {
+                            pageEnd = true;
+                        } else {
+                            $('#loadmore').html('上拉加载更多');
+                            pageNo++;
+                        }
                         me.renderAskListData(d.result.datingList);
 
                     } else {
@@ -338,7 +365,8 @@ $(function() {
                     'list': listArr
                 });
 
-            $('#tab2').data('init',true).html(html);
+            $('#tab2').data('init',true);
+            $('#tab2 .dating-list').append(html);
         }
     };
 
