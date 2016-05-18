@@ -192,18 +192,35 @@
         <span class="iconfont icon-yes"></span>寻找约会
     </a>
 </li> 
-<% } %>
+<% }else{ %>
 <% for(var i=0; i<list.length; i++){ %>
 <li class="item">
-    <div class="date-words">  
-        <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
+    <a class="who" href="./profile.html?id=">
+        <img src="<%= list[i].postUserInfo.avatar %>_s60" alt="" />
+        <span class="name"><%= list[i].postUserInfo.nickName %></span>
+    </a>
+    <div class="date-words"> 
         <%- list[i].article %>
     </div>
     <div class="date-info">
         <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
         <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
     </div>
+    <div class="request-list">
+        <span class="arrow"></span>
+        <div class="request-item">
+            <div class="info">
+                <div class="name">
+                    我的回应: 
+                    <span class="pub-time">1天前</span>
+                </div>
+                <div class="words">美女求约</div>
+            </div>
+            <span class="iconfont icon-no"></span>
+        </div>
+    </div>
 </li>
+<% } %>
 <% } %>
 </script>
 

@@ -64,6 +64,11 @@ $(function() {
                 $this.addClass('current');
                 $('.dating-list').hide();
                 $('#tab'+tab).show();
+
+                if(tab == 2 && !$('#tab2').data('init')) {
+                    // me.getAskListData();
+                    me.renderAskListData([]);
+                }
             });
 
             $(document).on('tap', '.btn-accept', function(){
@@ -248,6 +253,48 @@ $(function() {
 			$('.page-content').html(html);
             document.title = userInfo.nickName;
             $('#header h1').text(userInfo.nickName);
+        },
+
+        /**
+         * 获取我回应的列表数据
+         */
+        getAskListData: function () {
+            var me = this;
+
+            Loading.show();
+            Ajax.get(Apimap.profileApi, {
+                    'id': profileId
+                },
+                function(d){
+                    Loading.hide();
+
+                    if(d.result && d.result.userInfo) {
+                        
+                        me.renderAskListData(d.result);
+
+                    } else {
+                        // Nodata.show('返回的数据格式有问题');
+                    }
+                },
+                function(d){
+                    Loading.hide();
+
+                    // Nodata.show(d.resultMsg);
+                }
+            );
+
+        },
+
+        /**
+         * 渲染我回应的列表数据
+         */
+        renderAskListData: function (listArr) {
+            var html = Utils.template($('#askListTmpl').html(), 
+                {
+                    'list': listArr
+                });
+
+            $('#tab2').data('init',true).html(html);
         }
     };
 
