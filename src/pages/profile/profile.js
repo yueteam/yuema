@@ -163,6 +163,7 @@ $(function() {
                 '7': 'icon-badminton',
                 '8': 'icon-riding',
                 '9': 'icon-drive',
+                '11': 'icon-flight',
                 '1': 'icon-lquote'
             };
             var typeName = {
@@ -174,6 +175,7 @@ $(function() {
                 '7': '羽毛球',
                 '8': '骑行',
                 '9': '自驾',
+                '11': '同行',
                 '1': '其他'               
             };
             var cityMap = {
