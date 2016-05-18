@@ -102,79 +102,85 @@
             <a class="tab-item" data-tab="2" href="javascript:;">我回应的</a>
         </div>
         <% } %>
-        <ul id="tab1" class="dating-list">
-        <% if(list.length==0){ %>
-            <li class="empty-item">
-            <% if(myHome){ %>
-                <div class="empty-tip">
-                试试发个约会呗，看看谁想撩你？
-                </div>
-                <a href="./postdate.html" class="btn btn-green">
-                    <span class="iconfont icon-send"></span>发起约会
-                </a>
-            <% }else{ %>
-                <div class="empty-tip">
-                啊哦~ Ta还没发过约会呢~
-                </div>
-            <% } %>
-            </li> 
-        <% } %>
-        <% for(var i=0; i<list.length; i++){ %>
-            <li class="item">
-                <div class="date-words">  
-                    <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
-                    <%- list[i].article %>
-                </div>
-                <div class="date-info">
-                    <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
-                    <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
-                </div>
-                <% if(!myHome){ %>
-                <a class="g-yue" href="javascript:;" data-id="<%= list[i].id %>" data-uid="<%= info.id %>">
-                    <span class="iconfont icon-yes"></span>
-                </a>
+        <div id="tab1">
+            <ul class="dating-list">
+            <% if(list.length==0){ %>
+                <li class="empty-item">
+                <% if(myHome){ %>
+                    <div class="empty-tip">
+                    试试发个约会呗，看看谁想撩你？
+                    </div>
+                    <a href="./postdate.html" class="btn btn-green">
+                        <span class="iconfont icon-send"></span>发起约会
+                    </a>
+                <% }else{ %>
+                    <div class="empty-tip">
+                    啊哦~ Ta还没发过约会呢~
+                    </div>
                 <% } %>
-                <% 
-                    var requestUserInfos = list[i].requestUserInfos;
-                    if(requestUserInfos.length>0){ 
-                %>
-                <div class="request-list">
-                    <span class="arrow"></span>
+                </li> 
+            <% }else{ %>
+            <% for(var i=0; i<list.length; i++){ %>
+                <li class="item">
+                    <div class="date-words">  
+                        <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
+                        <%- list[i].article %>
+                    </div>
+                    <div class="date-info">
+                        <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
+                        <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
+                    </div>
+                    <% if(!myHome){ %>
+                    <a class="g-yue" href="javascript:;" data-id="<%= list[i].id %>" data-uid="<%= info.id %>">
+                        <span class="iconfont icon-yes"></span>
+                    </a>
+                    <% } %>
                     <% 
-                        for(var j=0; j<requestUserInfos.length; j++){ 
-                        var requestDatingUserInfo = requestUserInfos[j].requestDatingUserInfo;
-                        var requestDatingMessage = requestUserInfos[j].requestDatingMessage;
-                        var requestDatingTime = requestUserInfos[j].requestDatingTime;
+                        var requestUserInfos = list[i].requestUserInfos;
+                        if(requestUserInfos.length>0){ 
                     %>
-                    <div class="request-item">
-                        <div class="avatar">
-                            <a href="./profile.html?id=<%= requestDatingUserInfo.id %>">
-                                <img src="<%= requestDatingUserInfo.avatar %>_s60" alt="<%= requestDatingUserInfo.nickName %>" />
-                            </a>
-                        </div>
-                        <div class="info">
-                            <div class="name">
-                                <%= requestDatingUserInfo.nickName %>
-                                <span class="pub-time"><%= requestDatingTime %></span>
+                    <div class="request-list">
+                        <span class="arrow"></span>
+                        <% 
+                            for(var j=0; j<requestUserInfos.length; j++){ 
+                            var requestDatingUserInfo = requestUserInfos[j].requestDatingUserInfo;
+                            var requestDatingMessage = requestUserInfos[j].requestDatingMessage;
+                            var requestDatingTime = requestUserInfos[j].requestDatingTime;
+                        %>
+                        <div class="request-item">
+                            <div class="avatar">
+                                <a href="./profile.html?id=<%= requestDatingUserInfo.id %>">
+                                    <img src="<%= requestDatingUserInfo.avatar %>_s60" alt="<%= requestDatingUserInfo.nickName %>" />
+                                </a>
                             </div>
-                            <div class="words"><%- requestDatingMessage %></div>
-                        </div>
-                        <% if(list[i].done) { %>
-                            <% if(j==0) { %>
-                            <span class="iconfont icon-checked"></span>
-                            <% } else { %> 
-                            <span class="iconfont icon-no"></span>
+                            <div class="info">
+                                <div class="name">
+                                    <%= requestDatingUserInfo.nickName %>
+                                    <span class="pub-time"><%= requestDatingTime %></span>
+                                </div>
+                                <div class="words"><%- requestDatingMessage %></div>
+                            </div>
+                            <% if(list[i].done) { %>
+                                <% if(j==0) { %>
+                                <span class="iconfont icon-checked"></span>
+                                <% } else { %> 
+                                <span class="iconfont icon-no"></span>
+                                <% } %>
+                            <% } else { %>                       
+                            <a href="javascript:;" class="btn btn-tiny btn-primary btn-accept" data-id="<%= list[i].id %>" data-uid="<%= requestDatingUserInfo.id %>">接受</a>
                             <% } %>
-                        <% } else { %>                       
-                        <a href="javascript:;" class="btn btn-tiny btn-primary btn-accept" data-id="<%= list[i].id %>" data-uid="<%= requestDatingUserInfo.id %>">接受</a>
+                        </div>
                         <% } %>
                     </div>
                     <% } %>
-                </div>
-                <% } %>
-            </li>
-        <% } %>
-        </ul>
+                </li>
+            <% } %>
+            <% } %>
+            </ul>
+            <% if(list.length>0){ %>
+            <div id="loadmore">最多展示前十条约会</div>
+            <% } %>
+        </div>
         <% if(myHome){ %>
         <div id="tab2" class="hide">
             <ul class="dating-list">

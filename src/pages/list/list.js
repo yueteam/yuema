@@ -6,7 +6,7 @@ $(function() {
 	var Nodata = require('../../components/nodata');
 	var Loading = require('../../components/loading/loading');
 	var Yue = require("../../mods/yue/yue");
-    var Nav = require("../../mods/Nav/Nav");
+    var Nav = require("../../mods/nav/nav");
 	var Mscroll = require('../../components/mscroll');
     var Notice = require("../../mods/notice/notice");
 
