@@ -176,9 +176,12 @@
         <% } %>
         </ul>
         <% if(myHome){ %>
-        <ul id="tab2" class="dating-list hide">
-        
-        </ul>
+        <div id="tab2" class="hide">
+            <ul class="dating-list">
+                
+            </ul>
+            <div id="loadmore"></div>
+        </div>
         <% } %>
     </div>
 </script>
@@ -217,8 +220,10 @@
             </div>
             <% if(list[i].datingStatus=="accepted") { %>
             <span class="iconfont icon-checked"></span>
-            <% } else { %> 
+            <% } else if(list[i].datingStatus=="rejected") { %> 
             <span class="iconfont icon-no"></span>
+            <% } else { %>
+            <span class="iconfont">还没回音</span>
             <% } %>
         </div>
     </div>
