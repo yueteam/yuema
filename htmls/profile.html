@@ -36,7 +36,7 @@
             <a class="menu-item" href="./list.html"><span class="iconfont icon-followed"></span>想约谁</a>
         </li>
         <li>
-            <a class="menu-item" href="./postdate.html"><span class="iconfont icon-send"></span>发一个约会</a>
+            <a class="menu-item" href="./postdate.html"><span class="iconfont icon-send"></span>发起约会</a>
         </li>
     </ul>
     <a class="menu-profile" href="./login.html">
@@ -50,6 +50,7 @@
 <div class="page-content">
    
 </div>
+
 
 <script id="tmpl" type="text/tmpl">
     <div class="basic-info">
@@ -102,6 +103,22 @@
         </div>
         <% } %>
         <ul id="tab1" class="dating-list">
+        <% if(list.length==0){ %>
+            <li class="empty-item">
+            <% if(myHome){ %>
+                <div class="empty-tip">
+                试试发个约会呗，看看谁想撩你？
+                </div>
+                <a href="./postdate.html" class="btn btn-green">
+                    <span class="iconfont icon-send"></span>发起约会
+                </a>
+            <% }else{ %>
+                <div class="empty-tip">
+                啊哦~ Ta还没发过约会呢~
+                </div>
+            <% } %>
+            </li> 
+        <% } %>
         <% for(var i=0; i<list.length; i++){ %>
             <li class="item">
                 <div class="date-words">  
@@ -149,7 +166,7 @@
                             <span class="iconfont icon-no"></span>
                             <% } %>
                         <% } else { %>                       
-                        <a href="javascript:;" class="btn btn-tiny btn-primary btn-accept" data-id="<%= list[i].id %>" data-uid="<%= requestDatingUserInfo.id %>">答应</a>
+                        <a href="javascript:;" class="btn btn-tiny btn-primary btn-accept" data-id="<%= list[i].id %>" data-uid="<%= requestDatingUserInfo.id %>">接受</a>
                         <% } %>
                     </div>
                     <% } %>
@@ -160,26 +177,54 @@
         </ul>
         <% if(myHome){ %>
         <ul id="tab2" class="dating-list hide">
-        <% for(var i=0; i<list.length; i++){ %>
-            <li class="item">
-                <div class="date-words">  
-                    <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
-                    <%- list[i].article %>
-                </div>
-                <div class="date-info">
-                    <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
-                    <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
-                </div>
-                <% if(!myHome){ %>
-                <a class="g-yue" href="javascript:;" data-id="<%= list[i].id %>" data-uid="<%= info.id %>">
-                    <span class="iconfont icon-yes"></span>
-                </a>
-                <% } %>
-            </li>
-        <% } %>
+        
         </ul>
         <% } %>
     </div>
+</script>
+<script id="askListTmpl" type="text/tmpl">
+<% if(list.length==0){ %>
+<li class="empty-item">
+    <div class="empty-tip">
+    快去看看有没有心仪的约会，晚了就被别人约走了！
+    </div>
+    <a href="./list.html" class="btn btn-primary">
+        <span class="iconfont icon-yes"></span>寻找约会
+    </a>
+</li> 
+<% }else{ %>
+<% for(var i=0; i<list.length; i++){ %>
+<li class="item">
+    <a class="who" href="./profile.html?id=<%= list[i].postUserInfo.id %>">
+        <img src="<%= list[i].postUserInfo.avatar %>_s60" alt="" />
+        <span class="name"><%= list[i].postUserInfo.nickName %></span>
+    </a>
+    <div class="date-words"> 
+        <%- list[i].datingInfo.article %>
+    </div>
+    <div class="date-info">
+        <span class="what"><span class="iconfont <%= list[i].datingInfo.iconCls %>"></span><%= list[i].datingInfo.typeName %></span>
+        <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].datingInfo.datingTime %></span>
+    </div>
+    <div class="request-list">
+        <span class="arrow"></span>
+        <div class="request-item">
+            <div class="info">
+                <div class="title">
+                    我的回应: 
+                </div>
+                <div class="words"><%= list[i].requestDatingMessage %></div>
+            </div>
+            <% if(list[i].datingStatus=="accepted") { %>
+            <span class="iconfont icon-checked"></span>
+            <% } else { %> 
+            <span class="iconfont icon-no"></span>
+            <% } %>
+        </div>
+    </div>
+</li>
+<% } %>
+<% } %>
 </script>
 
 <script src="../build/js/base.js"></script>

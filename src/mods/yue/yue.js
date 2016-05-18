@@ -20,11 +20,11 @@ module.exports = {
                 userId = $(this).data('uid');
             var bdHtml = [
                     '<div class="input-row">',
-                        '<textarea class="ask-txa" id="askWords" placeholder="说点什么"></textarea>',
+                        '<textarea class="ask-txa" id="askWords" placeholder="讲文明懂礼貌，把握好这仅有的一次机会"></textarea>',
                     '</div>'
                 ].join('');
 
-            Dialog.confirm({'title': '回应这个邀约', 'body': bdHtml}, function(){
+            Dialog.confirm({'title': '回应这个邀约', 'body': bdHtml, 'okText': '我想约你',}, function(){
                 var askWords = $.trim($('#askWords').val());
                 if(askWords === '') {
                     Tips.show({

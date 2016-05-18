@@ -20,14 +20,14 @@ $(function() {
     	init: function() {
     		var me = this;
 
+            Nav.init();
+            
             Loading.show();
             me.getData(function() {
                 var scrollerW = width * $('.scroller .item').length;
                 $('.basic-info').height(width);
                 $('.scroller .item').width(width);
                 $('.scroller').width(scrollerW);
-
-                Nav.init();
 
                 me.initEvent(); 
             });  		
@@ -64,6 +64,10 @@ $(function() {
                 $this.addClass('current');
                 $('.dating-list').hide();
                 $('#tab'+tab).show();
+
+                if(tab == 2 && !$('#tab2').data('init')) {
+                    me.getAskListData();
+                }
             });
 
             $(document).on('tap', '.btn-accept', function(){
@@ -72,7 +76,7 @@ $(function() {
                 var id = $(this).data('id'),
                     userId = $(this).data('uid');
 
-                Dialog.confirm({'title': '答应Ta', 'body': '答应这个请求将不可取消，同时也将拒绝其他请求，确认答应吗？'}, function(){
+                Dialog.confirm({'title': '接受请求', 'body': '接受这个请求的同时将拒绝掉其他请求，确认接受吗？'}, function(){
                     
                     me.acceptAsk(id, userId);
                 });
@@ -158,6 +162,7 @@ $(function() {
                 '7': 'icon-badminton',
                 '8': 'icon-riding',
                 '9': 'icon-drive',
+                '11': 'icon-flight',
                 '1': 'icon-lquote'
             };
             var typeName = {
@@ -169,6 +174,7 @@ $(function() {
                 '7': '羽毛球',
                 '8': '骑行',
                 '9': '自驾',
+                '11': '同行',
                 '1': '其他'               
             };
             var cityMap = {
@@ -248,6 +254,91 @@ $(function() {
 			$('.page-content').html(html);
             document.title = userInfo.nickName;
             $('#header h1').text(userInfo.nickName);
+        },
+
+        /**
+         * 获取我回应的列表数据
+         */
+        getAskListData: function () {
+            var me = this;
+
+            Loading.show();
+            Ajax.get(Apimap.myRequestApi, {
+                    
+                },
+                function(d){
+                    Loading.hide();
+
+                    if(d.result && d.result.datingList) {
+                        
+                        me.renderAskListData(d.result.datingList);
+
+                    } else {
+                        Tips.show({
+                            type: 'error',
+                            title: '返回的数据格式有问题'
+                        });
+                    }
+                },
+                function(d){
+                    Loading.hide();
+
+                    Tips.show({
+                        type: 'error',
+                        title: d.resultMsg
+                    });
+                }
+            );
+
+        },
+
+        /**
+         * 渲染我回应的列表数据
+         */
+        renderAskListData: function (listArr) {
+            var iconMap = {
+                '2': 'icon-coffee',
+                '3': 'icon-food',
+                '4': 'icon-film',
+                '5': 'icon-run',
+                '6': 'icon-photo',
+                '7': 'icon-badminton',
+                '8': 'icon-riding',
+                '9': 'icon-drive',
+                '11': 'icon-flight',
+                '1': 'icon-lquote'
+            };
+            var typeName = {
+                '2': '喝咖啡/茶',
+                '3': '美食',
+                '4': '看电影',
+                '5': '跑步',
+                '6': '摄影',
+                '7': '羽毛球',
+                '8': '骑行',
+                '9': '自驾',
+                '11': '同行',
+                '1': '其他'               
+            };
+            $.each(listArr, function(index, item){
+                var datingTime = item.datingInfo.datingTime || '',
+                    typeId = item.datingInfo.typeId;
+                
+                if(datingTime !== '') {
+                    listArr[index].datingInfo.datingTime = datingTime.substr(0,10);
+                } else {
+                    listArr[index].datingInfo.datingTime = '随时';
+                }
+                listArr[index].datingInfo.iconCls = iconMap[typeId];
+                listArr[index].datingInfo.typeName = typeName[typeId]; 
+
+            });
+            var html = Utils.template($('#askListTmpl').html(), 
+                {
+                    'list': listArr
+                });
+
+            $('#tab2').data('init',true).html(html);
         }
     };
 
