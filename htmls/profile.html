@@ -166,7 +166,7 @@
                             <span class="iconfont icon-no"></span>
                             <% } %>
                         <% } else { %>                       
-                        <a href="javascript:;" class="btn btn-tiny btn-primary btn-accept" data-id="<%= list[i].id %>" data-uid="<%= requestDatingUserInfo.id %>">答应</a>
+                        <a href="javascript:;" class="btn btn-tiny btn-primary btn-accept" data-id="<%= list[i].id %>" data-uid="<%= requestDatingUserInfo.id %>">接受</a>
                         <% } %>
                     </div>
                     <% } %>
@@ -195,28 +195,31 @@
 <% }else{ %>
 <% for(var i=0; i<list.length; i++){ %>
 <li class="item">
-    <a class="who" href="./profile.html?id=">
+    <a class="who" href="./profile.html?id=<%= list[i].postUserInfo.id %>">
         <img src="<%= list[i].postUserInfo.avatar %>_s60" alt="" />
         <span class="name"><%= list[i].postUserInfo.nickName %></span>
     </a>
     <div class="date-words"> 
-        <%- list[i].article %>
+        <%- list[i].datingInfo.article %>
     </div>
     <div class="date-info">
-        <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
-        <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
+        <span class="what"><span class="iconfont <%= list[i].datingInfo.iconCls %>"></span><%= list[i].datingInfo.typeName %></span>
+        <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].datingInfo.datingTime %></span>
     </div>
     <div class="request-list">
         <span class="arrow"></span>
         <div class="request-item">
             <div class="info">
-                <div class="name">
+                <div class="title">
                     我的回应: 
-                    <span class="pub-time">1天前</span>
                 </div>
-                <div class="words">美女求约</div>
+                <div class="words"><%= list[i].requestDatingMessage %></div>
             </div>
+            <% if(list[i].datingStatus=="accepted") { %>
+            <span class="iconfont icon-checked"></span>
+            <% } else { %> 
             <span class="iconfont icon-no"></span>
+            <% } %>
         </div>
     </div>
 </li>

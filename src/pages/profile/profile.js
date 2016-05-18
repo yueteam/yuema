@@ -66,8 +66,7 @@ $(function() {
                 $('#tab'+tab).show();
 
                 if(tab == 2 && !$('#tab2').data('init')) {
-                    // me.getAskListData();
-                    me.renderAskListData([]);
+                    me.getAskListData();
                 }
             });
 
@@ -77,7 +76,7 @@ $(function() {
                 var id = $(this).data('id'),
                     userId = $(this).data('uid');
 
-                Dialog.confirm({'title': '答应Ta', 'body': '答应这个请求的同时将拒绝掉其他请求，确认答应吗？'}, function(){
+                Dialog.confirm({'title': '接受请求', 'body': '接受这个请求的同时将拒绝掉其他请求，确认接受吗？'}, function(){
                     
                     me.acceptAsk(id, userId);
                 });
@@ -264,24 +263,30 @@ $(function() {
             var me = this;
 
             Loading.show();
-            Ajax.get(Apimap.profileApi, {
-                    'id': profileId
+            Ajax.get(Apimap.myRequestApi, {
+                    
                 },
                 function(d){
                     Loading.hide();
 
-                    if(d.result && d.result.userInfo) {
+                    if(d.result && d.result.datingList) {
                         
-                        me.renderAskListData(d.result);
+                        me.renderAskListData(d.result.datingList);
 
                     } else {
-                        // Nodata.show('返回的数据格式有问题');
+                        Tips.show({
+                            type: 'error',
+                            title: '返回的数据格式有问题'
+                        });
                     }
                 },
                 function(d){
                     Loading.hide();
 
-                    // Nodata.show(d.resultMsg);
+                    Tips.show({
+                        type: 'error',
+                        title: d.resultMsg
+                    });
                 }
             );
 
@@ -291,6 +296,43 @@ $(function() {
          * 渲染我回应的列表数据
          */
         renderAskListData: function (listArr) {
+            var iconMap = {
+                '2': 'icon-coffee',
+                '3': 'icon-food',
+                '4': 'icon-film',
+                '5': 'icon-run',
+                '6': 'icon-photo',
+                '7': 'icon-badminton',
+                '8': 'icon-riding',
+                '9': 'icon-drive',
+                '11': 'icon-flight',
+                '1': 'icon-lquote'
+            };
+            var typeName = {
+                '2': '喝咖啡/茶',
+                '3': '美食',
+                '4': '看电影',
+                '5': '跑步',
+                '6': '摄影',
+                '7': '羽毛球',
+                '8': '骑行',
+                '9': '自驾',
+                '11': '同行',
+                '1': '其他'               
+            };
+            $.each(listArr, function(index, item){
+                var datingTime = item.datingInfo.datingTime || '',
+                    typeId = item.datingInfo.typeId;
+                
+                if(datingTime !== '') {
+                    listArr[index].datingInfo.datingTime = datingTime.substr(0,10);
+                } else {
+                    listArr[index].datingInfo.datingTime = '随时';
+                }
+                listArr[index].datingInfo.iconCls = iconMap[typeId];
+                listArr[index].datingInfo.typeName = typeName[typeId]; 
+
+            });
             var html = Utils.template($('#askListTmpl').html(), 
                 {
                     'list': listArr

@@ -13,7 +13,8 @@ var Apimap = {
     requestDatingApi: apiPerfix + 'action/dating/request',
     acceptDatingApi: apiPerfix + 'action/dating/accept',
     listApi: apiPerfix + 'open-api/query/dating/dating-list',
-    profileApi: apiPerfix + 'open-api/query/home-info'
+    profileApi: apiPerfix + 'open-api/query/home-info',
+    myRequestApi: apiPerfix + 'action/query/dating/my-request-dating-list'
 };
 
 module.exports = Apimap;
