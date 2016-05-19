@@ -21,7 +21,7 @@ module.exports = {
             beforeOpen: function(){
                 $('#header').appendTo('.jPanelMenu-panel');
             },
-            beforeClose: function(){
+            afterClose: function(){
                 $('#header').appendTo('body');
             }
         });
