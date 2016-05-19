@@ -128,7 +128,7 @@ $(function() {
 
                     Tips.show({
                         type: 'success',
-                        title: '您已答应，准备赴约吧'
+                        title: '您已接受，准备赴约吧'
                     });
                 },
                 function(d){
@@ -298,12 +298,16 @@ $(function() {
                     if(d.result && d.result.datingList) {
                         if(d.result.datingList.length === 0) {
                             pageEnd = true;
+                            if(pageNo === 1) {
+                                me.renderAskListData([]);
+                            } else {
+                                $('#loadmore').html('没有更多了~');
+                            }
                         } else {
                             $('#loadmore').html('上拉加载更多');
                             pageNo++;
+                            me.renderAskListData(d.result.datingList);
                         }
-                        me.renderAskListData(d.result.datingList);
-
                     } else {
                         Tips.show({
                             type: 'error',
