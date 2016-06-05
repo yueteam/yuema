@@ -55,7 +55,7 @@ $(function() {
             };
 
             Chat.socket.onmessage = function (message) {
-                me.render(message.data);
+                me.addMessage(message.data);
             };
         },
 
@@ -69,21 +69,32 @@ $(function() {
             if (!!message && !!userId && !!datingId) {
                 Chat.socket.send(JSON.stringify(data));
 
-                var msgHtml = '<li class="chat-message chat-message-self">'
-                                   + '<div class="chat-message-bubble" style="transform: translate3d(0px, 0px, 0px); opacity: 1;">'+message+'</div>'
-                               + '</li>';
-                $('.chat-messages-list').append(msgHtml);
+                me.addMessage(message,true);
 
                 $('#message').val('');
             }
         },
 
-        render : function(message) {
-            var msgHtml = '<li class="chat-message chat-message-friend">'
-                              + '<div class="chat-message-bubble">'+message+'</div>'
-                          + '</li>';
+        addMessage : function(message, self) {
+            var $messagesContainer=$(".chat-messages");
+            var $messagesList = $('.chat-messages-list');
 
-            $('.chat-messages-list').append(msgHtml);
+            var $messageContainer=$('<li/>')
+                .addClass('chat-message '+(self?'chat-message-self':'chat-message-friend'))
+                .appendTo($messagesList);
+            ;
+            var $messageBubble=$('<div/>')
+                .addClass('chat-message-bubble')
+                .appendTo($messageContainer);
+            ;
+            $messageBubble.text(message);
+
+            $messagesContainer.scrollTop(9999999);
+
+            return {
+                $container:$messageContainer,
+                $bubble:$messageBubble
+            };
         },
 
     	/**
