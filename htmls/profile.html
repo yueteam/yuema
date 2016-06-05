@@ -160,15 +160,18 @@
                                 </div>
                                 <div class="words"><%- requestDatingMessage %></div>
                             </div>
+                            <div class="action-area">
                             <% if(list[i].done) { %>
                                 <% if(j==0) { %>
                                 <span class="iconfont icon-checked"></span>
+                                <a class="iconfont icon-message" href="./chat.html?uid=<%= info.id %>&did=<%= list[i].id %>"></a>
                                 <% } else { %> 
                                 <span class="iconfont icon-no"></span>
                                 <% } %>
                             <% } else { %>                       
-                            <a href="javascript:;" class="btn btn-tiny btn-primary btn-accept" data-id="<%= list[i].id %>" data-uid="<%= requestDatingUserInfo.id %>">接受</a>
+                                <a href="javascript:;" class="btn btn-tiny btn-primary btn-accept" data-id="<%= list[i].id %>" data-uid="<%= requestDatingUserInfo.id %>">接受</a>
                             <% } %>
+                            </div>
                         </div>
                         <% } %>
                     </div>
@@ -224,13 +227,16 @@
                 </div>
                 <div class="words"><%= list[i].requestDatingMessage %></div>
             </div>
-            <% if(list[i].datingStatus=="accepted") { %>
-            <span class="iconfont icon-checked"></span>
-            <% } else if(list[i].datingStatus=="rejected") { %> 
-            <span class="iconfont icon-no"></span>
-            <% } else { %>
-            <span class="no-response">还没回音</span>
-            <% } %>
+            <div class="action-area">
+                <% if(list[i].datingStatus=="accepted") { %>
+                <span class="iconfont icon-checked"></span>
+                <a class="iconfont icon-message" href="./chat.html?uid=<%= list[i].postUserInfo.id %>&did=<%= list[i].datingInfo.uUID %>"></a>
+                <% } else if(list[i].datingStatus=="rejected") { %> 
+                <span class="iconfont icon-no"></span>
+                <% } else { %>
+                <span class="no-response">还没回音</span>
+                <% } %>
+            </div>
         </div>
     </div>
 </li>

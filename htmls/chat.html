@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="dns-prefetch" href="//g.alicdn.com">
+    <link rel="dns-prefetch" href="//at.alicdn.com">
+    <link rel="dns-prefetch" href="//img.alicdn.com">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta content="telephone=no,email=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="apple-touch-icon" href="favicon.png" />
+    <link rel="Shortcut Icon" href="favicon.png" type="image/x-icon" />
+    <title>聊天</title>
+
+    <script>g_start = new Date();</script>
+
+    <!-- build:css -->
+    <link rel="stylesheet" href="../build/css/chat.css">
+    <!-- endbuild -->
+
+</head>
+<body>
+
+<div class="page-content">
+    <div class="chat-window">
+        <div class="chat-messages">
+            <ol class="chat-messages-list" style="transform: matrix(1, 0, 0, 1, 0, 0);">
+                
+            </ol>
+        </div>
+        <div class="chat-input-bar">
+            <div class="chat-info-container">
+
+            </div>
+            <div class="chat-effect-container" style="-webkit-filter: none; filter: none;">
+                <div class="chat-effect-bar"></div>
+            </div>
+            <div class="chat-input-wrapper">
+                <textarea class="chat-input" id="message" placeholder="" autofocus></textarea>
+                <button class="chat-send" id="sendBtn">
+                    <span class="iconfont icon-send"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../build/js/base.js"></script>
+<!-- build:js -->
+<script src="../build/js/chat.js"></script>
+<!-- endbuild -->
+
+<!-- 加载脚本 -->
+<script>
+    g_mstart = new Date();
+</script>
+</body>
+</html>
