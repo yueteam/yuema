@@ -61,11 +61,8 @@ $(function() {
 
             Chat.socket.onmessage = function (message) {
                 var msg = JSON.parse(message.data);
-                if(msg.self) {
-                    me.addMessage(msg, true);
-                } else {
-                    me.addMessage(msg);
-                }
+
+                me.addMessage(msg);
             };
         },
 
@@ -86,12 +83,12 @@ $(function() {
             }
         },
 
-        addMessage : function(message, self) {
+        addMessage : function(message) {
             var $messagesContainer=$(".chat-messages");
             var $messagesList = $('.chat-messages-list');
 
             var $messageContainer=$('<li/>')
-                .addClass('chat-message '+(self?'chat-message-self':'chat-message-friend'))
+                .addClass('chat-message '+(message.self?'chat-message-self':'chat-message-friend'))
                 .appendTo($messagesList);
             
             var $messageAvatar=$('<div/>')
@@ -102,7 +99,7 @@ $(function() {
                 .addClass('chat-message-bubble')
                 .appendTo($messageContainer);
             
-            $messageAvatar.html('<img src="' + message.avatar + '_s60" alt="" />');
+            $messageAvatar.html('<a href="./profile.html?id=' + message.fromUserId + '"><img src="' + message.avatar + '_s60" alt="" /></a>');
             // $messageBubble.text(message);
             $messageBubble.html(message.message || message.msg);
 
@@ -162,11 +159,7 @@ $(function() {
                         var messageList = d.result.messageList;
                         if(messageList.length > 0) {
                             for(var i = 0, len = messageList.length; i < len; i++) {
-                                if(messageList[i].self) {
-                                    me.addMessage(messageList[i], true);
-                                } else {
-                                    me.addMessage(messageList[i]);
-                                }
+                                me.addMessage(messageList[i]);
                             }
                         }
                     } else {
