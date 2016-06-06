@@ -8,6 +8,9 @@ $(function() {
     var userId = Utils.getUrlParam('uid') || '';
     var datingId = Utils.getUrlParam('did') || '';
 
+    var pageNo = 1;
+    var pageEnd = false;
+
 	var Chat = {
         socket : null,
 
@@ -19,6 +22,8 @@ $(function() {
 
             var msgH = $(window).height() - 50;
             $('.chat-messages').height(msgH);
+
+            this.getData();
 
             if (window.location.protocol == 'http:') {
                 Chat.connect('ws://' + window.location.host + '/websocket/chat/'+datingId+'/'+userId);
@@ -57,9 +62,9 @@ $(function() {
             Chat.socket.onmessage = function (message) {
                 var msg = JSON.parse(message.data);
                 if(msg.self) {
-                    me.addMessage(msg.msg, true);
+                    me.addMessage(msg, true);
                 } else {
-                    me.addMessage(msg.msg);
+                    me.addMessage(msg);
                 }
             };
         },
@@ -88,12 +93,18 @@ $(function() {
             var $messageContainer=$('<li/>')
                 .addClass('chat-message '+(self?'chat-message-self':'chat-message-friend'))
                 .appendTo($messagesList);
-            ;
+            
+            var $messageAvatar=$('<div/>')
+                .addClass('chat-message-avatar')
+                .appendTo($messageContainer);
+
             var $messageBubble=$('<div/>')
                 .addClass('chat-message-bubble')
                 .appendTo($messageContainer);
-            ;
-            $messageBubble.text(message);
+            
+            $messageAvatar.html('<img src="' + message.avatar + '_s60" alt="" />');
+            // $messageBubble.text(message);
+            $messageBubble.html(message.message || message.msg);
 
             $messagesContainer.scrollTop(9999999);
 
@@ -129,7 +140,49 @@ $(function() {
             	Chat.sendMessage();
             });
 
+        },
+
+        /**
+         * 获取聊天记录数据
+         */
+        getData: function () {
+            var me = this;
+           
+            apiData = {
+                // 'page': pageNo,
+                'userId': userId,
+                'datingId': datingId
+            };
+            Loading.show();
+            Ajax.get(Apimap.chatRecordsApi, apiData,
+                function(d){
+                    Loading.hide();
+
+                    if(d.result && d.result.messageList) {
+                        var messageList = d.result.messageList;
+                        if(messageList.length > 0) {
+                            for(var i = 0, len = messageList.length; i < len; i++) {
+                                if(messageList[i].self) {
+                                    me.addMessage(messageList[i], true);
+                                } else {
+                                    me.addMessage(messageList[i]);
+                                }
+                            }
+                        }
+                    } else {
+                        Tips.show({
+                            type: 'error',
+                            title: '返回的数据格式有问题'
+                        });
+                    }
+                },
+                function(d){
+                    Loading.hide();
+                }
+            );
+
         }
+
     };
 
     Chat.init();
