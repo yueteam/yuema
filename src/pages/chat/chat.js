@@ -55,11 +55,17 @@ $(function() {
             };
 
             Chat.socket.onmessage = function (message) {
-                me.addMessage(message.data);
+                var msg = JSON.parse(message.data);
+                if(msg.self) {
+                    me.addMessage(msg.msg, true);
+                } else {
+                    me.addMessage(msg.msg);
+                }
             };
         },
 
         sendMessage : function() {
+            var me = this;
             var message = $.trim($('#message').val());
             var data = {
                 message: message,
@@ -69,7 +75,7 @@ $(function() {
             if (!!message && !!userId && !!datingId) {
                 Chat.socket.send(JSON.stringify(data));
 
-                me.addMessage(message,true);
+                // me.addMessage(message,true);
 
                 $('#message').val('');
             }
