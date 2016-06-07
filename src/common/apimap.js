@@ -15,6 +15,7 @@ var Apimap = {
     listApi: apiPerfix + 'open-api/query/dating/dating-list', // 约会列表
     profileApi: apiPerfix + 'open-api/query/home-info', // 个人页信息
     myRequestApi: apiPerfix + 'action/query/dating/my-request-dating-list', // 我回应的约会列表
+    datingDetailApi: apiPerfix + 'open-api/query/dating/dating-info', // 约会详情
     chatRecordsApi: apiPerfix + 'action/query/message/message-list' // 聊天记录
 }; 
 
