@@ -20,8 +20,7 @@ $(function() {
                 return false;
             }
 
-            var msgH = $(window).height() - 50;
-            $('.chat-messages').height(msgH);
+            this.updateChatHeight();
 
             this.getDetail();
             this.getData();
@@ -69,7 +68,7 @@ $(function() {
 
         sendMessage : function() {
             var me = this;
-            var message = $.trim($('#message').val());
+            var message = $.trim($('#message').text());
             var data = {
                 message: message,
                 userId: userId,
@@ -80,7 +79,8 @@ $(function() {
 
                 // me.addMessage(message,true);
 
-                $('#message').val('');
+                $('#message').text('');
+                me.updateChatHeight();
             }
         },
 
@@ -112,6 +112,12 @@ $(function() {
             };
         },
 
+        updateChatHeight : function() {
+            $('.chat-messages').css({
+                height: $(window).height() - $(".chat-input-bar").height()
+            });
+        },
+
     	/**
          * 初始化事件
          */
@@ -136,6 +142,10 @@ $(function() {
             // 发送
             $(document).on('tap', '#sendBtn', function () {
             	Chat.sendMessage();
+            });
+
+            $('.chat-input').on("input", function(){
+                me.updateChatHeight();
             });
 
         },

@@ -152,22 +152,21 @@
 }
 
 .chat-input {
+	.border-box();
 	outline: none;
 	resize: none;
 	overflow: hidden;
-	height: 30px;
-	line-height: 30px;
+	min-height: 38px;
 	-webkit-flex: 1;
 	flex: 1;
 	font-size: 14px;
-	padding: 0 0 0 20px;
+	padding: 10px 0 10px 20px;
 	color: #fff;
 	cursor: text;
-	background: @green-sea;
 }
 
 .chat-input:empty::before {
-	content: "Write something...";
+	content: "说点什么吧...";
 }
 
 .chat-input:focus::before {
