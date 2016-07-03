@@ -10,6 +10,7 @@ $(function() {
 
     var pageNo = 1;
     var pageEnd = false;
+    var lastSendTime = '';
 
 	var Chat = {
         socket : null,
@@ -85,13 +86,23 @@ $(function() {
         },
 
         addMessage : function(message) {
+            var me = this;
             var $messagesContainer=$(".chat-messages");
             var $messagesList = $('.chat-messages-list');
+
+            if(lastSendTime == '' || (lastSendTime!='' && (new Date(message.sentTime).getTime() - lastSendTime) > 3*60*1000)) { // 大于3分钟
+                var sentTime = me.handleTime(message.sentTime);
+                var $messageTime=$('<li/>')
+                    .addClass('chat-time')
+                    .html('<span>'+sentTime+'</span>')
+                    .appendTo($messagesList);
+            }
+            lastSendTime = new Date(message.sentTime).getTime();
 
             var $messageContainer=$('<li/>')
                 .addClass('chat-message '+(message.self?'chat-message-self':'chat-message-friend'))
                 .appendTo($messagesList);
-            
+
             var $messageAvatar=$('<div/>')
                 .addClass('chat-message-avatar')
                 .appendTo($messageContainer);
@@ -110,6 +121,33 @@ $(function() {
                 $container:$messageContainer,
                 $bubble:$messageBubble
             };
+        },
+
+        handleTime : function(time) {
+            var date = Utils.strToDate(time);
+            var year = date.getFullYear(),
+            month = date.getMonth() + 1,
+            day = date.getDate(),
+            hours = date.getHours(),         //获取当前小时数(0-23)
+            minutes = date.getMinutes(),     //获取当前分钟数(0-59)
+            seconds = date.getSeconds();     //获取当前秒数(0-59)
+
+            if(month < 10){
+                month = '0' + month;
+            }
+            if(day < 10){
+                day = '0' + day;
+            }
+            if(hours < 10) {
+                hours = '0' + hours;
+            }
+            if(minutes < 10) {
+                minutes = '0' + minutes;
+            }
+            if(seconds < 10) {
+                seconds = '0' + seconds;
+            }
+            return year + '年' + month + '月' + day + '日 ' + hours + ':' + minutes;
         },
 
         updateChatHeight : function() {
