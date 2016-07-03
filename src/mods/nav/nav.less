@@ -8,7 +8,7 @@
         font-size: 20px;
         text-align: center;
     }
-    .menu-trigger, .menu-right {
+    .menu-trigger, .menu-right, .menu-back {
         position: absolute;
         top: 0;
         left: 0;
@@ -38,6 +38,12 @@
         color: @dark-gray;
         font-size: 18px;
         text-align: center;
+    }
+    .menu-back {        
+        .encoded-svg-background("<svg viewBox='0 0 20 32' xmlns='http://www.w3.org/2000/svg'><path d='M16.552 5.633l-2.044-2.044L2.243 15.854l12.265 12.557 2.044-2.044L6.331 15.854z' fill='#91aba3'/></svg>");
+        background-size: 20px 23px;
+        background-repeat: no-repeat;
+        background-position: center;
     }
 }
 .header-fixed {
