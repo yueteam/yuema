@@ -62,7 +62,7 @@ $(function() {
 
             Chat.socket.onmessage = function (message) {
                 var msg = JSON.parse(message.data);
-
+                console.log(msg);
                 me.addMessage(msg);
             };
         },
@@ -90,14 +90,14 @@ $(function() {
             var $messagesContainer=$(".chat-messages");
             var $messagesList = $('.chat-messages-list');
 
-            if(lastSendTime == '' || (lastSendTime!='' && (new Date(message.sentTime).getTime() - lastSendTime) > 3*60*1000)) { // 大于3分钟
-                var sentTime = me.handleTime(message.sentTime);
+            if(lastSendTime == '' || (lastSendTime!='' && (new Date(message.sendTime).getTime() - lastSendTime) > 3*60*1000)) { // 大于3分钟
+                var sendTime = me.handleTime(message.sendTime);
                 var $messageTime=$('<li/>')
                     .addClass('chat-time')
-                    .html('<span>'+sentTime+'</span>')
+                    .html('<span>'+sendTime+'</span>')
                     .appendTo($messagesList);
             }
-            lastSendTime = new Date(message.sentTime).getTime();
+            lastSendTime = new Date(message.sendTime).getTime();
 
             var $messageContainer=$('<li/>')
                 .addClass('chat-message '+(message.self?'chat-message-self':'chat-message-friend'))
