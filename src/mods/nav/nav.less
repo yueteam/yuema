@@ -162,11 +162,33 @@
 .menu {
     display: none;
     background: #fff;
-    ul li {
-        margin-top: 20px;
+    .menu-profile {
+        margin: 50px 0;
+        text-align: center;
+        .avatar {
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+            background: #e6e6e6;
+        } 
+        .iconfont {
+            display: block;
+            margin: 0 auto 10px;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            color: #fff;
+            font-size: 40px;
+        }
+        .login-info {
+            color: @text-color;
+            font-size: 14px;
+        }
     }
     .menu-item {
         display: block;
+        margin-bottom: 20px;
         padding-left: 20px;
         width: 100%;
         line-height: 40px;
@@ -178,7 +200,7 @@
             border-left: 5px solid @green-sea;
         }
     }
-    .menu-profile {
+    .menu-set {
         position: absolute;
         bottom: 0;
         left: 0;
@@ -188,12 +210,14 @@
         color: #333;
         font-size: 20px;
         background: #e6e6e6;
-        .text-overflow();
         .border-box();
         .iconfont {
             margin-right: 0;
             color: #fff;
             font-size: 30px;
+        }
+        a {
+            color: #333;
         }
     }
     .iconfont {

@@ -29,7 +29,7 @@ module.exports = {
 
         if(Utils.isLogin()) {
             var nick = Utils.getCookie('nick_name');
-            $('.menu-profile').attr('href', './profile.html');
+            $('.menu-profile .profile-lnk').attr('href', './profile.html');
             $('.menu-profile .login-info').text(nick);
         }
     }
