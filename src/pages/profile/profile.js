@@ -99,22 +99,27 @@ $(function() {
             $(document).on('tap', '.btn-accept', function(){
                 Utils.stopEventTap();
                 
-                var id = $(this).data('id'),
-                    userId = $(this).data('uid');
+                var $this = $(this),
+                    $parent = $this.parent('.action-area'),
+                    id = $this.data('id'),
+                    userId = $this.data('uid'),
+                    myId = $this.data('myid');
 
                 Dialog.confirm({'title': '接受请求', 'body': '接受这个请求的同时将拒绝掉其他请求，确认接受吗？'}, function(){
                     
-                    me.acceptAsk(id, userId);
+                    me.acceptAsk(id, userId, function() {
+                        $parent.html('<span class="iconfont icon-checked"></span><a class="iconfont icon-message" href="./chat.html?uid='+myId+'&did='+id+'"></a>');
+                    });
                 });
                
             });
 		},
 
         /**
-         * 发送信息
+         * 接受应约
          * @return {Boolean} [description]
          */
-        acceptAsk: function(id, uid) {
+        acceptAsk: function(id, uid, cb) {
             var me = this;
 
             Loading.show();
@@ -125,6 +130,8 @@ $(function() {
                 },
                 function(d){
                     Loading.hide();
+
+                    cb && cb();
 
                     Tips.show({
                         type: 'success',
