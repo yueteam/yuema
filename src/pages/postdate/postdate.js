@@ -25,7 +25,7 @@ $(function() {
 
     		$('#dateDesc').focus();
 
-    		var listH = $(window).height() - 300;
+    		var listH = $(window).height() - $('.textarea-box').height() - $('.post-option').height();
             $('.panels').height(listH);
     		$('.opt-panel').height(listH);
 
