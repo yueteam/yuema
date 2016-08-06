@@ -115,7 +115,12 @@ var Utils = {
      * @return {Boolean} [description]
      */
     isWeixin: function() {
-        return ua.indexOf('MicroMessenger') > -1;
+        // return ua.indexOf('MicroMessenger') > -1;
+        if(ua.match(/MicroMessenger/i)=='micromessenger') {
+            return true;
+        } else {
+            return false;
+        }
     },
 
     /**

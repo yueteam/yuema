@@ -182,9 +182,11 @@ $(function() {
             	Chat.sendMessage();
             });
 
-            $('.chat-input').on("input", function(){
-                me.updateChatHeight();
-            });
+            if(!Utils.isWeixin()) {
+                $('.chat-input').on("input", function(){
+                    me.updateChatHeight();
+                });
+            }
 
         },
 
