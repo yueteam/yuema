@@ -90,6 +90,7 @@ var Utils = {
      * @return {Boolean} [description]
      */
     isIOS : function() {
+        var ua = window.navigator.userAgent;
         var ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
         var ipod = ua.match(/(iPod)(.*OS\s([\d_]+))?/);
         var iphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
@@ -107,6 +108,7 @@ var Utils = {
      * @return {Boolean} [description]
      */
     isAndroid: function() {
+        var ua = window.navigator.userAgent;
         return ua.indexOf('Android') > -1;
     },
 
@@ -115,12 +117,8 @@ var Utils = {
      * @return {Boolean} [description]
      */
     isWeixin: function() {
-        // return ua.indexOf('MicroMessenger') > -1;
-        if(ua.match(/MicroMessenger/i)=='micromessenger') {
-            return true;
-        } else {
-            return false;
-        }
+        var ua = window.navigator.userAgent;
+        return ua.indexOf('MicroMessenger') > -1;
     },
 
     /**
