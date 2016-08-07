@@ -166,11 +166,16 @@
         margin: 50px 0;
         text-align: center;
         .avatar {
+            margin: 0 auto 10px;
             width: 80px;
             height: 80px;
-            line-height: 80px;
-            text-align: center;
-            background: #e6e6e6;
+            overflow: hidden;
+            .border-radius(50%);
+
+            img {
+                display: block;
+                width: 80px;
+            }           
         } 
         .iconfont {
             display: block;

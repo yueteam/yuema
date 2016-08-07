@@ -36,6 +36,17 @@ $(function() {
             });  		
     	},
 
+        /**
+         * 检查localstorage是否存储了头像
+         */
+        checkLs: function(avatar) {
+            var ls = window.localStorage;
+
+            if(!ls.getItem('avatar')) {
+                ls.setItem('avatar', avatar);
+            }
+        },
+
     	/**
          * 初始化事件
          */
@@ -287,6 +298,8 @@ $(function() {
 			$('.page-content').html(html);
             document.title = userInfo.nickName;
             $('#header h1').text(userInfo.nickName);
+
+            this.checkLs(userInfo.avatar);
         },
 
         /**
