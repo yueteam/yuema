@@ -81,7 +81,10 @@ $(function() {
                 // me.addMessage(message,true);
 
                 $('#message').text('');
-                me.updateChatHeight();
+                
+                if(!Utils.isWeixin()) {
+                    me.updateChatHeight();
+                }
             }
         },
 
