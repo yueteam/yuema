@@ -127,8 +127,9 @@ $(function() {
         },
 
         handleTime : function(time) {
-            var date = Utils.strToDate(time);
-            // alert(time);
+            var newTime = time.substr(0,19);
+            var date = Utils.strToDate(newTime);
+            
             var year = date.getFullYear(),
             month = date.getMonth() + 1,
             day = date.getDate(),
