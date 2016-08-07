@@ -2,6 +2,21 @@ var Utils = require('../../common/utils');
 module.exports = {
     init: function() {
         var me = this;
+
+        if(Utils.isLogin()) {
+            var ls = window.localStorage;
+
+            if($('.profile-lnk')[0] && ls.getItem('avatar')) {
+                var avatarUrl = ls.getItem('avatar');
+
+                $('.profile-lnk').prepend('<div class="avatar"><img src="'+avatarUrl+'_s120" alt="" /></div>');
+                $('.profile-lnk .icon-account').remove();
+            }
+            
+            var nick = Utils.getCookie('nick_name');
+            $('.menu-profile .profile-lnk').attr('href', './profile.html');
+            $('.menu-profile .login-info').text(nick);
+        }
         
         var header = new Headroom(document.querySelector("header"), {
             tolerance: 5,
@@ -27,11 +42,6 @@ module.exports = {
         });
         jPanelMenu.on();
 
-        if(Utils.isLogin()) {
-            var nick = Utils.getCookie('nick_name');
-            $('.menu-profile .profile-lnk').attr('href', './profile.html');
-            $('.menu-profile .login-info').text(nick);
-        }
     }
   
 };
