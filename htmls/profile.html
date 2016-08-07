@@ -140,9 +140,13 @@
                         <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
                     </div>
                     <% if(!myHome){ %>
-                    <a class="g-yue" href="javascript:;" data-id="<%= list[i].id %>" data-uid="<%= info.id %>">
-                        <span class="iconfont icon-yes"></span>
-                    </a>
+                        <% if(list[i].datingInfo.acceptUserId!=0){ %>
+                        <span class="yuele">已约</span>
+                        <% }else{ %>
+                        <a class="g-yue" href="javascript:;" data-id="<%= list[i].id %>" data-uid="<%= info.id %>">
+                            <span class="iconfont icon-yes"></span>
+                        </a>
+                        <% } %>
                     <% } %>
                     <% 
                         var requestUserInfos = list[i].requestUserInfos;
