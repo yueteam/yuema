@@ -49,6 +49,10 @@ $(function() {
 
             if(!ls.getItem('avatar')) {
                 ls.setItem('avatar', avatar);
+            } else {
+                if(ls.getItem('avatar')!=avatar) {
+                    ls.setItem('avatar', avatar);
+                }
             }
         },
 
@@ -304,7 +308,9 @@ $(function() {
             document.title = userInfo.nickName;
             $('#header h1').text(userInfo.nickName);
 
-            this.checkLs(userInfo.avatar);
+            if(data.myHome) {
+                this.checkLs(userInfo.avatar);
+            }
         },
 
         /**
