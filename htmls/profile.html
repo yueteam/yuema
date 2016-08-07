@@ -140,7 +140,7 @@
                         <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
                     </div>
                     <% if(!myHome){ %>
-                        <% if(list[i].datingInfo.acceptUserId!=0){ %>
+                        <% if(list[i].datingInfo.acceptUserId){ %>
                         <span class="yuele">已约</span>
                         <% }else{ %>
                         <a class="g-yue" href="javascript:;" data-id="<%= list[i].id %>" data-uid="<%= info.id %>">
@@ -193,9 +193,7 @@
             <% } %>
             <% } %>
             </ul>
-            <% if(list.length===10){ %>
             <div class="loadmore">最多展示前十条约会</div>
-            <% } %>
         </div>
         <% if(myHome){ %>
         <div id="tab2" class="tab-con hide">
