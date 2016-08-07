@@ -23,6 +23,11 @@ $(function() {
 	var app = {
     	init: function() {
     		var me = this;
+
+            if(!Utils.isLogin()) {
+                window.location.href = './login.html';
+                return false;
+            }
             
             Loading.show();
             me.getData(function() {

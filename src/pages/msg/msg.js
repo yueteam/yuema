@@ -9,9 +9,6 @@ $(function() {
 	var Mscroll = require('../../components/mscroll');
     var Notice = require('../../mods/notice/notice');
 
-	var pageNo = 1;
-	var pageEnd = false;
-
 	var app = {
     	init: function() {
     		var me = this;          
@@ -19,9 +16,8 @@ $(function() {
             Nav.init();
 
             Loading.show();
-    		me.getData(function() {
-    			me.initEvent();
-    		});
+    		me.getData();
+            me.initEvent();
     		
     	},
 
@@ -32,36 +28,16 @@ $(function() {
         	var me = this;
 
             Notice.initialize();
-
-        	//滚动监控
-            Mscroll.init({
-                'scrollToBottom': function(){
-                    if(pageEnd) {
-                        Mscroll.stop();
-                        return;
-                    }
-
-                    pageNo > 1 && $('#loadmore').html('');
-                    Loading.show({
-                        renderTo: '#loadmore'
-                    });
-
-                    me.getData(function(){
-                        Mscroll.after();
-                    });
-                }
-            });
-
 		},
 
 		/**
          * 获取列表数据
          */
-        getData: function (cb) {
+        getData: function () {
             var me = this;
            
             var apiData = {
-                'page': pageNo
+                
             };
 
             Ajax.get(Apimap.chatListApi, apiData,
@@ -72,18 +48,10 @@ $(function() {
 				    	var listData  = d.result.chatList;
 
 				    	if(listData.length === 0) {
-				    		pageEnd = true;
-				    		if(pageNo === 1) {
-				    			Nodata.show('暂时没什么约会，过会来看看吧~');
-				    		} else {
-				    			$('#loadmore').html('没有更多约会了~');
-				    		}
+				    		Nodata.show('暂时还没什么消息~');
 				    	} else {
 				    		me.renderData(listData);
-				    		$('#loadmore').html('上拉加载更多');
-				    		pageNo++;
 				    	}
-				    	cb && cb();
 				    } else {
 				    	Tips.show({
 		                    type: 'error',
