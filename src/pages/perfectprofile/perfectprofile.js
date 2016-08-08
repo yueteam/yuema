@@ -185,7 +185,7 @@ $(function() {
                 }
 
             });
-
+            // alert(JSON.stringify(submitData));
             console.log('setSubmitData', submitData);
             me.doSubmit();
         },
