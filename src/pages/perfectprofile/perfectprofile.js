@@ -49,7 +49,7 @@ $(function() {
                         title: obj.resultMsg
                     });
                     if(obj.resultCode === 'NEVER_LOGINED') {
-                        window.location.href = './login.html';
+                        parent.location.href = 'http://www.yuema.us/login.html';
                     }
                 }
             };
