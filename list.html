@@ -16,7 +16,7 @@
     <script>g_start = new Date();</script>
 
     <!-- build:css -->
-    <link rel="stylesheet" href="../build/css/list.css">
+    <link rel="stylesheet" href="../build/css/list.css?t=1470672930752">
     <!-- endbuild -->
 
 </head>
@@ -104,11 +104,7 @@
             <div class="info-box">
                 <div class="name"><%= list[i].postUserInfo.nickName %></div>
                 <div class="info"><%= list[i].age %>岁, <%= list[i].sex %>, <%= list[i].city %></div>
-                <% if(list[i].profession.length>12){ %>
-                <div class="info"><%= list[i].profession.substr(0,12) %>...</div>
-                <% }else{ %>
-                <div class="info"><%= list[i].profession %></div>
-                <% } %>
+                <div class="info career-info"><%= list[i].profession %></div>
             </div>
             <div class="latest-date">
                 <span class="label">约吗？</span><%- list[i].datingInfo.article %>
