@@ -1,0 +1,267 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="dns-prefetch" href="//g.alicdn.com">
+    <link rel="dns-prefetch" href="//at.alicdn.com">
+    <link rel="dns-prefetch" href="//img.alicdn.com">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="yes" name="apple-touch-fullscreen" />
+    <meta content="telephone=no,email=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="apple-touch-icon" href="favicon.png" />
+    <link rel="Shortcut Icon" href="favicon.png" type="image/x-icon" />
+    <title>个人主页</title>
+
+    <script>g_start = new Date();</script>
+
+    <!-- build:css -->
+    <link rel="stylesheet" href="../build/css/profile.css">
+    <!-- endbuild -->
+
+</head>
+<body>
+
+<header id="header" class="header-fixed">
+    <h1>个人主页</h1>
+    <a href="javascript:;" class="menu-trigger"></a>
+    <a class="menu-right hide" href="./perfectprofile.html">
+        <span class="iconfont icon-account"></span>
+    </a>
+</header>
+
+<nav class="menu">
+    <div class="menu-profile">
+        <a class="profile-lnk" href="./login.html">
+            <span class="iconfont icon-account"></span>          
+            <span class="login-info">
+            请登录
+            </span>
+        </a>
+    </div>
+    <ul>
+        <li>
+            <a class="menu-item" href="./list.html"><span class="iconfont icon-followed"></span>发现</a>
+        </li>
+        <li>
+            <a class="menu-item" href="./msg.html"><span class="iconfont icon-message"></span>消息</a>
+        </li>
+        <li>
+            <a class="menu-item" href="./postdate.html"><span class="iconfont icon-send"></span>发起约会</a>
+        </li>
+    </ul>
+    <div class="menu-set">
+        <span class="iconfont icon-set"></span>
+        <a href="./login.html">退出</a>
+    </div>
+</nav>
+
+<div class="page-content">
+   
+</div>
+
+
+<script id="tmpl" type="text/tmpl">
+    <div class="basic-info">
+        <div class="scroller">
+            <div class="item">
+                <img src="../build/images/blank.gif" style="background-image:url(<%= info.avatar %>_s480)" alt="<%= info.nickName %>" />
+            </div>
+        </div>
+        <ul class="top-info">
+            <li class="info-city">
+                <div class="iconfont icon-location"></div>
+                <%= info.city %>
+            </li>
+            <li class="info-constellation">
+                <div class="iconfont icon-constellation"></div>
+                <%= info.constellation %>
+            </li>
+            <li class="info-age">
+                <div class="iconfont <%= info.sexCls %>"></div>
+                <%= info.age %>岁
+            </li>
+        </ul>
+        <div class="info">
+            <h2 class="name">
+                <%= info.nickName %>
+            </h2>
+            <div class="profession">
+                <%= info.profession %>
+            </div>
+        </div>
+        <div class="side-action">
+        
+        </div>
+    </div>
+    <div class="details">
+        <ul class="stat">
+            <li class="stat-item">
+                <h3>0次<br>赴约</h3>
+            </li>
+            <li class="stat-item">
+                <h3>0次<br>爽约</h3>
+            </li>
+        </ul>
+    </div>
+    <div class="dating-tab">
+        <% if(myHome){ %>
+        <div class="tab-bar">
+            <a class="tab-item current" data-tab="1" href="javascript:;">我发起的</a>
+            <a class="tab-item" data-tab="2" href="javascript:;">我回应的</a>
+        </div>
+        <% } %>
+        <div id="tab1" class="tab-con">
+            <ul class="dating-list">
+            <% if(list.length==0){ %>
+                <li class="empty-item">
+                <% if(myHome){ %>
+                    <div class="empty-tip">
+                    试试发个约会呗，看看谁想撩你？
+                    </div>
+                    <a href="./postdate.html" class="btn btn-green">
+                        <span class="iconfont icon-send"></span>发起约会
+                    </a>
+                <% }else{ %>
+                    <div class="empty-tip">
+                    啊哦~ Ta还没发过约会呢~
+                    </div>
+                <% } %>
+                </li> 
+            <% }else{ %>
+            <% for(var i=0; i<list.length; i++){ %>
+                <li class="item">
+                    <div class="date-words">  
+                        <div class="label"><span class="iconfont icon-lquote"></span>约吗？</div>
+                        <%- list[i].article %>
+                    </div>
+                    <div class="date-info">
+                        <span class="what"><span class="iconfont <%= list[i].iconCls %>"></span><%= list[i].typeName %></span>
+                        <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].time %></span>
+                    </div>
+                    <% if(!myHome){ %>
+                        <% if(list[i].datingInfo.acceptUserId){ %>
+                        <span class="yuele">已约</span>
+                        <% }else{ %>
+                        <a class="g-yue" href="javascript:;" data-id="<%= list[i].id %>" data-uid="<%= info.id %>">
+                            <span class="iconfont icon-yes"></span>
+                        </a>
+                        <% } %>
+                    <% } %>
+                    <% 
+                        var requestUserInfos = list[i].requestUserInfos;
+                        if(requestUserInfos.length>0){ 
+                    %>
+                    <div class="request-list">
+                        <span class="arrow"></span>
+                        <% 
+                            for(var j=0; j<requestUserInfos.length; j++){ 
+                            var requestDatingUserInfo = requestUserInfos[j].requestDatingUserInfo;
+                            var requestDatingMessage = requestUserInfos[j].requestDatingMessage;
+                            var requestDatingTime = requestUserInfos[j].requestDatingTime;
+                        %>
+                        <div class="request-item">
+                            <div class="avatar">
+                                <a href="./profile.html?id=<%= requestDatingUserInfo.id %>">
+                                    <img src="<%= requestDatingUserInfo.avatar %>_s60" alt="<%= requestDatingUserInfo.nickName %>" />
+                                </a>
+                            </div>
+                            <div class="info">
+                                <div class="name">
+                                    <%= requestDatingUserInfo.nickName %>
+                                    <span class="pub-time"><%= requestDatingTime %></span>
+                                </div>
+                                <div class="words"><%- requestDatingMessage %></div>
+                            </div>
+                            <div class="action-area">
+                            <% if(list[i].done) { %>
+                                <% if(j==0) { %>
+                                <span class="iconfont icon-checked"></span>
+                                <a class="iconfont icon-message" href="./chat.html?uid=<%= info.id %>&did=<%= list[i].id %>"></a>
+                                <% } else { %> 
+                                <span class="iconfont icon-no"></span>
+                                <% } %>
+                            <% } else { %>                       
+                                <a href="javascript:;" class="btn btn-tiny btn-primary btn-accept" data-myid="<%= info.id %>" data-id="<%= list[i].id %>" data-uid="<%= requestDatingUserInfo.id %>">接受</a>
+                            <% } %>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                    <% } %>
+                </li>
+            <% } %>
+            <% } %>
+            </ul>
+        </div>
+        <% if(myHome){ %>
+        <div id="tab2" class="tab-con hide">
+            <ul class="dating-list">
+                
+            </ul>
+            <div id="loadmore"></div>
+        </div>
+        <% } %>
+    </div>
+</script>
+<script id="askListTmpl" type="text/tmpl">
+<% if(list.length==0){ %>
+<li class="empty-item">
+    <div class="empty-tip">
+    快去看看有没有心仪的约会，晚了就被别人约走了！
+    </div>
+    <a href="./list.html" class="btn btn-primary">
+        <span class="iconfont icon-yes"></span>寻找约会
+    </a>
+</li> 
+<% }else{ %>
+<% for(var i=0; i<list.length; i++){ %>
+<li class="item">
+    <a class="who" href="./profile.html?id=<%= list[i].postUserInfo.id %>">
+        <img src="<%= list[i].postUserInfo.avatar %>_s60" alt="" />
+        <span class="name"><%= list[i].postUserInfo.nickName %></span>
+    </a>
+    <div class="date-words"> 
+        <%- list[i].datingInfo.article %>
+    </div>
+    <div class="date-info">
+        <span class="what"><span class="iconfont <%= list[i].datingInfo.iconCls %>"></span><%= list[i].datingInfo.typeName %></span>
+        <span class="time"><span class="iconfont icon-calendar"></span><%= list[i].datingInfo.datingTime %></span>
+    </div>
+    <div class="request-list">
+        <span class="arrow"></span>
+        <div class="request-item">
+            <div class="info">
+                <div class="title">
+                    我的回应: 
+                </div>
+                <div class="words"><%= list[i].requestDatingMessage %></div>
+            </div>
+            <div class="action-area">
+                <% if(list[i].datingStatus=="accepted") { %>
+                <span class="iconfont icon-checked"></span>
+                <a class="iconfont icon-message" href="./chat.html?uid=<%= list[i].postUserInfo.id %>&did=<%= list[i].datingInfo.uUID %>"></a>
+                <% } else if(list[i].datingStatus=="rejected") { %> 
+                <span class="iconfont icon-no"></span>
+                <% } else { %>
+                <span class="no-response">还没回音</span>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</li>
+<% } %>
+<% } %>
+</script>
+
+<script src="../build/js/base.js"></script>
+<!-- build:js -->
+<script src="../build/js/profile.js"></script>
+<!-- endbuild -->
+
+<!-- 加载脚本 -->
+<script>
+    g_mstart = new Date();
+</script>
+</body>
+</html>
