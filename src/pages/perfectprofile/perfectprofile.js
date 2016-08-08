@@ -36,7 +36,7 @@ $(function() {
             // }
 
             // 上传图片回调函数
-            uploadSuccess = function(obj) {
+            window.uploadSuccess = function(obj) {
                 console.log(obj);
                 Loading.hide();
                 if(obj.resultCode === 'SUCCESS') {
@@ -53,6 +53,36 @@ $(function() {
                     }
                 }
             };
+            
+            window.addEventListener('message', function(event) {
+
+                // IMPORTANT: Check the origin of the data!
+                if (~event.origin.indexOf('//www.yuema.us')) {
+                    // The data has been sent from your site
+
+                    // The data sent with postMessage is stored in event.data
+                    console.log(event.data);
+                    Loading.hide();
+                    var obj = event.data;
+                    if(obj.resultCode === 'SUCCESS') {
+                        var url = 'http://www.yuema.us' + obj.result;
+                        $('#avatar').val(url);
+                        $('#avatarImg').attr('src', url);
+                    } else {
+                        Tips.show({
+                            type: 'error',
+                            title: obj.resultMsg
+                        });
+                        if(obj.resultCode === 'NEVER_LOGINED') {
+                            window.location.href = './login.html';
+                        }
+                    }
+                } else {
+                    // The data hasn't been sent from your site!
+                    // Be careful! Do not use it.
+                    return;
+                }
+            });
 
             this.initEvent();
     	},

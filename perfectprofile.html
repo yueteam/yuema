@@ -13,7 +13,10 @@
     <link rel="Shortcut Icon" href="favicon.png" type="image/x-icon" />
     <title>完善资料</title>
 
-    <script>g_start = new Date();</script>
+    <script>
+    	g_start = new Date();
+    	document.domain = "www.yuema.us";
+    </script>
 
     <!-- build:css -->
     <link rel="stylesheet" href="../build/css/perfectprofile.css">
@@ -126,7 +129,7 @@
 <!-- 加载脚本 -->
 <script>
     g_mstart = new Date();
-    var uploadSuccess;
+    window.uploadSuccess = null;
 </script>
 </body>
 </html>
