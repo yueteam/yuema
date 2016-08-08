@@ -93,14 +93,15 @@ $(function() {
             var $messagesContainer=$(".chat-messages");
             var $messagesList = $('.chat-messages-list');
 
-            if(lastSendTime == '' || (lastSendTime!='' && (new Date(message.sendTime).getTime() - lastSendTime) > 3*60*1000)) { // 大于3分钟
-                var sendTime = me.handleTime(message.sendTime);
+            var newSendTime = message.sendTime.substr(0,19);
+            if(lastSendTime == '' || (lastSendTime!='' && (new Date(newSendTime).getTime() - lastSendTime) > 3*60*1000)) { // 大于3分钟
+                var sendTime = me.handleTime(newSendTime);
                 var $messageTime=$('<li/>')
                     .addClass('chat-time')
                     .html('<span>'+sendTime+'</span>')
                     .appendTo($messagesList);
             }
-            lastSendTime = new Date(message.sendTime).getTime();
+            lastSendTime = new Date(newSendTime).getTime();
 
             var $messageContainer=$('<li/>')
                 .addClass('chat-message '+(message.self?'chat-message-self':'chat-message-friend'))
