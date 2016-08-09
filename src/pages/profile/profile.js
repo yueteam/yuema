@@ -45,14 +45,18 @@ $(function() {
          * 检查localstorage是否存储了头像
          */
         checkLs: function(avatar) {
-            var ls = window.localStorage;
+            try {
+                var ls = window.localStorage;
 
-            if(!ls.getItem('avatar')) {
-                ls.setItem('avatar', avatar);
-            } else {
-                if(ls.getItem('avatar')!=avatar) {
+                if(!ls.getItem('avatar')) {
                     ls.setItem('avatar', avatar);
+                } else {
+                    if(ls.getItem('avatar')!=avatar) {
+                        ls.setItem('avatar', avatar);
+                    }
                 }
+            }catch(e){
+                
             }
         },
 

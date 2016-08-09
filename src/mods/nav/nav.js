@@ -38,6 +38,10 @@ module.exports = {
             },
             afterClose: function(){
                 $('#header').appendTo('body');
+            },
+            afterOn: function(){
+                var winH = $(window).height();
+                $('.jPanelMenu-panel').css('minHeight', winH-50);
             }
         });
         jPanelMenu.on();
