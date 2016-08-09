@@ -94,6 +94,7 @@ $(function() {
             var $messagesList = $('.chat-messages-list');
 
             var newSendTime = message.sendTime.substr(0,19);
+            newSendTime = newSendTime.replace(/-/g,'/');
             if(lastSendTime == '' || (lastSendTime!='' && (new Date(newSendTime).getTime() - lastSendTime) > 3*60*1000)) { // 大于3分钟
                 var sendTime = me.handleTime(newSendTime);
                 var $messageTime=$('<li/>')
