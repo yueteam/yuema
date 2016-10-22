@@ -9,7 +9,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  */
 
-// (function(window, document) {
+;(function(window, document) {
 
 var div = document.createElement('div');
 var prefix = ['webkit', 'moz', 'o', 'ms'];
@@ -596,4 +596,4 @@ function getAngle(triangle) {
 //   window.Flipsnap = Flipsnap;
 // }
 
-// })(window, window.document);
+})(window, window.document);

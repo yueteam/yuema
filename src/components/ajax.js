@@ -8,7 +8,7 @@
     };
 
     module.exports = {
-        post: function(api, param, succ_call, fail_call) {
+        post: function(api, param, succ_call, fail_call, noredirect) {
             $.ajax({
                 url: api,
                 data: param,
@@ -16,7 +16,9 @@
                 dataType: 'json',
                 success: function(data) {
                     //重定向
-                    goRedirectUrl(data);
+                    if(!noredirect) {
+                        goRedirectUrl(data);
+                    }
                     if (data.resultCode === 'SUCCESS')
                         succ_call(data);
                     else

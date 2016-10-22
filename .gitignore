@@ -1,5 +1,7 @@
 node_modules
 bower_components
+.idea
+*.swp
 .tmp
 .sass-cache
 .DS_Store

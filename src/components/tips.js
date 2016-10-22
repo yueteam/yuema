@@ -46,7 +46,7 @@
 
             //title and msg
             var msgBody = options.text || '',
-                msgTitle = options.title || '';
+                msgTitle = options.title || '',
                 msgType = options.type || 'success',
                 callback = options.callback || null;
 
