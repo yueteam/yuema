@@ -49,7 +49,6 @@
     var Apimap = require('../libs/apimap');
     var Tips = require('../components/tips');
     var Ajax = require('../components/ajax');
-    var Nodata = require('../components/nodata');
     var Yue = require('../components/yue');
 
     export default {

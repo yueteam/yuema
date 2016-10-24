@@ -10,8 +10,8 @@
         </div>
     </div>
 
-    <div v-if="loadType=='loadmodal'" v-show="showLoad" class="preloader-indicator-overlay"></div>
-    <div v-if="loadType=='loadmodal'" v-show="showLoad" class="preloader-indicator-modal">
+    <div v-if="loadType=='loadmodal'" v-show="showLoad && show" class="preloader-indicator-overlay"></div>
+    <div v-if="loadType=='loadmodal'" v-show="showLoad && show" class="preloader-indicator-modal">
         <span class="preloader preloader-white"></span>
         <span class="msg">数据加载中...</span>
     </div>
@@ -22,19 +22,29 @@
     export default {
         replace:true,
         props: ['loadType', 'showLoad', 'showLoading', 'loadEnd'],
+        data (){
+            return {
+                show: false
+            }
+        },
         ready (){
+            var me = this;
             if(this.loadType == 'loadmodal') {
-                var $loaderModal = $('.preloader-indicator-modal');
-                var w = parseInt($loaderModal.width())/2;
-                var h = parseInt($loaderModal.height())/2;
 
-                //25是loading图标的一半是17，padding的8
-                $('.preloader-indicator-modal .preloader').css('marginLeft', (w-25) + 'px');
+                setTimeout(function(){ // 路由切换场景需要300ms
+                    me.show = true;
+                    var $loaderModal = $('.preloader-indicator-modal');
+                    var w = 43;
+                    var h = 35;
 
-                $loaderModal.css({
-                    'marginLeft': '-' + w + 'px',
-                    'marginTop': '-' + h + 'px'
-                });
+                    //25是loading图标的一半是17，padding的8
+                    $('.preloader-indicator-modal .preloader').css('marginLeft', (w-25) + 'px');
+
+                    $loaderModal.css({
+                        'marginLeft': '-' + w + 'px',
+                        'marginTop': '-' + h + 'px'
+                    });
+                },300);
             }
         }
     }

@@ -123,13 +123,12 @@
 		    </div>
 		</div>
     </section>
+    <loading :show-load="showLoad" load-type="loadmodal"></loading>
 </template>
 <script>
     var Apimap = require('../libs/apimap');
     var Tips = require('../components/tips');
     var Ajax = require('../components/ajax');
-    var Loading = require('../components/loading');
-    var Nodata = require('../components/nodata');
     var Dialog = require('../components/dialog');
     var Yue = require('../components/yue');
 
@@ -147,6 +146,7 @@
                 info: {},
 				list: [],
 				result: {},
+				showLoad: false,
 				showNodata: false,
 				nodataMsg: '',
 				transitionName: 'slide-right'
@@ -177,7 +177,6 @@
                     //页面初次加载获取的数据
                     this.getData();
                 }
-
                 this.transitionName = 'slide-right';
                 
             },
@@ -231,10 +230,10 @@
                     id: me.profileId
                 };
                	
-               	Loading.show();
+               	me.showLoad = true;
                 Ajax.get(Apimap.profileApi, params,
 					function(d){
-						Loading.hide();
+						me.showLoad = false;
 
 					    if(d.result && d.result.userInfo) {
 	                        if(!d.result.userInfo.id) {
@@ -266,8 +265,8 @@
 	                        me.nodataMsg = '返回的数据格式有问题';
 	                    }
 					},
-					function(d){
-						Loading.hide();
+					function(d){						
+	                	me.showLoad = false;
 
 	                    me.showNodata = true;
 	                    me.nodataMsg = d.resultMsg;
@@ -309,7 +308,8 @@
         },
         components:{
             "nvHead": require('./header.vue'),
-            "nodata": require('../components/nodata.vue')
+            "nodata": require('../components/nodata.vue'),        
+            "loading": require('../components/loading.vue')
         }
     }
 </script>
