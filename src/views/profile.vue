@@ -172,6 +172,7 @@
 	                $('.basic-info').height(width);
 	                $('.scroller .item').width(width);
 	                $('.scroller').width(scrollerW);
+	                $('.page-content').width(width);
                 }
                 else{
                     //页面初次加载获取的数据
@@ -260,6 +261,7 @@
 			                $('.basic-info').height(width);
 			                $('.scroller .item').width(width);
 			                $('.scroller').width(scrollerW);
+	                		$('.page-content').width(width);
 					    } else {
 	                        me.showNodata = true;
 	                        me.nodataMsg = '返回的数据格式有问题';
