@@ -1,7 +1,7 @@
 <template>
     <!-- 全局header -->
     <nv-head :page-type="pageType"
-            :show-menu="showMenu" :hd-title="hdTitle">
+            :show-menu="showMenu" :hd-title="hdTitle" :cur-tab="searchKey.tab">
     </nv-head>
 
     <section class="page-content">

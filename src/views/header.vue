@@ -30,36 +30,36 @@
         </a>
     </nav>
 
-    <div class="g-panel" :class="{'open':showFilter}">
+    <div class="g-panel" :class="{'open':showFilter}" v-if="pageType=='list'">
         <ul class="tag-list">
-            <li class="tag-item" v-link="{'name':'list',query:{tab:'2'}}" @click="closeFilter">
+            <li class="tag-item" :class="curTab==2?'active':''" v-link="{'name':'list',query:{tab:'2'}}" @click="closeFilter">
                 <span class="iconfont icon-coffee"></span>喝咖啡/茶
             </li>
-            <li class="tag-item" v-link="{'name':'list',query:{tab:'3'}}" @click="closeFilter">
+            <li class="tag-item" :class="curTab==3?'active':''" v-link="{'name':'list',query:{tab:'3'}}" @click="closeFilter">
                 <span class="iconfont icon-food"></span>美食
             </li>
-            <li class="tag-item" v-link="{'name':'list',query:{tab:'4'}}" @click="closeFilter">
+            <li class="tag-item" :class="curTab==4?'active':''" v-link="{'name':'list',query:{tab:'4'}}" @click="closeFilter">
                 <span class="iconfont icon-film"></span>看电影
             </li>
-            <li class="tag-item" v-link="{'name':'list',query:{tab:'11'}}" @click="closeFilter">
+            <li class="tag-item" :class="curTab==11?'active':''" v-link="{'name':'list',query:{tab:'11'}}" @click="closeFilter">
                 <span class="iconfont icon-flight"></span>同行
             </li>
-            <li class="tag-item" v-link="{'name':'list',query:{tab:'5'}}" @click="closeFilter">
+            <li class="tag-item" :class="curTab==5?'active':''" v-link="{'name':'list',query:{tab:'5'}}" @click="closeFilter">
                 <span class="iconfont icon-run"></span>跑步
             </li>
-            <li class="tag-item" v-link="{'name':'list',query:{tab:'7'}}" @click="closeFilter">
+            <li class="tag-item" :class="curTab==7?'active':''" v-link="{'name':'list',query:{tab:'7'}}" @click="closeFilter">
                 <span class="iconfont icon-badminton"></span>羽毛球
             </li>
-            <li class="tag-item" v-link="{'name':'list',query:{tab:'8'}}" @click="closeFilter">
+            <li class="tag-item" :class="curTab==8?'active':''" v-link="{'name':'list',query:{tab:'8'}}" @click="closeFilter">
                 <span class="iconfont icon-riding"></span>骑行
             </li>
-            <li class="tag-item" v-link="{'name':'list',query:{tab:'9'}}" @click="closeFilter">
+            <li class="tag-item" :class="curTab==9?'active':''" v-link="{'name':'list',query:{tab:'9'}}" @click="closeFilter">
                 <span class="iconfont icon-drive"></span>自驾
             </li>
-            <li class="tag-item" v-link="{'name':'list',query:{tab:'6'}}" @click="closeFilter">
+            <li class="tag-item" :class="curTab==6?'active':''" v-link="{'name':'list',query:{tab:'6'}}" @click="closeFilter">
                 <span class="iconfont icon-photo"></span>摄影
             </li>
-            <li class="tag-item" v-link="{'name':'list',query:{tab:'1'}}" @click="closeFilter">
+            <li class="tag-item" :class="curTab==1?'active':''" v-link="{'name':'list',query:{tab:'1'}}" @click="closeFilter">
                 <span class="iconfont icon-lquote"></span>其他
             </li>
         </ul>
@@ -73,7 +73,7 @@
 
     export default {
         replace:true,
-        props: ['hdTitle', 'pageType', 'showMenu', 'showFilter'],
+        props: ['hdTitle', 'pageType', 'showMenu', 'showFilter', 'curTab'],
         ready (){
             
         },
