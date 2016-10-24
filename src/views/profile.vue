@@ -7,123 +7,121 @@
     <div class="wrapper">
 	    <section class="page-content" :transition="transitionName">
 	    	<nodata :show="showNodata" :msg="nodataMsg"></nodata>
-	    	<div v-if="info.id">
-		    	<div class="basic-info">
-			        <div class="scroller">
-			            <div class="item">
-			                <img v-if="info && info.avatar" src="http://www.yuema.us/build/images/blank.gif" 
-			                	:style="{backgroundImage: 'url(' + info.avatar + '_s480)'}" alt="" />
-			            </div>
-			        </div>
-			        <ul class="top-info">
-			            <li class="info-city">
-			                <div class="iconfont icon-location"></div>
-			                {{info.cityId | getCityName}}
-			            </li>
-			            <li class="info-constellation">
-			                <div class="iconfont icon-constellation"></div>
-			                {{info.constellation}}
-			            </li>
-			            <li class="info-age">
-			                <div class="iconfont" :class="info.sex | getSexCls"></div>
-			                {{info.birthday | getAge}}岁
-			            </li>
-			        </ul>
-			        <div class="info">
-			            <h2 class="name">
-			                {{info.nickName}}
-			            </h2>
-			            <div class="profession">
-			                {{info.socialId | getProfession info.career}}
-			            </div>
-			        </div>
-			    </div>
-			    <div class="details">
-			        <ul class="stat">
-			            <li class="stat-item">
-			                <h3>0次<br>赴约</h3>
-			            </li>
-			            <li class="stat-item">
-			                <h3>0次<br>爽约</h3>
-			            </li>
-			        </ul>
-			    </div>
-			    <div class="dating-con">
-			        <div class="ask-lnk" v-if="myHome" v-link="{name:'asklist'}">
-			        	<span class="ar-lnk">查看请求的约会进度</span>
-			        </div>
+	    	<div class="basic-info" v-if="!showNodata">
+		        <div class="scroller">
+		            <div class="item">
+		                <img v-if="info && info.avatar" src="http://www.yuema.us/build/images/blank.gif" 
+		                	:style="{backgroundImage: 'url(' + info.avatar + '_s480)'}" alt="" />
+		            </div>
+		        </div>
+		        <ul class="top-info">
+		            <li class="info-city">
+		                <div class="iconfont icon-location"></div>
+		                {{info.cityId | getCityName}}
+		            </li>
+		            <li class="info-constellation">
+		                <div class="iconfont icon-constellation"></div>
+		                {{info.constellation}}
+		            </li>
+		            <li class="info-age">
+		                <div class="iconfont" :class="info.sex | getSexCls"></div>
+		                {{info.birthday | getAge}}岁
+		            </li>
+		        </ul>
+		        <div class="info">
+		            <h2 class="name">
+		                {{info.nickName}}
+		            </h2>
+		            <div class="profession">
+		                {{info.socialId | getProfession info.career}}
+		            </div>
+		        </div>
+		    </div>
+		    <div class="details" v-if="!showNodata">
+		        <ul class="stat">
+		            <li class="stat-item">
+		                <h3>0次<br>赴约</h3>
+		            </li>
+		            <li class="stat-item">
+		                <h3>0次<br>爽约</h3>
+		            </li>
+		        </ul>
+		    </div>
+		    <div class="dating-con" v-if="!showNodata">
+		        <div class="ask-lnk" v-if="myHome" v-link="{name:'asklist'}">
+		        	<span class="ar-lnk">查看请求的约会进度</span>
+		        </div>
 
-		            <ul class="dating-list">
-		                <li class="empty-item" v-if="list.length==0">
-		                	<div v-if="myHome">
-			                    <div class="empty-tip">
-			                    试试发个约会呗，看看谁想撩你？
-			                    </div>
-			                    <a class="btn btn-green" v-link="{name:'add'}">
-			                        <span class="iconfont icon-send"></span>发起约会
-			                    </a>
-			                </div>
-		                    <div class="empty-tip" v-else>
-		                    	啊哦~ Ta还没发过约会呢~
+	            <ul class="dating-list">
+	                <li class="empty-item" v-if="list.length==0">
+	                	<div v-if="myHome">
+		                    <div class="empty-tip">
+		                    试试发个约会呗，看看谁想撩你？
 		                    </div>
-		                </li> 
-		                <li class="item" v-else v-for="(i, item) in list">
-		                    <div class="date-words">  
-		                        <div class="label" v-if="item.datingInfo.acceptUserId">	                        	
-		                        </div>
-		                        <div class="label" v-else>
-		                        	<span class="iconfont icon-lquote"></span>约吗？
-		                        </div>
-		                        {{item.datingInfo.article}}
-		                    </div>
-		                    <div class="date-info">
-		                        <span class="what">
-		                        	<span class="iconfont" :class="item.datingInfo.typeId | getIconClass"></span>
-		                        	{{item.datingInfo.typeId | getTypeName}}
-		                        </span>
-		                        <span class="time">
-		                        	<span class="iconfont icon-calendar"></span>
-		                        	{{item.datingInfo.datingTime | getDatingDate}}
-		                        </span>
-		                    </div>
-		                    <div class="yue-status" v-if="item.datingInfo.acceptUserId">
-		                    	<div class="flag">已约</div>
-		                    </div>
-		                    <a class="g-yue pure" v-else v-show="!myHome" href="javascript:;" @click="yue(item.datingInfo.uUID, info.id)">
-		                        <span class="iconfont icon-yes"></span>
+		                    <a class="btn btn-green" v-link="{name:'add'}">
+		                        <span class="iconfont icon-send"></span>发起约会
 		                    </a>
-		                    <div class="request-list" v-if="item.requestUserInfos.length">
-		                        <span class="arrow"></span>
-		                        <div class="request-item" v-for="(j, requestItem) in item.requestUserInfos">
-		                            <div class="avatar">
-		                                <a v-link="{name:'profile',params:{id:requestItem.requestDatingUserInfo.id}}">
-		                                    <img :src="requestItem.requestDatingUserInfo.avatar | getAvatar 60" alt="" />
-		                                </a>
-		                            </div>
-		                            <div class="info">
-		                                <div class="name">
-		                                    {{requestItem.requestDatingUserInfo.nickName}}
-		                                    <span class="pub-time">{{requestItem.requestDatingTime | ago}}</span>
+		                </div>
+	                    <div class="empty-tip" v-else>
+	                    	啊哦~ Ta还没发过约会呢~
+	                    </div>
+	                </li> 
+	                <li class="item" v-else v-for="(i, item) in list">
+	                    <div class="date-words">  
+	                        <div class="label" v-if="item.datingInfo.acceptUserId">	                        	
+	                        </div>
+	                        <div class="label" v-else>
+	                        	<span class="iconfont icon-lquote"></span>约吗？
+	                        </div>
+	                        {{item.datingInfo.article}}
+	                    </div>
+	                    <div class="date-info">
+	                        <span class="what">
+	                        	<span class="iconfont" :class="item.datingInfo.typeId | getIconClass"></span>
+	                        	{{item.datingInfo.typeId | getTypeName}}
+	                        </span>
+	                        <span class="time">
+	                        	<span class="iconfont icon-calendar"></span>
+	                        	{{item.datingInfo.datingTime | getDatingDate}}
+	                        </span>
+	                    </div>
+	                    <div class="yue-status" v-if="item.datingInfo.acceptUserId">
+	                    	<div class="flag">已约</div>
+	                    </div>
+	                    <a class="g-yue pure" v-else v-show="!myHome" href="javascript:;" @click="yue(item.datingInfo.uUID, info.id)">
+	                        <span class="iconfont icon-yes"></span>
+	                    </a>
+	                    <div class="request-list" v-if="item.requestUserInfos.length">
+	                        <span class="arrow"></span>
+	                        <div class="request-item" v-for="(j, requestItem) in item.requestUserInfos">
+	                            <div class="avatar">
+	                                <a v-link="{name:'profile',params:{id:requestItem.requestDatingUserInfo.id}}">
+	                                    <img :src="requestItem.requestDatingUserInfo.avatar | getAvatar 60" alt="" />
+	                                </a>
+	                            </div>
+	                            <div class="info">
+	                                <div class="name">
+	                                    {{requestItem.requestDatingUserInfo.nickName}}
+	                                    <span class="pub-time">{{requestItem.requestDatingTime | ago}}</span>
+	                                </div>
+	                                <div class="words">{{requestItem.requestDatingMessage}}</div>
+	                            </div>
+	                            <div class="action-area">
+	                                <div v-if="item.requestUserInfos[0].requestDatingAccept">
+	                                	<div v-if="j==0">
+		                                	<span class="iconfont icon-checked"></span>
+		                                	<a class="iconfont icon-message" href="./chat.html?uid=<%= info.id %>&did=<%= list[i].id %>"></a>
 		                                </div>
-		                                <div class="words">{{requestItem.requestDatingMessage}}</div>
-		                            </div>
-		                            <div class="action-area">
-		                                <div v-if="item.requestUserInfos[0].requestDatingAccept">
-		                                	<div v-if="j==0">
-			                                	<span class="iconfont icon-checked"></span>
-			                                	<a class="iconfont icon-message" href="./chat.html?uid=<%= info.id %>&did=<%= list[i].id %>"></a>
-			                                </div>
-			                                <span class="iconfont icon-no" v-else></span>
-		                                </div>                     
-			                            <a v-else href="javascript:;" class="btn btn-tiny btn-primary btn-accept" @click="acceptAsk(item.datingInfo.uUID, requestItem.requestDatingUserInfo.id, i)">接受</a>
+		                                <span class="iconfont icon-no" v-else></span>
+	                                </div>                     
+		                            <a v-else href="javascript:;" class="btn btn-tiny btn-primary btn-accept" @click="acceptAsk(item.datingInfo.uUID, requestItem.requestDatingUserInfo.id, i)">接受</a>
 
-		                            </div>
-		                        </div>
-		                    </div>
-		                </li>
-		            </ul>		        
-			    </div>
-			</div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </li>
+	            </ul>		        
+		    </div>
 	    </section>
 	</div>
 </template>
