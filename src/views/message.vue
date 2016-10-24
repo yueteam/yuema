@@ -3,7 +3,7 @@
     <nv-head :page-type="pageType"
             :show-menu="showMenu" :hd-title="hdTitle">
     </nv-head>
-
+    <loading :show-load="showLoad" load-type="loadmodal"></loading>
     <section class="page-content">
     	<ul class="msg-list">
             <li class="item" v-for="item in list">
@@ -25,7 +25,6 @@
 	var Apimap = require('../libs/apimap');
     var Tips = require('../components/tips');
     var Ajax = require('../components/ajax');
-    var Loading = require('../components/loading');
 
     export default {
         ready (){
@@ -37,17 +36,18 @@
                 pageType: 'message',
                 hdTitle: '消息',
                 pageNo: 1,
-				list: []
+				list: [],
+				showLoad: false
             }
         },
         methods:{ 
             getData (){
                 var me = this;
                	
-               	Loading.show();
+               	me.showLoad = true;
                 Ajax.get(Apimap.chatListApi, {},
 					function(d){
-						Loading.hide();
+						me.showLoad = false;
 
 					    if(d.result && d.result.chatList) {
 	                        me.list = d.result.chatList;
@@ -60,7 +60,7 @@
 	                    }
 					},
 					function(d){
-						Loading.hide();
+						me.showLoad = false;
 
 	                    Tips.show({
 	                        type: 'error',
@@ -71,7 +71,8 @@
             }
         },
         components:{
-            "nvHead":require('./header.vue')
+            "nvHead":require('./header.vue'),        
+            "loading": require('../components/loading.vue')
         }
     }
 </script>

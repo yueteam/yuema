@@ -6,7 +6,7 @@
 
     <section class="page-content fade hiden">
     	<div class="post-box">
-	        <div class="textarea-box">
+	        <div class="textarea-box" @click="focusTxa">
 	            <textarea class="date-desc" id="dateDesc" placeholder="在此处描述你的约会，最多100个字。" autofocus></textarea>
 	            <div class="bar">
 	                <div class="bar-con">
@@ -141,6 +141,9 @@
             }
         },
         methods:{ 
+        	focusTxa : function() {
+        		$('#dateDesc').focus();
+        	},
         	switchOpt : function(opt) {
         		this.currentOpt = opt;
         	},

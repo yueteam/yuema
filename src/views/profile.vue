@@ -3,6 +3,7 @@
     <nv-head :page-type="pageType"
             :show-menu="showMenu" :hd-title="hdTitle">
     </nv-head>
+    <loading :show-load="showLoad" load-type="loadmodal"></loading>
     <section class="page-content" :transition="transitionName">
     	<nodata :show="showNodata" :msg="nodataMsg"></nodata>
     	<div v-if="info.id">
@@ -123,7 +124,6 @@
 		    </div>
 		</div>
     </section>
-    <loading :show-load="showLoad" load-type="loadmodal"></loading>
 </template>
 <script>
     var Apimap = require('../libs/apimap');
@@ -182,13 +182,13 @@
             },
             activate (transition){
             	if(transition.from.name === 'asklist'){
-                	this.transitionName = '';
+                	this.transitionName = 'fade';
                 }
                 transition.next();
             },
             canDeactivate (transition){
             	if(transition.to.name === 'asklist'){
-                	this.transitionName = '';
+                	this.transitionName = 'fade';
                 }
                 transition.next();
             },

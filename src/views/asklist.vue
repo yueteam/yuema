@@ -3,6 +3,7 @@
     <nv-head :page-type="pageType"
             :show-menu="showMenu" :hd-title="hdTitle">
     </nv-head>
+    <loading :show-load="showLoad" load-type="loadmodal"></loading>
     <section class="page-content" transition="slide-right">
     	
         <ul class="dating-list">
@@ -59,7 +60,6 @@
     var Apimap = require('../libs/apimap');
     var Tips = require('../components/tips');
     var Ajax = require('../components/ajax');
-    var Loading = require('../components/loading');
 
     export default {
         ready (){
@@ -72,19 +72,20 @@
                 hdTitle: '我请求的约会',
                 pageNo: 1,
 				list: [],
-				ajaxComplete: false
+				ajaxComplete: false,
+				showLoad: false
             }
         },
         methods:{ 
             getData (){
                 var me = this;
                	
-               	Loading.show();
+               	me.showLoad = true;
                 Ajax.get(Apimap.myRequestApi, {
                 		page: me.pageNo
                 	},
 					function(d){
-						Loading.hide();
+						me.showLoad = false;
 						me.ajaxComplete = true;
 
 					    if(d.result && d.result.datingList) {
@@ -101,7 +102,7 @@
 	                    }
 					},
 					function(d){
-						Loading.hide();
+						me.showLoad = false;
 
 	                    Tips.show({
 	                        type: 'error',
@@ -112,7 +113,8 @@
             }
         },
         components:{
-            "nvHead":require('./header.vue')
+            "nvHead":require('./header.vue'),        
+            "loading": require('../components/loading.vue')
         }
     }
 </script>
