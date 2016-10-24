@@ -6,7 +6,7 @@
     <section class="page-content" transition="slide-right">
     	
         <ul class="dating-list">
-            <li class="empty-item" v-if="list.length==0">
+            <li class="empty-item" v-if="ajaxComplete && list.length==0">
                 <div class="empty-tip">
 			    快去看看有没有心仪的约会，晚了就被别人约走了！
 			    </div>
@@ -71,7 +71,8 @@
                 pageType: 'asklist',
                 hdTitle: '我请求的约会',
                 pageNo: 1,
-				list: []
+				list: [],
+				ajaxComplete: false
             }
         },
         methods:{ 
@@ -84,6 +85,7 @@
                 	},
 					function(d){
 						Loading.hide();
+						me.ajaxComplete = true;
 
 					    if(d.result && d.result.datingList) {
 	                        var result = d.result,

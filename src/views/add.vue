@@ -4,7 +4,7 @@
             :show-menu="showMenu" :hd-title="hdTitle">
     </nv-head>
 
-    <section class="page-content" transition="fade">
+    <section class="page-content fade hiden">
     	<div class="post-box">
 	        <div class="textarea-box">
 	            <textarea class="date-desc" id="dateDesc" placeholder="在此处描述你的约会，最多100个字。" autofocus></textarea>
@@ -121,6 +121,8 @@
 	    		var listH = $(window).height() - $('.textarea-box').height() - $('.post-option').height() - 50;
 	            $('.panels').height(listH);
 	    		$('.opt-panel').height(listH);
+
+	    		$('.page-content').removeClass('hiden');
         	},100);
 	        	
         },

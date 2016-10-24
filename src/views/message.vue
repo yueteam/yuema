@@ -4,7 +4,7 @@
             :show-menu="showMenu" :hd-title="hdTitle">
     </nv-head>
 
-    <section class="page-content" transition="fade">
+    <section class="page-content">
     	<ul class="msg-list">
             <li class="item" v-for="item in list">
 		        <a class="item-lnk" href="./chat.html?uid=<%= list[i].postUserId %>&did=<%= list[i].uUID %>">

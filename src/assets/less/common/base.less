@@ -34,6 +34,13 @@ body {
 
 .page-content {
     padding-top: 50px;
+    &.fade {
+        opacity: 1;
+        transition: opacity .3s ease;
+    }
+    &.hiden {
+        opacity: 0;
+    }
 }
 
 /* transition必需 */
@@ -60,18 +67,11 @@ body {
 
 // 无数据
 .g-nodata {
-    display: none;
-    position: absolute;
-    top: 40%;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    width: 100%;
+    margin-top: 150px;
     line-height: 40px;
     text-align: center;
     color: #cccccc;
     font-size: 16px;
-
     .icon-warn {
         font-size: 88px;
         color: #cccccc;

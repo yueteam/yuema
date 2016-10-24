@@ -4,7 +4,8 @@
             :show-menu="showMenu" :hd-title="hdTitle">
     </nv-head>
 
-    <section class="page-content" transition="fade">
+    <section class="page-content">
+        <nodata :show="showNodata" :msg="nodataMsg"></nodata>
         <ul class="list">
             <li class="item" v-for="item in items">
                 <div v-link="{name:'profile',params:{id:item.postUserInfo.id}}">
@@ -67,7 +68,9 @@
                     pageNo: 1,
                     tab: 'all'
                 },
-                searchDataStr:''
+                searchDataStr:'',
+                showNodata: false,
+                nodataMsg: ''
             }
         },
         route:{
@@ -81,9 +84,6 @@
                 }
                 //如果从左侧切换分类，则清空查询条件
                 if(transition.from.name === "list"){
-                    if ($('.g-nodata').length) {
-                        Nodata.hide();
-                    }
                     this.loadEnd = false;
                     this.items = [];
                     this.searchKey.pageNo = 1;
@@ -153,7 +153,8 @@
                             if(listData.length === 0) {
                                 if(searchKey.pageNo === 1) {
                                     me.showLoad = false;
-                                    Nodata.show('暂时没什么约会，过会来看看吧~');
+                                    me.showNodata = true;
+                                    me.nodataMsg = '暂时没什么约会，过会来看看吧~';
                                 } else {
                                     me.showLoad = true;
                                     me.loadEnd = true;
@@ -205,7 +206,8 @@
             }
         },
         components:{
-            "nvHead": require('./header.vue'),           
+            "nvHead": require('./header.vue'),
+            "nodata": require('../components/nodata.vue'),        
             "loading": require('../components/loading.vue')
         }
     }
