@@ -4,8 +4,7 @@
             :show-menu="showMenu" :hd-title="hdTitle">
     </nv-head>
     <loading :show-load="showLoad" load-type="loadmodal"></loading>
-    <section class="page-content" transition="slide-right">
-    	
+    <section class="page-content" transition="slide-right" style="background:#fff">   	
         <ul class="dating-list">
             <li class="empty-item" v-if="ajaxComplete && list.length==0">
                 <div class="empty-tip">

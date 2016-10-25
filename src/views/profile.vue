@@ -174,34 +174,34 @@
                 else{
                     //页面初次加载获取的数据
                     this.getData();
-                }
-                this.transitionName = 'slide-right';
+                }               
                 
             },
             activate (transition){
             	if(transition.from.name === 'asklist'){
                 	this.transitionName = 'fade';
                 }
-                transition.next();
-            },
-            canDeactivate (transition){
-            	if(transition.to.name === 'asklist'){
-                	this.transitionName = 'fade';
-                }
-                transition.next();
+                setTimeout(function(){
+                	transition.next();
+                },100);
+                
             },
             deactivate (transition){
                 if(this.myHome && transition.to.name === 'asklist'){
                     sessionStorage.profileScrollTop = $(window).scrollTop();
                     sessionStorage.profile = JSON.stringify(this.result);
                     sessionStorage.profileId = this.result.userInfo.id;
+                    this.transitionName = 'fade';
                 }
                 else{
                     sessionStorage.removeItem("profileScrollTop");
                     sessionStorage.removeItem("profile");
                     sessionStorage.removeItem("profileId");
+                    this.transitionName = 'slide-right';
                 }
-                transition.next();
+                setTimeout(function(){
+                	transition.next();
+                },100);
             }
         },
         methods:{       	

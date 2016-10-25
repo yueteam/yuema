@@ -4,7 +4,7 @@
             :show-menu="showMenu" :hd-title="hdTitle" :cur-tab="searchKey.tab">
     </nv-head>
 
-    <section class="page-content">
+    <section class="page-content" transition="fade">
         <nodata :show="showNodata" :msg="nodataMsg"></nodata>
         <ul class="list">
             <li class="item" v-for="item in items">
