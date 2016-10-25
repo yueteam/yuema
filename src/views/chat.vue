@@ -4,7 +4,7 @@
             :show-menu="showMenu" :hd-title="hdTitle">
     </nv-head>
     <loading :show-load="showLoad" load-type="loadmodal"></loading>
-    <section class="page-content" transition="slide-right">
+    <section class="page-content" :transition="transitionName">
 	    <div class="chat-window">
 	        <div class="chat-messages">
 	            <ol class="chat-messages-list">
@@ -90,7 +90,8 @@
 	            datingId: '',
 	            detail: {},
 				messageList: [],
-				showLoad: false
+				showLoad: false,
+				transitionName: 'slide-right'
             }
         },
         route:{
@@ -110,6 +111,27 @@
 	                me.connect('wss://' + window.location.host + '/websocket/chat/'+me.datingId+'/'+me.userId);
 	            }
 
+            },
+            activate (transition){
+            	if(transition.from.name === 'message'){
+                	this.transitionName = 'slide-right';
+                } else if(transition.from.name === 'profile'){
+                	this.transitionName = 'fade';
+                }
+                setTimeout(function(){
+                	transition.next();
+                },100);
+                
+            },
+            deactivate (transition){
+                if(transition.to.name === 'profile'){
+                    this.transitionName = 'fade';
+                } else {
+                    this.transitionName = 'slide-right';
+                }
+                setTimeout(function(){
+                	transition.next();
+                },100);
             }
         },
         filters: {

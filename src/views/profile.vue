@@ -158,7 +158,7 @@
                 this.profileId = transition.to.params.id;
 
                 //如果从详情返回并且typeid一样才去sessionStorge
-                if(sessionStorage.profile && transition.from.name === 'asklist' 
+                if(sessionStorage.profile && transition.from.name === 'asklist'
                 	&& (this.profileId=='me'||this.profileId==sessionStorage.profileId)){
                     this.result = JSON.parse(sessionStorage.profile);
                     this.myHome = this.result.myHome;
