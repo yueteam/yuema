@@ -109,7 +109,8 @@
                                 <div v-if="item.requestUserInfos[0].requestDatingAccept">
                                 	<div v-if="j==0">
 	                                	<span class="iconfont icon-checked"></span>
-	                                	<a class="iconfont icon-message" href="./chat.html?uid=<%= info.id %>&did=<%= list[i].id %>"></a>
+	                                	<a class="iconfont icon-message" 
+	                                		v-link="{name:'chat',params:{uid:info.id,did:item.datingInfo.uUID}}"></a>
 	                                </div>
 	                                <span class="iconfont icon-no" v-else></span>
                                 </div>                     

@@ -44,7 +44,8 @@
 			            <div class="action-area">
 			                <span v-if="item.datingStatus=='accepted'">
 				                <span class="iconfont icon-checked"></span>
-				                <a class="iconfont icon-message" href="./chat.html?uid=<%= list[i].postUserInfo.id %>&did=<%= list[i].datingInfo.uUID %>"></a>
+				                <a class="iconfont icon-message" 
+				                	v-link="{name:'chat',params:{uid:item.postUserInfo.id,did:item.datingInfo.uUID}}"></a>
 				            </span>
 			                <span class="iconfont icon-no" v-if="item.datingStatus=='rejected'"></span>
 			                <span class="no-response" v-if="item.datingStatus!='accepted'&&item.datingStatus!='rejected'">还没回音</span>
