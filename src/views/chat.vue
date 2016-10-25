@@ -3,7 +3,7 @@
     <nv-head :page-type="pageType"
             :show-menu="showMenu" :hd-title="hdTitle">
     </nv-head>
-
+    <loading :show-load="showLoad" load-type="loadmodal"></loading>
     <section class="page-content" transition="slide-right">
 	    <div class="chat-window">
 	        <div class="chat-messages">
@@ -14,20 +14,26 @@
 	                			<span class="iconfont icon-lquote"></span> 约吗？
 	                		</span>
 	                		<br>
-	                		<span>十一去阳澄湖吃大闸蟹，能吃爽</span>
+	                		<span>{{detail.article}}</span>
 	                		<br>
-	                		<span class="what"><span class="iconfont icon-food"></span>美食</span>
-	                		<span class="time"><span class="iconfont icon-calendar"></span>2016-10-01</span>
+	                		<span class="what">
+	                			<span class="iconfont" :class="detail.typeId | getIconClass"></span>
+	                			{{detail.typeId | getTypeName}}
+	                		</span>
+	                		<span class="time">
+	                			<span class="iconfont icon-calendar"></span>
+	                			{{detail.datingTime | getDatingDate}}
+	                		</span>
 	                	</div>
 	                </li>
-	                <li class="chat-time"><span>2016年09月30日 11:39</span></li>
-	                <li class="chat-message chat-message-friend" v-for="chat in messageList">
+	                <li class="chat-message" :class="msg.self?'chat-message-self':'chat-message-friend'" v-for="msg in messageList">
+	                	<div class="chat-time"><span>{{msg.sendTime | msgTime}}</span></div>
 	                	<div class="chat-message-avatar">
-	                		<a href="./profile.html?id=80">
-	                			<img src="http://www.yuema.us/upload/玄悟/04e204117f1b45d5832f995895120d74.jpg_s60" alt="">
+	                		<a v-link="{name: 'profile', params: {id: msg.fromUserId}}">
+	                			<img :src="msg.avatar | getAvatar 60" alt="">
 	                		</a>
 	                	</div>
-	                	<div class="chat-message-bubble">我们约会吧~</div>
+	                	<div class="chat-message-bubble">{{msg.message || msg.msg}}</div>
 	                </li>
 	            </ol>
 	        </div>
@@ -39,8 +45,8 @@
 	                <div class="chat-effect-bar"></div>
 	            </div>
 	            <div class="chat-input-wrapper">
-	                <!-- <textarea class="chat-input" id="message" placeholder="" autofocus></textarea> -->
-	                <div class="chat-input" id="message" contenteditable=""></div>
+	                <div class="chat-input" id="message" contenteditable="" 
+	                	@click="focusInput" @keydown.enter="sendMessage" @input="watchInputHeight"></div>
 	                <button class="chat-send" id="sendBtn" @click="sendMessage">
 	                    <span class="iconfont icon-send"></span>
 	                </button>
@@ -54,9 +60,9 @@
 	var Apimap = require('../libs/apimap');
     var Tips = require('../components/tips');
     var Ajax = require('../components/ajax');
-    var Loading = require('../components/loading');
 
     var socket = null;
+    var lastSendTime = '';
 
     export default {
         ready (){
@@ -67,6 +73,12 @@
 
         	setTimeout(function(){
         		me.updateChatHeight();
+
+        		// Remove elements with "noscript" class - <noscript> is not allowed in XHTML
+                var noscripts = document.getElementsByClassName("noscript");
+                for (var i = 0; i < noscripts.length; i++) {
+                    noscripts[i].parentNode.removeChild(noscripts[i]);
+                }
         	},100);	        	
         },
         data (){
@@ -77,7 +89,8 @@
                 userId: '',
 	            datingId: '',
 	            detail: {},
-				messageList: []
+				messageList: [],
+				showLoad: false
             }
         },
         route:{
@@ -89,17 +102,33 @@
                 this.datingId = transition.to.params.did;
 
                 this.getDetail();
-            	this.getData(function() {
-            		if (window.location.protocol == 'http:') {
-		                me.connect('ws://' + window.location.host + '/websocket/chat/'+me.datingId+'/'+me.userId);
-		            } else {
-		                me.connect('wss://' + window.location.host + '/websocket/chat/'+me.datingId+'/'+me.userId);
-		            }
-            	});
+            	this.getData();
+
+            	if (window.location.protocol == 'http:') {
+	                me.connect('ws://' + window.location.host + '/websocket/chat/'+me.datingId+'/'+me.userId);
+	            } else {
+	                me.connect('wss://' + window.location.host + '/websocket/chat/'+me.datingId+'/'+me.userId);
+	            }
 
             }
         },
-        methods:{ 
+        filters: {
+	        msgTime : function(time) {
+	            var newSendTime = time.substr(0,19).replace(/-/g,'/');
+	            var sendTime = '';
+	            
+	            if(lastSendTime == '' || (lastSendTime!='' && (new Date(newSendTime).getTime() - lastSendTime) > 60*60*1000)) { // 大于3分钟
+	                sendTime = this.handleTime(newSendTime);
+	            }
+	            lastSendTime = new Date(newSendTime).getTime();
+	            
+	            return sendTime;
+	        }
+        },
+        methods: { 
+        	focusInput : function() {
+        		$('#message').focus();
+        	},
             connect : function(host) {
 	            var me = this;
 
@@ -116,7 +145,7 @@
 	            }
 
 	            socket.onopen = function () {
-	                me.initEvent();
+	                // me.initEvent();
 	            };
 
 	            socket.onclose = function () {
@@ -131,6 +160,9 @@
 	                var msg = JSON.parse(message.data);
 	                console.log(msg);
 	                me.messageList.push(msg);
+	                setTimeout(function(){	                        
+            			$('.chat-messages').scrollTop(9999999);
+            		},100);
 	            };
 	        },
 
@@ -151,46 +183,12 @@
 	                    me.updateChatHeight();
 	                }
 	            }
-	        },
+	        },        
 
-	        addMessage : function(message) {
-	            var me = this;
-	            var $messagesContainer=$(".chat-messages");
-	            var $messagesList = $('.chat-messages-list');
-
-	            var newSendTime = message.sendTime.substr(0,19);
-	            newSendTime = newSendTime.replace(/-/g,'/');
-	            if(lastSendTime == '' || (lastSendTime!='' && (new Date(newSendTime).getTime() - lastSendTime) > 3*60*1000)) { // 大于3分钟
-	                var sendTime = me.handleTime(newSendTime);
-	                var $messageTime=$('<li/>')
-	                    .addClass('chat-time')
-	                    .html('<span>'+sendTime+'</span>')
-	                    .appendTo($messagesList);
-	            }
-	            lastSendTime = new Date(newSendTime).getTime();
-
-	            var $messageContainer=$('<li/>')
-	                .addClass('chat-message '+(message.self?'chat-message-self':'chat-message-friend'))
-	                .appendTo($messagesList);
-
-	            var $messageAvatar=$('<div/>')
-	                .addClass('chat-message-avatar')
-	                .appendTo($messageContainer);
-
-	            var $messageBubble=$('<div/>')
-	                .addClass('chat-message-bubble')
-	                .appendTo($messageContainer);
-	            
-	            $messageAvatar.html('<a href="./profile.html?id=' + message.fromUserId + '"><img src="' + message.avatar + '_s60" alt="" /></a>');
-	            // $messageBubble.text(message);
-	            $messageBubble.html(message.message || message.msg);
-
-	            $messagesContainer.scrollTop(9999999);
-
-	            return {
-	                $container:$messageContainer,
-	                $bubble:$messageBubble
-	            };
+	        updateChatHeight : function() {
+	            $('.chat-messages').css({
+	                height: $(window).height() - $(".chat-input-bar").height() - 50
+	            });
 	        },
 
 	        handleTime : function(time) {
@@ -222,39 +220,13 @@
 	            return year + '年' + month + '月' + day + '日 ' + hours + ':' + minutes;
 	        },
 
-	        updateChatHeight : function() {
-	            $('.chat-messages').css({
-	                height: $(window).height() - $(".chat-input-bar").height()
-	            });
-	        },
-
 	    	/**
-	         * 初始化事件
+	         * 输入文字时检测响应输入框高度变化
 	         */
-	        initEvent: function () {
-	        	var me = this;
-
-	        	document.addEventListener("DOMContentLoaded", function() {
-	                // Remove elements with "noscript" class - <noscript> is not allowed in XHTML
-	                var noscripts = document.getElementsByClassName("noscript");
-	                for (var i = 0; i < noscripts.length; i++) {
-	                    noscripts[i].parentNode.removeChild(noscripts[i]);
-	                }
-	            }, false);
-
-	            // 回车发送
-	            document.getElementById('message').onkeydown = function(event) {
-	                if (event.keyCode == 13) {
-	                    Chat.sendMessage();
-	                }
-	            };
-
-	            if(!Utils.isWeixin()) {
-	                $('.chat-input').on("input", function(){
-	                    me.updateChatHeight();
-	                });
+	        watchInputHeight: function () {
+	        	if(!Utils.isWeixin()) {
+	                this.updateChatHeight();
 	            }
-
 	        },
 
 	        /**
@@ -262,63 +234,20 @@
 	         */
 	        getDetail: function () {
 	            var me = this;
-
-	            var iconMap = {
-	                '2': 'icon-coffee',
-	                '3': 'icon-food',
-	                '4': 'icon-film',
-	                '5': 'icon-run',
-	                '6': 'icon-photo',
-	                '7': 'icon-badminton',
-	                '8': 'icon-riding',
-	                '9': 'icon-drive',
-	                '11': 'icon-flight',
-	                '1': 'icon-lquote'
-	            };
-	            var typeName = {
-	                '2': '喝咖啡/茶',
-	                '3': '美食',
-	                '4': '看电影',
-	                '5': '跑步',
-	                '6': '摄影',
-	                '7': '羽毛球',
-	                '8': '骑行',
-	                '9': '自驾',
-	                '11': '同行',
-	                '1': '其他'               
-	            };
 	           
-	            apiData = {
-	                'userId': userId,
-	                'datingId': datingId
+	            var params = {
+	                'userId': me.userId,
+	                'datingId': me.datingId
 	            };
-	            Loading.show();
-	            Ajax.get(Apimap.datingDetailApi, apiData,
+	            me.showLoad = true;
+	            Ajax.get(Apimap.datingDetailApi, params,
 	                function(d){
-	                    Loading.hide();
+	                    me.showLoad = false;
 
 	                    if(d.result && d.result.datingInfo) {
 	                        var datingInfo = d.result.datingInfo;
 
-	                        var datingTime = datingInfo.datingTime || '',
-	                            typeId = datingInfo.typeId;
-	                        
-	                        if(datingTime !== '') {
-	                            var time = datingTime.substr(0,10);
-	                        } else {
-	                            var time = '随时';
-	                        }
-	                        
-	                        var detaiHtml = '<li class="chat-message chat-message-theme">'
-	                                            +'<div class="chat-message-bubble">' 
-	                                                +'<span class="label"><span class="iconfont icon-lquote"></span> 约吗？</span><br />' 
-	                                                +'<span>' + datingInfo.article + '</span><br />'
-	                                                +'<span class="what"><span class="iconfont '+iconMap[typeId]+'"></span>'+typeName[typeId]+'</span>'
-	                                                +'<span class="time"><span class="iconfont icon-calendar"></span>'+time+'</span>'
-	                                            +'</div>'
-	                                        +'</li>';
-
-	                        $('.chat-messages-list').prepend(detaiHtml);
+	                        me.detail = datingInfo;
 	                    } else {
 	                        Tips.show({
 	                            type: 'error',
@@ -327,6 +256,7 @@
 	                    }
 	                },
 	                function(d){
+	                	me.showLoad = false;
 	                    Tips.show({
 	                        type: 'error',
 	                        title: d.resultMsg
@@ -339,44 +269,45 @@
 	        /**
 	         * 获取聊天记录数据
 	         */
-	        getData: function (cb) {
+	        getData: function () {
 	            var me = this;
 	           
-	            apiData = {
+	            var params = {
 	                'userId': me.userId,
 	                'datingId': me.datingId
 	            };
-	            Loading.show();
-	            Ajax.get(Apimap.chatRecordsApi, apiData,
+	            me.showLoad = true;
+	            Ajax.get(Apimap.chatRecordsApi, params,
 	                function(d){
-	                    Loading.hide();
+	                    me.showLoad = false;
 
 	                    if(d.result && d.result.messageList) {
 	                        me.messageList = d.result.messageList;
-	                        
+	                        setTimeout(function(){	                        
+	                			$('.chat-messages').scrollTop(9999999);
+	                		},100);
 	                    } else {
 	                        Tips.show({
 	                            type: 'error',
 	                            title: '返回的聊天数据格式有问题'
 	                        });
 	                    }
-	                    cb && cb();
 	                },
 	                function(d){
-	                    Loading.hide();
+	                    me.showLoad = false;
 
 	                    Tips.show({
 	                        type: 'error',
 	                        title: d.resultMsg
 	                    });
-	                    cb && cb();
 	                }
 	            );
 
 	        }
         },
         components:{
-            "nvHead":require('./header.vue')
+            'nvHead': require('./header.vue'),        
+            'loading': require('../components/loading.vue')
         }
     }
 </script>
@@ -408,7 +339,7 @@
 		padding: 0;
 		margin: 0;
 		width: 100%;
-		padding: 60px 10px;
+		padding: 10px;
 		line-height: 1.4;
 		.border-box();
 	}
@@ -416,7 +347,7 @@
 	.chat-message {
 		position: relative;
 		font-size: 0;
-		margin-bottom: 10px;
+		margin-bottom: 20px;
 		padding-left: 40px;
 		.chat-message-avatar {
 			position: absolute;
@@ -446,15 +377,15 @@
 	}
 
 	.chat-time {
-		margin: 10px 0;
+		position: absolute;
+		top: -15px;
+		left: 0;
+		width: 100%;
 		text-align: center;
 		span {
 			display: inline-block;
-			padding: 3px 5px;
 			font-size: 12px;
-			color: #fff;
-			background-color: @silver;
-			border-radius: 5px;
+			color: #999;
 		}
 	}
 

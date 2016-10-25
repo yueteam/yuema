@@ -7,7 +7,7 @@
     <section class="page-content">
     	<ul class="msg-list">
             <li class="item" v-for="item in list">
-		        <a class="item-lnk" href="./chat.html?uid=<%= list[i].postUserId %>&did=<%= list[i].uUID %>">
+		        <a class="item-lnk" v-link="{name:'chat',params:{uid:item.postUserId,did:item.uUID}}">
 		            <div class="avatar">
 		                <img :src="item.avatar | getAvatar 60" alt="" />
 		            </div>
