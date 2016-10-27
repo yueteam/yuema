@@ -4,7 +4,7 @@
 
     <header id="header" class="header-fixed">
         <h1>{{hdTitle}}</h1>
-        <a href="javascript:;" class="menu-back" v-if="pageType=='chat'||pageType=='profile'||pageType=='asklist'" @click="goBack"></a>
+        <a href="javascript:;" class="menu-back" v-if="menuBack" @click="goBack"></a>
         <a href="javascript:;" class="menu-trigger" v-else @click="toggleMenu"></a>
         <a href="javascript:;" class="menu-right menu-filter" v-if="pageType=='list'" @click="toggleFilter">
             <span class="iconfont icon-filter"></span>
@@ -73,13 +73,13 @@
 
     export default {
         replace:true,
-        props: ['hdTitle', 'pageType', 'showMenu', 'showFilter', 'curTab'],
+        props: ['hdTitle', 'pageType', 'showMenu', 'curTab', 'menuBack'],
         ready (){
             
         },
         data (){
             return {
-                
+                showFilter: false
             }
         },
         methods: {
@@ -98,7 +98,7 @@
                 this.showFilter = !this.showFilter;
             },
             closeFilter (){
-                this.showFilter = !this.showFilter;
+                this.showFilter = false;
             }
         },
         components:{

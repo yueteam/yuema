@@ -1,7 +1,7 @@
 <template>
 	<!-- 全局header -->
-    <nv-head :page-type="pageType"
-            :show-menu="showMenu" :hd-title="hdTitle">
+    <nv-head :page-type="pageType" :hd-title="hdTitle" 
+             :show-menu="showMenu" :menu-back="menuBack">
     </nv-head>
     <loading :show-load="showLoad" load-type="loadmodal"></loading>
     <section class="page-content" :transition="transitionName">
@@ -140,6 +140,7 @@
                 showMenu: false,
                 pageType: 'profile',
                 hdTitle: '个人主页',
+                menuBack: true,
                 profileId: '',
                 myHome: false,
                 info: {},
@@ -164,7 +165,12 @@
                     this.myHome = this.result.myHome;
 			    	this.info = this.result.userInfo;
 			    	this.list = this.result.postDatingInfoList;
-                    this.$nextTick(()=> $(window).scrollTop(sessionStorage.profileScrollTop)); 	
+                    // this.$nextTick(()=> $(window).scrollTop(sessionStorage.profileScrollTop)); 	
+                    this.$nextTick(function(){
+                        setTimeout(function(){
+                            $(window).scrollTop(sessionStorage.profileScrollTop);
+                        },200); 
+                    });
 
                     var width = $(window).width();
 			    	var scrollerW = width * $('.scroller .item').length;
@@ -175,10 +181,18 @@
                 else{
                     //页面初次加载获取的数据
                     this.getData();
-                }               
+
+                    setTimeout(function(){
+				        $(window).scrollTop(0);
+				    },150); 
+                }                             
                 
             },
             activate (transition){
+            	if(!!!transition.from.name) {
+            		this.menuBack = false;
+            		this.transitionName = '';
+            	}
             	if(transition.from.name === 'asklist'){
                 	this.transitionName = 'fade';
                 }

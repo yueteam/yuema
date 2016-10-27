@@ -29,6 +29,9 @@
     export default {
         ready (){
             this.getData();
+            setTimeout(function(){
+		        $(window).scrollTop(0);
+		    },150);
         },
         data (){
             return {

@@ -1,7 +1,7 @@
 <template>
     <!-- 全局header -->
-    <nv-head :page-type="pageType"
-            :show-menu="showMenu" :hd-title="hdTitle" :cur-tab="searchKey.tab">
+    <nv-head :page-type="pageType" :hd-title="hdTitle" 
+             :show-menu="showMenu" :cur-tab="searchKey.tab" :menu-back="menuBack">
     </nv-head>
 
     <section class="page-content" transition="fade">
@@ -55,13 +55,14 @@
         data (){
             return {
                 showMenu: false,
-                scroll: true,
+                pageType: 'list',
+                hdTitle: '约吗',
+                menuBack: false,
+                scroll: true, // 下拉滚动
                 showLoad: false,
                 loadType: 'loadmore',
                 showScroll: false,
-                loadEnd: false,
-                pageType: 'list',
-                hdTitle: '约吗',
+                loadEnd: false, // 是否已加载完
                 items: [],
                 searchKey: {
                     pageNo: 1,
@@ -93,12 +94,19 @@
                     && sessionStorage.tab == tab){
                     this.items = JSON.parse(sessionStorage.items);
                     this.searchKey = JSON.parse(sessionStorage.searchKey);
-                    this.$nextTick(()=> $(window).scrollTop(sessionStorage.scrollTop));
+                    this.$nextTick(function(){
+                        setTimeout(function(){
+                            $(window).scrollTop(sessionStorage.scrollTop);
+                        },150); 
+                    });
                 }
                 else{
                     //页面初次加载获取的数据
                     this.searchKey.tab = tab;
                     this.getItems();
+                    setTimeout(function(){
+                        $(window).scrollTop(0);
+                    },150); 
                 }
 
                 //滚动加载
@@ -158,15 +166,16 @@
                                     me.showLoad = true;
                                     me.loadEnd = true;
                                 }
+                                me.scroll = false;
                             } else {
                                 me.items = me.items.concat(listData);
                                 searchKey.pageNo++;
                                 me.scroll = true;
                                 me.showLoad = true;
-                                if(listData.length < 21) {
-                                    me.loadEnd = true;
-                                    me.scroll = false;
-                                }
+                                // if(listData.length < 21) {
+                                //     me.loadEnd = true;
+                                //     me.scroll = false;
+                                // }
                             }
                             
                         } else {

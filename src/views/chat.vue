@@ -1,7 +1,7 @@
 <template>
     <!-- 全局header -->
-    <nv-head :page-type="pageType"
-            :show-menu="showMenu" :hd-title="hdTitle">
+    <nv-head :page-type="pageType" :hd-title="hdTitle" 
+             :show-menu="showMenu" :menu-back="menuBack">
     </nv-head>
     <loading :show-load="showLoad" load-type="loadmodal"></loading>
     <section class="page-content" :transition="transitionName">
@@ -86,6 +86,7 @@
                 showMenu: false,
                 pageType: 'chat',
                 hdTitle: '聊天',
+                menuBack: true,
                 userId: '',
 	            datingId: '',
 	            detail: {},
@@ -110,6 +111,10 @@
 	            } else {
 	                me.connect('wss://' + window.location.host + '/websocket/chat/'+me.datingId+'/'+me.userId);
 	            }
+
+	            setTimeout(function(){
+			        $(window).scrollTop(0);
+			    },150);
 
             },
             activate (transition){

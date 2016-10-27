@@ -41,7 +41,9 @@ router.beforeEach((transition) => {
 });
 //切换路由后回到顶部
 router.afterEach((transition) => {
-    $(window).scrollTop(0);
+    // setTimeout(function(){
+        // $(window).scrollTop(0);
+    // },200);   
 });  
 
 let app = Vue.extend({});

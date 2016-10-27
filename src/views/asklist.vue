@@ -1,7 +1,7 @@
 <template>
 	<!-- 全局header -->
-    <nv-head :page-type="pageType"
-            :show-menu="showMenu" :hd-title="hdTitle">
+    <nv-head :page-type="pageType" :hd-title="hdTitle" 
+             :show-menu="showMenu" :menu-back="menuBack">
     </nv-head>
     <loading :show-load="showLoad" load-type="loadmodal"></loading>
     <section class="page-content" transition="slide-right" style="background:#fff">   	
@@ -64,12 +64,16 @@
     export default {
         ready (){
         	this.getData();
+        	setTimeout(function(){
+		        $(window).scrollTop(0);
+		    },150);
         },
         data (){
             return {
                 showMenu: false,
                 pageType: 'asklist',
                 hdTitle: '我请求的约会',
+                menuBack: true,
                 pageNo: 1,
 				list: [],
 				ajaxComplete: false,
